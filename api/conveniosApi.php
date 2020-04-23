@@ -3,48 +3,49 @@ require_once "../models/conveniosModel.php";
 
 class ConveniosApi
 {
-    public function saveArchivo($arrDatos)
-    {
-        $response = ArchivoModel::saveArchivo($arrDatos,"archivos");
-        echo json_encode($response);
-    }
-    public function getAreasUsuario($idUsuario)
-    {
-        $response = ArchivoModel::getAreasUsuario($idUsuario,"areas_usuarios");
-        echo json_encode($response);  
-    }
-    public function getArchivos($idUsuario,$idArea,$idCategoria)
-    {
-        $response = ArchivoModel::getArchivos($idUsuario,$idArea,$idCategoria,"archivos");
-        echo json_encode($response);
-    }
+
     public function getConveniosApi()
     {
-        $response = ConveniosModel::getConveniosModel('convenios');
+        $response = ConveniosModel::getConveniosMdl('convenios');
         echo json_encode($response);
     }
-    public function deleteArchivo($idArchivo)
+    public function saveConvenio($arrDatos)
     {
-        $response = ArchivoModel::deleteArchivoModel($idArchivo,"archivos");
+        $response = ConveniosModel::saveConvenioMdl($arrDatos,"convenios");
+        echo json_encode($response);
+    }
+    public function deleteConvenio($idConvenio)
+    {
+        $response = ConveniosModel::deleteConvenioMdl($idConvenio,'convenios');
         echo $response != "success" ? $response : json_encode($response); 
     }
 
 
 }
+//Obtenemos peticion
 
-if(isset($_POST["saveArchivo"])) {
-    $a = new ArchivoController();
-    $a -> saveArchivo( $_POST["saveArchivo"]);
-} else if(isset($_POST["getConvenios"])){
+$request = json_decode(file_get_contents('php://input'), true);
+
+// Dependiendo la peticion que recibamos realiza diferente accion
+
+if(isset($_POST["getConvenios"])){
+
     $b = new ConveniosApi();
     $b -> getConveniosApi();
-} else if (isset($_POST["getArchivos"])) {
-    $c = new ArchivoController();
-    $c -> getArchivos($_POST["getArchivos"]["idUsuario"],$_POST["getArchivos"]["idArea"],$_POST["getArchivos"]["idCategoria"]);
-} else if (isset($_POST["getCategoriasArea"])){
-    $d = new ArchivoController();
-    $d -> getCategoriasArea($_POST["getCategoriasArea"]["idArea"]);    
-} elseif (isset($_POST['deleteArchivo'])) {
-    $e = new ArchivoController();
-    $e -> deleteArchivo($_POST['deleteArchivo']['idArchivo']);
-}
+
+} else if(isset($request["saveConvenio"])) {
+
+    $a = new ConveniosApi();
+    $a -> saveConvenio($request["saveConvenio"]);
+
+}else if (isset($request["deleteConvenio"])) {
+
+    $c = new ConveniosApi();
+    $c -> deleteConvenio($request['deleteConvenio']['idConvenio']);
+
+} else {
+
+    // $d = new ConveniosApi();
+    // $d -> getCategoriasArea($_POST["getCategoriasArea"]["idArea"]);    
+    
+} 

@@ -17,10 +17,10 @@ class CatalogosModel extends Conexion
                     $arrayResult[] = array('idCatalogo' => $row['idCatalogo'],
                         'nombre' => $row['nombre'],
                         'descripcion' => $row['descripcion'],
-                        'idTipoCatalgo' => $row['idTipoCatalgo']);
+                        'idTipoCatalogo' => $row['idTipoCatalogo']);
                 }
 
-                var_dump($arrayResult);
+                return $arrayResult;
             } else {
                 return "No se pudieron obterner los datos";
             }

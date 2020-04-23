@@ -1,20 +1,19 @@
 <?php
 require_once "../include/config.php";
-require_once "globlalFuncModel.php";
 
-class ConveniosModel extends Conexion
+class ContratosModel extends Conexion
 {
-   public function getConveniosMdl($table)
+   public function getContratosMdl($table)
     {
         try {
             $arrayResult = array();
-            $stmt = Conexion::conectar()->prepare("SELECT idConvenio, nombre, descripcion, fechaCreacion, 
+            $stmt = Conexion::conectar()->prepare("SELECT idContrato, nombre, descripcion, fechaCreacion, 
             fechaFirma, fechaFin, isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento   FROM $table");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $arrayResult[] = array('idConvenio' => $row['idConvenio'],
+                $arrayResult[] = array('idContrato' => $row['idContrato'],
                     'nombre' => $row['nombre'],
                     'descripcion' => $row['descripcion'],
                     'fechaCreacion' => $row['fechaCreacion'],
@@ -38,14 +37,14 @@ class ConveniosModel extends Conexion
             return $th->getMessage();
         }
     }
-   public function saveConvenioMdl($arrDatos,$table)
+   public function saveContratoMdl($arrDatos,$table)
    {
       try {
          $today = date("Y-m-d H:i:s");
 
          $fechaFirma = date("y-m-d", strtotime($arrDatos['fechaFirma']));
          $fechaFin = $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])); 
-         if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idConvenio'] == "") {
+         if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idContrato'] == "") {
 
              $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
              isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
@@ -71,14 +70,14 @@ class ConveniosModel extends Conexion
                return "Error";
            }
            $stmt->close();
-         } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idConvenio'] != ""){
+         } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idContrato'] != ""){
             // var_dump($arrDatos['idConvenio'],$arrDatos);
             $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, fechaCreacion = :fechaCreacion, 
             fechaFirma = :fechaFirma, fechaFin = :fechaFin, isIndefinida = :isIndefinida, idPrograma = :idPrograma, idContraparte = :idContraparte, 
             idAmbito = :idAmbito, idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, idPais = :idPais, 
-            financiamiento = :financiamiento WHERE idconvenio = :idConvenio");
+            financiamiento = :financiamiento WHERE idcontrato = :idContrato");
 
-            $stmt->bindParam(":idConvenio", $arrDatos['idConvenio']);
+            $stmt->bindParam(":idContrato", $arrDatos['idContrato']);
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
             $stmt->bindParam(":descripcion",$arrDatos['descripcion'], PDO::PARAM_STR);
             $stmt->bindParam(":financiamiento",$arrDatos['financiamiento']);
@@ -96,26 +95,26 @@ class ConveniosModel extends Conexion
             if ($stmt->execute()) {
                 return "success";
             } else {
-                return "Hubo un error al editar el convenio" .nombre;
+                return "Hubo un error al editar el contrato" .nombre;
             }
             $stmt->close();
          } else {
-            return "Hubo un problema: " + $arrDatos['HFCommandName'] + ", " + $arrDatos['idConvenio'];
+            return "Hubo un problema: " + $arrDatos['HFCommandName'] + ", " + $arrDatos['idContrato'];
          }
       } catch (Exception $th) {
          return $th->getMessage();
       }
    }
-   public function deleteConvenioMdl($idConvenio,$table)
+   public function deleteContratoMdl($idContrato,$table)
    {
       try {
-         $stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE idconvenio = :id");
-         $stmt->bindParam(":id", $idConvenio, PDO::PARAM_INT);
+         $stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE idcontrato = :id");
+         $stmt->bindParam(":id", $idContrato, PDO::PARAM_INT);
          if($stmt->execute()){
             return "success";
          }
          else{
-            return "No se pudo eliminar el convenio";
+            return "No se pudo eliminar el contrato";
          }
          $stmt->close();
       } catch (Throwable $th) {
@@ -166,12 +165,12 @@ class ConveniosModel extends Conexion
          return $th->getMessage();
       }
    }
-   public function subirConvenio($nombreEncriptado,$ruta,$table)
+   public function subirContrato($nombreEncriptado,$ruta,$table)
    {
       try {
          $pdo = Conexion::conectar();
-          $stmt = $pdo->prepare("INSERT INTO $table(encrypConvenio, rutaConvenio) VALUES (:encrypNomConvenio, :ruta)");
-          $stmt->bindParam(":encrypNomConvenio",$nombreEncriptado, PDO::PARAM_STR);
+          $stmt = $pdo->prepare("INSERT INTO $table(encrypContrato, rutaContrato) VALUES (:encrypNomContrato, :ruta)");
+          $stmt->bindParam(":encrypNomContrato",$nombreEncriptado, PDO::PARAM_STR);
           $stmt->bindParam(":ruta",$ruta, PDO::PARAM_STR);
           if($stmt->execute()) {
             $id = $pdo->lastInsertId();

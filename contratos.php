@@ -10,11 +10,11 @@
 <div id="app" class="ui basic segment">
     <!-- El Contenido comienza aqui -->
     <div class="ui container">
-        <h2 class="ui dividing header ui">Convenios</h2>
+        <h2 class="ui dividing header ui">Contratos</h2>
         <div class="example">
             <div class="ui right floated main menu">
-                <button id="btnNuevoConvenio" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i> 
-                    Nuevo convenio
+                <button id="btnNuevoContrato" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i> 
+                    Nuevo contrato
                 </button>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
-            <table id="tableConvenios" class="ui purple celled table responsive">
+            <table id="tableContratos" class="ui green celled table responsive">
                 <thead>
                     <tr>
                         <th class="">Nombre</th>
@@ -42,11 +42,11 @@
             <div class="ui modal" id="mdAltaEdicion">
                 <i class="close icon"></i>
                 <div class="ui red header">
-                    Nuevo Convenio
+                    Nuevo contrato
                 </div>
                 <div class="content">
                     <!-- <div class="ui piled segment"> -->
-                    <form class="ui form" id="formConvenios">
+                    <form class="ui form" id="formContratos">
                         <div class="field">
                             <div class="fields">
                                 <div class="six wide field">
@@ -119,7 +119,7 @@
                                     </select>
                                 </div>
                                 <div class="four wide field">
-                                    <label for="">Tipo de convenio</label>
+                                    <label for="">Tipo de contrato</label>
                                     <select name="" id="idTipoConvenioMd" class="ui dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
@@ -209,7 +209,7 @@
       </div>
   </div>
         <input type='hidden' name='HFCommandName' id="HFCommandName" value="" />
-        <input type='hidden' name='HFIdConvenio' id="HFIdConvenio" value="" />
+        <input type='hidden' name='HFIdContrato' id="HFIdContrato" value="" />
 
     </div>
     <!-- El Contenido termina aqui -->
@@ -220,4 +220,4 @@
 
 <?php include "include/footer.php"; ?>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-<script src="assets/js/p-convenios.js"></script>
+<script src="assets/js/p-contratos.js"></script>

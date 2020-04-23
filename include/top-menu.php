@@ -3,7 +3,7 @@
   <span class="item"><img src="/img/Logo.png"></span>
   <a class="active item" href="index.php">Inicio</a>
   <a class="item" href="convenios.php">Convenios</a>
-  <a class="item" href="index.php">Contratos</a>
+  <a class="item" href="contratos.php">Contratos</a>
   <div class="ui dropdown item">
     Lenguaje <i class="dropdown icon"></i>
     <div class="menu">
