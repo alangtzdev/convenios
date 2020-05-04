@@ -4,6 +4,7 @@
     include 'include/left-menu.php'; 
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link href="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
 
 <!-- BEGIN CONTENT -->
 <!-- <div class="pusher"> -->
@@ -13,7 +14,7 @@
         <h2 class="ui dividing header ui">Convenios</h2>
         <div class="example">
             <div class="ui right floated main menu">
-                <button id="btnNuevoConvenio" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i> 
+                <button id="btnNuevoConvenio" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i>
                     Nuevo convenio
                 </button>
             </div>
@@ -49,7 +50,7 @@
                     <form class="ui form" id="formConvenios">
                         <div class="field">
                             <div class="fields">
-                                <div class="six wide field">
+                                <div class="six wide field ">
                                     <label>Nombre</label>
                                     <input type="text" id="txtNombre" name="name"
                                         placeholder="Nombre / instrumento juridico">
@@ -67,7 +68,7 @@
                                     <div class="ui calendar" id="divFechaFirma">
                                         <div class="ui input left icon">
                                             <i class="calendar icon"></i>
-                                            <input  id="fechaFirma" type="text" placeholder="Date">
+                                            <input id="fechaFirma" type="text" placeholder="Date">
                                         </div>
                                     </div>
                                 </div>
@@ -135,22 +136,43 @@
                         <div class="field">
                             <div class="fields">
                                 <div class="eight wide field">
-                                <label>Financiamiento</label>
-                                <input type="number" id="txtFinaciamiento" name="financiamiento"
-                                        placeholder="">
+                                    <label>Financiamiento</label>
+                                    <input type="number" id="txtFinaciamiento" name="financiamiento" placeholder="">
                                 </div>
                                 <div class="eight wide field">
-                                <label for="">Pais</label>
-                                <select name="" id="" class="ui dropdown">
+                                    <label for="">Pais</label>
+                                    <select name="" id="" class="ui dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="ui dividing header">Subir archivo</h4>
+                        <div class="field">
+                            <div class="fields">
+                                <div class="eleven wide field">
+                                    <div class="ui labeled input">
+                                        <div class="ui olive label">
+                                            Archivo
+                                        </div>
+                                        <input type="file" placeholder="mysite.com">
+                                    </div>
+                                    <div class="ui indicating progress" data-value="1" data-total="100" id="example5">
+                                        <div class="bar">
+                                            <div class="progress"></div>
+                                        </div>
+                                        <!-- <div class="label">Waiting for you to press button</div> -->
+                                    </div>
+                                    <!-- <a id="aver" class="ui button" data-url="storage/prueba.pdf">
+                                        Rapidly Update
+                                    </a> -->
                                 </div>
                             </div>
                         </div>
                         <h4 class="ui dividing header">Compromisos</h4>
                         <div class="field">
                             <div class="fields">
-                            <div class="four wide field"><label>Intercambio estudiante</label>
+                                <div class="four wide field"><label>Intercambio estudiante</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
                                         <input type="checkbox" name="checkbox">
@@ -179,9 +201,44 @@
                                     </div>
                                 </div>
 
-                            
+
                             </div>
                         </div>
+                        <div class="field">
+                            <div class="fields">
+                                <div class="four wide field"><label>Desarrollo de proyectos</label>
+                                    <div class="ui fitted checkbox">
+                                        <!-- <label></label> -->
+                                        <input type="checkbox" name="checkbox">
+                                        <label>SI</label>
+                                    </div>
+                                </div>
+                                <div class="four wide field"><label>Coedición de libros</label>
+                                    <div class="ui fitted checkbox">
+                                        <!-- <label></label> -->
+                                        <input type="checkbox" name="checkbox">
+                                        <label></label>
+                                    </div>
+                                </div>
+                                <div class="four wide field"><label>Costos institucionales</label>
+                                    <div class="ui fitted checkbox">
+                                        <!-- <label></label> -->
+                                        <input type="checkbox" name="checkbox">
+                                        <label></label>
+                                    </div>
+                                </div>
+                                <div class="four wide field"><label>Informes de avance</label>
+                                    <div class="ui fitted checkbox">
+                                        <!-- <label></label> -->
+                                        <input type="checkbox" name="checkbox">
+                                        <label></label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
                         <div class="ui error message"></div>
                     </form>
                     <!-- </div> -->
@@ -199,15 +256,15 @@
             </div>
         </div>
         <div class="ui orange toast" id="domtoastactions">
-      <div class="content">
-          <div class="ui header">ELIMINAR</div>
-          Seguro que deseas eliminar este registro?
-      </div>
-      <div class="left basic actions">
-          <button class="ui positive button">Yes</button>
-          <button class="ui negative button cancel">No</button>
-      </div>
-  </div>
+            <div class="content">
+                <div class="ui header">ELIMINAR</div>
+                Seguro que deseas eliminar este registro?
+            </div>
+            <div class="left basic actions">
+                <button class="ui positive button">Yes</button>
+                <button class="ui negative button cancel">No</button>
+            </div>
+        </div>
         <input type='hidden' name='HFCommandName' id="HFCommandName" value="" />
         <input type='hidden' name='HFIdConvenio' id="HFIdConvenio" value="" />
 
@@ -220,4 +277,7 @@
 
 <?php include "include/footer.php"; ?>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery.ui.widget.js"></script>
+<script src="assets/plugins/fileUpload/jquery.fileupload.js"></script>
 <script src="assets/js/p-convenios.js"></script>

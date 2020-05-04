@@ -1,6 +1,42 @@
 $(function () {
   getConvenios();
   getCatalogos();
+//   $('#example5').progress();
+//   $('#aver')
+//   .on('click', function() {
+//     var
+//       $progress       = $('indicating progress.ui.progress'),
+//       $button         = $(this),
+//       updateEvent
+//     ;
+//     // restart to zero
+//     clearInterval(window.fakeProgress)
+//     $progress.progress('reset');
+//      // updates every 10ms until complete
+//     window.fakeProgress = setInterval(function() {
+//       $progress.progress('increment');
+//       $button.text( $progress.progress('get value') );
+//       // stop incrementing when complete
+//       if($progress.progress('is complete')) {
+//         clearInterval(window.fakeProgress)
+//       }
+//     }, 10);
+//   })
+// ;
+$('.rapid.example .ui.progress')
+  .progress({
+    duration : 100,
+    total    : 100,
+    text     : {
+      active: '{value} of {total} done'
+    }
+  });
+  $('#tableConvenios tbody').on('click', '#linkConvenio', function () {
+    var table = $('#tableConvenios').DataTable();
+    var data = table.row($(this).parents('tr')).data();
+    mdAltaEdicion($(this).data('command'));
+    loadData(data, $(this).data('command'));
+  });
 
   $('#tableConvenios tbody').on('click', '#perro', function () {
     var table = $('#tableConvenios').DataTable();
@@ -8,6 +44,7 @@ $(function () {
     mdAltaEdicion($(this).data('command'));
     loadData(data, $(this).data('command'));
   });
+  
 
   $('#btnNuevoConvenio').click(function () {
     mdAltaEdicion($(this).data('command'));
@@ -72,8 +109,63 @@ function mdAltaEdicion(command) {
           type: 'date',
           startMode: 'year'
         });
+        if (command == 'CONSULTA') {
+        //   $("#mdAltaEdicion .dropdown").each(function (index) {
+        //     $(this).attr('disabled', true); 
+        // });
+        $('.ui.dropdown.selection').addClass('disabled');
+        $('.ui.calendar :input').attr('disabled', true);
+        $("#mdAltaEdicion :input").each(function (index) {
+            $(this).attr('readonly', true);
+            
+            // $(this).parent('div').removeClass('has-error');
+            // $('span.help-block-error').remove();
+            // $('div.progress').hide();
+            // $(this).parent('div').removeClass('progress');
+            // $('#dateCaducidadCirculacion').prop('disabled');
+            //limpiaCamposArchivos();
+        });
+          // $('#cboTipoUnidad').prop('disabled', true);
+          // $('#btnGuardar').hide();
+          // $("span.fileinput-button").hide();
+          // //$('a.btn-warning').show();
+          // $('#divBody a').show();
+          // $('#RdioSi, #RdioNo').iCheck('disable');
+        } else if (command == 'EDITAR'){
+
+        }
         $('#HFCommandName').val(command);
+        // var button = $(event.relatedTarget)
+        // var isReadonly = (button.data('command') == "CONSULTA");
+        // var isEdit = (button.data('command') == "EDITAR");
         // if (event.target.tagName != "INPUT") {
+        //     $('#HFCommandName').val(button.data('command'));
+
+        // }
+        // $("#mdAltaEdicion :input").each(function (index) {
+        //     $(this).attr('readonly', isReadonly);
+        //     $(this).parent('div').removeClass('has-error');
+        //     $('span.help-block-error').remove();
+        //     $('div.progress').hide();
+        //     $(this).parent('div').removeClass('progress');
+        //     $('#dateCaducidadCirculacion').prop('disabled', isReadonly);
+        //     //limpiaCamposArchivos();
+        // });
+
+        // if (isReadonly) {
+
+        // }
+        // else {
+        //     $('#btnGuardar').show();
+        //     $("span.fileinput-button").show();
+        //     $('#RdioSi, #RdioNo').iCheck('enable');
+
+        //     $('#cboTipoUnidad').prop('disabled', false);
+        //     $('div.progress').show();
+        //     $('#divBody a').hide();
+        // }
+        // if (isReadonly || isEdit) {
+        //     $('#divBody a').show();
         // }
 
       },
@@ -85,6 +177,9 @@ function mdAltaEdicion(command) {
         //Resets form error messages
         $('.ui.form .field.error').removeClass("error");
         $('.ui.form.error').removeClass("error");
+        $('.ui.form :input').attr('readonly', false);
+        $('.ui.dropdown.selection').removeClass('disabled');
+        $('.ui.calendar :input').attr('disabled', false);
       },
       onApprove: function () {
         $('.ui.form').form('submit');
@@ -112,7 +207,13 @@ function getConvenios() {
           "targets": "_all"
         }],
         columns: [
-          { data: "nombre" },
+          { data: "nombre",
+            mRender: function (data, type, full) {
+                return '<a type="button" id="linkConvenio"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
+            }
+
+        
+          },
           {
             data: text_truncate("descripcion", 19)
           },

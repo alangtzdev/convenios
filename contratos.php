@@ -147,17 +147,18 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <h4 class="ui dividing header">Compromisos</h4>
                         <div class="field">
                             <div class="fields">
-                            <div class="four wide field"><label>Intercambio estudiante</label>
+                            <div class="four wide field"><label>Contratacion personal</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
                                         <input type="checkbox" name="checkbox">
                                         <label>SI</label>
                                     </div>
                                 </div>
-                                <div class="four wide field"><label>Intercambio profesores</label>
+                                <div class="four wide field"><label>Vinculacion de becarios</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
                                         <input type="checkbox" name="checkbox">
@@ -171,12 +172,41 @@
                                         <label></label>
                                     </div>
                                 </div>
-                                <div class="four wide field"><label>Servicio social estudiantes</label>
+                                <div class="four wide field"><label>Costos institucionales</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
                                         <input type="checkbox" name="checkbox">
                                         <label></label>
                                     </div>
+                                </div>
+
+                            
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="fields">
+                            <div class="four wide field"><label>Informes financieros</label>
+                                    <div class="ui fitted checkbox">
+                                        <!-- <label></label> -->
+                                        <input type="checkbox" name="checkbox">
+                                        <label>SI</label>
+                                    </div>
+                                </div>
+                                <div class="four wide field"><label>informes tecnicos</label>
+                                    <div class="ui fitted checkbox">
+                                        <!-- <label></label> -->
+                                        <input type="checkbox" name="checkbox">
+                                        <label></label>
+                                    </div>
+                                </div>
+                                <div class="four wide field"><label>Auditoria externa</label>
+                                    <div class="ui fitted checkbox">
+                                        <!-- <label></label> -->
+                                        <input type="checkbox" name="checkbox">
+                                        <label></label>
+                                    </div>
+                                </div>
+                                <div class="four wide field"><label></label>
                                 </div>
 
                             
