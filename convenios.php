@@ -147,8 +147,8 @@
                                 </div>
                             </div>
                         </div>
-                        <h4 class="ui dividing header">Subir archivo</h4>
-                        <div class="field">
+                        <!-- <h4 class="ui dividing header">Subir archivo</h4> -->
+                        <!-- <div class="field">
                             <div class="fields">
                                 <div class="eleven wide field">
                                     <div class="ui labeled input">
@@ -160,15 +160,15 @@
                                     <div class="ui indicating progress" data-value="1" data-total="100" id="example5">
                                         <div class="bar">
                                             <div class="progress"></div>
-                                        </div>
+                                        </div> -->
                                         <!-- <div class="label">Waiting for you to press button</div> -->
-                                    </div>
+                                    <!-- </div> -->
                                     <!-- <a id="aver" class="ui button" data-url="storage/prueba.pdf">
                                         Rapidly Update
                                     </a> -->
-                                </div>
-                            </div>
-                        </div>
+                                <!-- </div> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
                         <h4 class="ui dividing header">Compromisos</h4>
                         <div class="field">
                             <div class="fields">

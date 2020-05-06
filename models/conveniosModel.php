@@ -7,8 +7,9 @@ class ConveniosModel extends Conexion
    public function getConveniosMdl($table)
     {
         try {
+            $cxn = Conexion::conectar();
             $arrayResult = array();
-            $stmt = Conexion::conectar()->prepare("SELECT idConvenio, nombre, descripcion, fechaCreacion, 
+            $stmt = $cxn->prepare("SELECT idConvenio, nombre, descripcion, fechaCreacion, 
             fechaFirma, fechaFin, isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento   FROM $table");
             $stmt->execute();
@@ -41,13 +42,14 @@ class ConveniosModel extends Conexion
    public function saveConvenioMdl($arrDatos,$table)
    {
       try {
+         $cxn = Conexion::conectar();
          $today = date("Y-m-d H:i:s");
 
          $fechaFirma = date("y-m-d", strtotime($arrDatos['fechaFirma']));
          $fechaFin = $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])); 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idConvenio'] == "") {
 
-             $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
+             $stmt = $cxn->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
              isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
              VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idPrograma, :idContraparte, 
              :idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento)");
@@ -73,7 +75,7 @@ class ConveniosModel extends Conexion
            $stmt->close();
          } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idConvenio'] != ""){
             // var_dump($arrDatos['idConvenio'],$arrDatos);
-            $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, fechaCreacion = :fechaCreacion, 
+            $stmt = $cxn->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, fechaCreacion = :fechaCreacion, 
             fechaFirma = :fechaFirma, fechaFin = :fechaFin, isIndefinida = :isIndefinida, idPrograma = :idPrograma, idContraparte = :idContraparte, 
             idAmbito = :idAmbito, idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, idPais = :idPais, 
             financiamiento = :financiamiento WHERE idconvenio = :idConvenio");
@@ -109,7 +111,8 @@ class ConveniosModel extends Conexion
    public function deleteConvenioMdl($idConvenio,$table)
    {
       try {
-         $stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE idconvenio = :id");
+         $cxn = Conexion::conectar();
+         $stmt = $cxn->prepare("DELETE FROM $table WHERE idconvenio = :id");
          $stmt->bindParam(":id", $idConvenio, PDO::PARAM_INT);
          if($stmt->execute()){
             return "success";
@@ -126,8 +129,9 @@ class ConveniosModel extends Conexion
    public function getAreasUsuario($idUsuario,$table)
    {
       try {
+         $cxn = Conexion::conectar();
          $jsonArray = array();
-         $stmt = Conexion::conectar()->prepare("SELECT id, nombreArea FROM areas WHERE id IN (SELECT id_area FROM $table WHERE id_usuario = :id)");
+         $stmt = $cxn->prepare("SELECT id, nombreArea FROM areas WHERE id IN (SELECT id_area FROM $table WHERE id_usuario = :id)");
          $stmt->bindParam(":id",$idUsuario, PDO::PARAM_INT);
          $stmt->execute();
          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -147,8 +151,9 @@ class ConveniosModel extends Conexion
    public function getCategoriasArea($idArea,$table)
    {
       try {
+         $cxn = Conexion::conectar();
          $jsonArray = array();
-         $stmt = Conexion::conectar()->prepare("SELECT id, nombreCategoria, descripcion FROM $table WHERE id_area = :id");
+         $stmt = $cxn->prepare("SELECT id, nombreCategoria, descripcion FROM $table WHERE id_area = :id");
          $stmt->bindParam(":id",$idArea, PDO::PARAM_INT);
          $stmt->execute();
          if ($stmt->rowCount() > 0) { 
