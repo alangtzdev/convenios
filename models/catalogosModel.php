@@ -10,8 +10,9 @@ class CatalogosModel extends Conexion
         try {
             $cxn = Conexion::conectar();
             $arrayResult = array();
-            $stmt = $cxn = Conexion::conectar();("SELECT * FROM $table");
-            if ($stmt->execute()) {
+            $stmt = $cxn->prepare("SELECT * FROM $table");
+            $exeResult = $stmt->execute();
+            if ($exeResult) {
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
@@ -36,7 +37,7 @@ class CatalogosModel extends Conexion
     {
         try {
             $cxn = Conexion::conectar();
-            $stmt =Conexion::conectar()->prepare("SELECT * FROM $table where idTipocatalogo = :idEnumTipoCatalogo");
+            $stmt = $cxn->prepare("SELECT * FROM $table where idTipocatalogo = :idEnumTipoCatalogo");
             binparam(":idEnumTipoCatalogo",$enumTipoCatalogo[$tipoCatalogo], PDO::PARAM_INT);
             $stmt->execute();
 
