@@ -8,7 +8,7 @@ class ContratosModel extends Conexion
         try {
             $arrayResult = array();
             $stmt = Conexion::conectar()->prepare("SELECT idContrato, nombre, descripcion, fechaCreacion, 
-            fechaFirma, fechaFin, isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, 
+            fechaFirma, fechaFin, isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento   FROM $table");
             $stmt->execute();
 
@@ -20,6 +20,8 @@ class ContratosModel extends Conexion
                     'fechaFirma' => $row['fechaFirma'],
                     'fechaFin' => $row['fechaFin'],
                     'isIndefinida' => $row['isIndefinida'] == 0 ? false : true ,
+                    'idFinEspecifico' => $row['idFinEspecifico'],
+                    'idCondicion' => $row['idEstatus'],
                     'idPrograma' => $row['idPrograma'], 
                     'idContraparte' => $row['idContraparte'], 
                     'idAmbito' => $row['idAmbito'], 
@@ -47,9 +49,9 @@ class ContratosModel extends Conexion
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idContrato'] == "") {
 
              $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
-             isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
-             VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idPrograma, :idContraparte, 
-             :idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento)");
+             isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
+             VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idFinEspecifico, :idEstatus,
+              :idPrograma, :idContraparte,:idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento)");
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
             $stmt->bindParam(":descripcion",$arrDatos['descripcion'], PDO::PARAM_STR);
             $stmt->bindParam(":financiamiento",$arrDatos['financiamiento']);
@@ -57,6 +59,8 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
             $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico'], PDO::PARAM_INT);
+            $stmt->bindParam(":idEstatus",$arrDatos['idEstatus'], PDO::PARAM_INT);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma'], PDO::PARAM_INT);
             $stmt->bindParam(":idContraparte",$arrDatos['idContraparte'], PDO::PARAM_INT);
             $stmt->bindParam(":idAmbito",$arrDatos['idAmbito'], PDO::PARAM_INT);
@@ -73,9 +77,10 @@ class ContratosModel extends Conexion
          } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idContrato'] != ""){
             // var_dump($arrDatos['idConvenio'],$arrDatos);
             $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, fechaCreacion = :fechaCreacion, 
-            fechaFirma = :fechaFirma, fechaFin = :fechaFin, isIndefinida = :isIndefinida, idPrograma = :idPrograma, idContraparte = :idContraparte, 
-            idAmbito = :idAmbito, idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, idPais = :idPais, 
-            financiamiento = :financiamiento WHERE idcontrato = :idContrato");
+            fechaFirma = :fechaFirma, fechaFin = :fechaFin, isIndefinida = :isIndefinida, idFinEspecifico = :idFinEspecifico, 
+            idEstatus = :idEstatus, idPrograma = :idPrograma, idContraparte = :idContraparte, idAmbito = :idAmbito, 
+            idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, 
+            idPais = :idPais, financiamiento = :financiamiento WHERE idcontrato = :idContrato");
 
             $stmt->bindParam(":idContrato", $arrDatos['idContrato']);
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
@@ -85,6 +90,8 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
             $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico'], PDO::PARAM_INT);
+            $stmt->bindParam(":idEstatus",$arrDatos['idEstatus'], PDO::PARAM_INT);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma'], PDO::PARAM_INT);
             $stmt->bindParam(":idContraparte",$arrDatos['idContraparte'], PDO::PARAM_INT);
             $stmt->bindParam(":idAmbito",$arrDatos['idAmbito'], PDO::PARAM_INT);

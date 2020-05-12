@@ -1,6 +1,9 @@
 $(function () {
   getConvenios();
   getCatalogos();
+  getPaises();
+  getResponsables();
+  // getResponsables();
 //   $('#example5').progress();
 //   $('#aver')
 //   .on('click', function() {
@@ -78,7 +81,14 @@ $('.rapid.example .ui.progress')
       $('#divFechaFin :input').attr('disabled', false);
     }
   });
+
   $('#divFechaFin :input').attr('disabled', false);
+
+  $('#idFinEspecificoMd').on('change', function () {
+
+      getSubCatalogos($(this).val(), true, false);
+
+  });
 
 });
 function mdAltaEdicion(command) {
@@ -257,7 +267,7 @@ function getCatalogos() {
       return response.json();
     })
     .then(response => {
-      let ambito = 1, programa = 2, convenio = 3, origen = 4;
+      let ambito = 1, programa = 2, convenio = 3, origen = 4, finesEspecificos = 5;
 
       $(response).each(function (index, element) {
 
@@ -273,12 +283,100 @@ function getCatalogos() {
 
           $('#idTipoConvenioMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
 
-        } else {
+        } else if (origen == element.idTipoCatalogo){
 
           $('#idOrigenMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
+
+        } else if (finesEspecificos == element.idTipoCatalogo) {
+
+          $('#idFinEspecificoMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
+
+        } else {
+          
+          $('#idCondicionMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
+          
         }
       });
       // waitMeHide('#divBody');
+
+    }).catch(function (error) {
+      console.log('Hubo un problema con la petición Fetch:' + error.message);
+    });
+}
+function getSubCatalogos(idArea, search, md) {
+  let params = { idArea: idArea };
+  $.ajax({
+      type: "POST",
+      url: "../controllers/archivosController.php",
+      data: { "getCategoriasArea": params },
+      dataType: "json",
+      success: function (response) {
+          let $slc = '';
+          let $idCategoria = '';
+          let $divCategoria = '';
+          let $lbl = '';
+          if (search == true) {
+              $slc = $('<select id="idCategoria" class="form-control select2 select2-hidden-accessible" tabindex="-1 aria-hidden="true"></select>');
+              $idCategoria = '#idCategoria';
+              $divCategoria = '#divCategoria';
+              $lbl = $('<label class="control-label">Categoria</label>');
+          } else {
+              $slc = $('<select id="idCategoriaMd" class="form-control"></select>');
+              $idCategoria = '#idCategoriaMd';
+              $divCategoria = '#divCategoriaMd';
+              $lbl = $('<label for="idCategoriaMd">Selecciona una Categoria</label>');
+          }
+          $(response).each(function (index, element) {
+              $($slc).append('<option></option><option value="' + element.id + '"> ' + element.nombreCategoria + '</option>');
+          });
+          $($divCategoria).html('').append($slc);
+          search == true ? $($slc).before($lbl) : $($slc).after($lbl);
+          $($slc).trigger('change');
+          // $($slc).trigger('create');
+          $("#idCategoria").select2({
+              placeholder: "Selecciona una catergoria..",
+              width: null
+          });
+      }
+  });
+}
+function getPaises() {
+  fetch('./api/paisesApi.php', {
+    method: "POST",
+    body: JSON.stringify({ 'getPaises': { id: 1 } }),
+    dataType: "JSON"
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(response => {
+
+      $(response).each(function (index, element) {
+          $('#idPaisMd').append($('<option>').text(element.nombre).attr('value', element.idPais));
+        
+      });
+
+
+    }).catch(function (error) {
+      console.log('Hubo un problema con la petición Fetch:' + error.message);
+    });
+}
+function getResponsables() {
+  fetch('./api/usuariosApi.php', {
+    method: "POST",
+    body: JSON.stringify({ 'getUsuarios': { id: 1 } }),
+    dataType: "JSON"
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(response => {
+
+      $(response).each(function (index, element) { 
+          $('#idResponsableMd').append($('<option>').text(element.nombre +' ' +element.apellido).attr('value', element.idUsuario));
+        
+      });
+
 
     }).catch(function (error) {
       console.log('Hubo un problema con la petición Fetch:' + error.message);
@@ -297,6 +395,8 @@ function saveConvenio() {
       fechaFirma: $('#fechaFirma').val(),
       isIndefinida: $('#chkIndefinida').is(':checked'),
       fechaFin: $('#fechaFin').val(),
+      idFinEspecifico: $('#idFinEspecificoMd').val(),
+      idEstaatus: $('#idCondicionMd').select(),
       idPrograma: $('#idProgramaMd').val(),
       idContraparte: 1, //$('#idContraparteMd').val(),
       idAmbito: $('#idAmbitoMd').val(),
@@ -304,7 +404,7 @@ function saveConvenio() {
       idTipoConvenio: $('#idTipoConvenioMd').val(),
       idResponsable: 6,//$('#idResponsableMd').val(),
       financiamiento: $('#txtFinaciamiento').val(),
-      idPais: 2//$('#idPaisMd').val(),
+      idPais: $('#idPaisMd').val(),
     };
   fetch('./api/conveniosApi.php', {
     method: "POST",
@@ -343,13 +443,15 @@ function loadData(data) {
   $('#txtNombre').val(data.nombre);
   $('#txtDescripcion').val(data.descripcion);
   $('#divFechaFirma').calendar('set date',_fechaFirma.toDateString(), updateInput = true, fireChange = true);
+  $('#idFinEspecificoMd').dropdown('set selected',data.idFinEspecifico);
+  $('#idCondicionMd').dropdown('set selected',data.idEstatus);
   $('#idProgramaMd').dropdown('set selected',data.idPrograma);
   $('#idContraparteMd').val(2);
   $('#idAmbitoMd').dropdown('set selected',data.idAmbito);
   $('#idOrigenMd').dropdown('set selected',data.idOrigen);
   $('#idTipoConvenioMd').dropdown('set selected',data.idTipoConvenio);
   $('#txtFinaciamiento').val(data.financiamiento);
-  $('#idPaisMd').val(1);
+  $('#idPaisMd').val(data.idPais);
   $('#idResponsableMd').val(10);
   if (data.isIndefinida) {
     $('#chkIndefinida').prop('checked', true);

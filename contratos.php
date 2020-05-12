@@ -47,6 +47,22 @@
                 <div class="content">
                     <!-- <div class="ui piled segment"> -->
                     <form class="ui form" id="formContratos">
+                    <div class="field">
+                            <div class="fields">
+                                <div class="eight wide field">
+                                    <label>Fines especificos</label>
+                                    <select id="idFinEspecificoMd" class="ui dropdown" name="dropdown">
+                                        <option value="">Selecciona...</option>
+                                    </select>
+                                </div>
+                                <div class="eight wide field">
+                                    <label>Condicion</label>
+                                    <select id="idCondicionMd" class="ui dropdown" name="dropdown">
+                                        <option value="">Selecciona...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="field">
                             <div class="fields">
                                 <div class="six wide field">

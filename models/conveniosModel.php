@@ -10,7 +10,7 @@ class ConveniosModel extends Conexion
             $cxn = Conexion::conectar();
             $arrayResult = array();
             $stmt = $cxn->prepare("SELECT idConvenio, nombre, descripcion, fechaCreacion, 
-            fechaFirma, fechaFin, isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, 
+            fechaFirma, fechaFin, isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento   FROM $table");
             $stmt->execute();
 
@@ -22,6 +22,8 @@ class ConveniosModel extends Conexion
                     'fechaFirma' => $row['fechaFirma'],
                     'fechaFin' => $row['fechaFin'],
                     'isIndefinida' => $row['isIndefinida'] == 0 ? false : true ,
+                    'idFinEspecifico' => $row['idFinEspecifico'],
+                    'idCondicion' => $row['idEstatus'],
                     'idPrograma' => $row['idPrograma'], 
                     'idContraparte' => $row['idContraparte'], 
                     'idAmbito' => $row['idAmbito'], 
@@ -50,8 +52,8 @@ class ConveniosModel extends Conexion
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idConvenio'] == "") {
 
              $stmt = $cxn->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
-             isIndefinida, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
-             VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idPrograma, :idContraparte, 
+             isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
+             VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idFinEspecifico, :idEstatus, :idPrograma, :idContraparte, 
              :idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento)");
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
             $stmt->bindParam(":descripcion",$arrDatos['descripcion'], PDO::PARAM_STR);
@@ -60,6 +62,8 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
             $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico'], PDO::PARAM_INT);
+            $stmt->bindParam(":idEstatus",$arrDatos['idEstatus'], PDO::PARAM_INT);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma'], PDO::PARAM_INT);
             $stmt->bindParam(":idContraparte",$arrDatos['idContraparte'], PDO::PARAM_INT);
             $stmt->bindParam(":idAmbito",$arrDatos['idAmbito'], PDO::PARAM_INT);
@@ -76,8 +80,9 @@ class ConveniosModel extends Conexion
          } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idConvenio'] != ""){
             // var_dump($arrDatos['idConvenio'],$arrDatos);
             $stmt = $cxn->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, fechaCreacion = :fechaCreacion, 
-            fechaFirma = :fechaFirma, fechaFin = :fechaFin, isIndefinida = :isIndefinida, idPrograma = :idPrograma, idContraparte = :idContraparte, 
-            idAmbito = :idAmbito, idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, idPais = :idPais, 
+            fechaFirma = :fechaFirma, fechaFin = :fechaFin, isIndefinida = :isIndefinida, idFinEspecifico = :idFinEspecifico, 
+            idEstatus = :idEstatus,  idPrograma = :idPrograma, idContraparte = :idContraparte, idAmbito = :idAmbito, 
+            idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, idPais = :idPais, 
             financiamiento = :financiamiento WHERE idconvenio = :idConvenio");
 
             $stmt->bindParam(":idConvenio", $arrDatos['idConvenio']);
@@ -88,6 +93,8 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
             $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico'], PDO::PARAM_INT);
+            $stmt->bindParam(":idEstatus",$arrDatos['idEstatus'], PDO::PARAM_INT);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma'], PDO::PARAM_INT);
             $stmt->bindParam(":idContraparte",$arrDatos['idContraparte'], PDO::PARAM_INT);
             $stmt->bindParam(":idAmbito",$arrDatos['idAmbito'], PDO::PARAM_INT);

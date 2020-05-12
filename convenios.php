@@ -50,6 +50,22 @@
                     <form class="ui form" id="formConvenios">
                         <div class="field">
                             <div class="fields">
+                                <div class="eight wide field">
+                                    <label>Fines especificos</label>
+                                    <select id="idFinEspecificoMd" class="ui dropdown" name="dropdown">
+                                        <option value="">Selecciona...</option>
+                                    </select>
+                                </div>
+                                <div class="eight wide field">
+                                    <label>Condicion</label>
+                                    <select id="idCondicionMd" class="ui dropdown" name="dropdown">
+                                        <option value="">Selecciona...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="fields">
                                 <div class="six wide field ">
                                     <label>Nombre</label>
                                     <input type="text" id="txtNombre" name="name"
@@ -141,7 +157,7 @@
                                 </div>
                                 <div class="eight wide field">
                                     <label for="">Pais</label>
-                                    <select name="" id="" class="ui dropdown">
+                                    <select name="" id="idPaisMd" class="ui dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
                                 </div>
@@ -161,13 +177,13 @@
                                         <div class="bar">
                                             <div class="progress"></div>
                                         </div> -->
-                                        <!-- <div class="label">Waiting for you to press button</div> -->
-                                    <!-- </div> -->
-                                    <!-- <a id="aver" class="ui button" data-url="storage/prueba.pdf">
+                        <!-- <div class="label">Waiting for you to press button</div> -->
+                        <!-- </div> -->
+                        <!-- <a id="aver" class="ui button" data-url="storage/prueba.pdf">
                                         Rapidly Update
                                     </a> -->
-                                <!-- </div> -->
-                            <!-- </div> -->
+                        <!-- </div> -->
+                        <!-- </div> -->
                         <!-- </div> -->
                         <h4 class="ui dividing header">Compromisos</h4>
                         <div class="field">

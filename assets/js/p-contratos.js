@@ -2,6 +2,8 @@
 $(() =>{
     getContratos();
     getCatalogos();
+    getPaises();
+    getResponsables();
   
     $('#tableContratos tbody').on('click', '#perro', function () {
       var table = $('#tableContratos').DataTable();
@@ -91,13 +93,19 @@ $(() =>{
             "targets": "_all"
           }],
           columns: [
-            { data: "nombre" },
-            {
-              data: text_truncate("descripcion", 19)
-            },
-            {
-              data: "fechaFirma"
-            },
+            { data: "nombre",
+            mRender: function (data, type, full) {
+                return '<a type="button" id="linkConvenio"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
+            }
+
+        
+          },
+          {
+            data: text_truncate("descripcion", 19)
+          },
+          {
+            data: "fechaFirma"
+          },
             {
               mRender: function (data, type, full) {
                 return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
@@ -125,6 +133,48 @@ $(() =>{
       }
     });
   }
+  function getPaises() {
+    fetch('./api/paisesApi.php', {
+      method: "POST",
+      body: JSON.stringify({ 'getPaises': { id: 1 } }),
+      dataType: "JSON"
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(response => {
+  
+        $(response).each(function (index, element) {
+            $('#idPaisMd').append($('<option>').text(element.nombre).attr('value', element.idPais));
+          
+        });
+  
+  
+      }).catch(function (error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+      });
+  }
+  function getResponsables() {
+    fetch('./api/usuariosApi.php', {
+      method: "POST",
+      body: JSON.stringify({ 'getUsuarios': { id: 1 } }),
+      dataType: "JSON"
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(response => {
+  
+        $(response).each(function (index, element) { 
+            $('#idResponsableMd').append($('<option>').text(element.nombre +' ' +element.apellido).attr('value', element.idUsuario));
+          
+        });
+  
+  
+      }).catch(function (error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+      });
+  }
   function getCatalogos() {
     fetch('./api/catalogosApi.php', {
       method: "POST",
@@ -135,7 +185,7 @@ $(() =>{
         return response.json();
       })
       .then(response => {
-        let ambito = 1, programa = 2, convenio = 3, origen = 4;
+        let ambito = 1, programa = 2, convenio = 3, origen = 4, finesEspecificos = 5;
   
         $(response).each(function (index, element) {
   
@@ -151,10 +201,20 @@ $(() =>{
   
             $('#idTipoConvenioMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
   
-          } else {
-  
+          } else if (origen == element.idTipoCatalogo){
+
             $('#idOrigenMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
+  
+          } else if (finesEspecificos == element.idTipoCatalogo) {
+  
+            $('#idFinEspecificoMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
+  
+          } else {
+            
+            $('#idCondicionMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
+            
           }
+          
         });
         // waitMeHide('#divBody');
   
@@ -173,6 +233,8 @@ $(() =>{
         fechaFirma: $('#fechaFirma').val(),
         isIndefinida: $('#chkIndefinida').is(':checked'),
         fechaFin: $('#fechaFin').val(),
+        idFinEspecifico: $('#idFinEspecificoMd').val(),
+        idEstaatus: $('#idCondicionMd').select(),
         idPrograma: $('#idProgramaMd').val(),
         idContraparte: 1, //$('#idContraparteMd').val(),
         idAmbito: $('#idAmbitoMd').val(),
@@ -219,6 +281,9 @@ $(() =>{
     $('#txtNombre').val(data.nombre);
     $('#txtDescripcion').val(data.descripcion);
     $('#divFechaFirma').calendar('set date',_fechaFirma.toDateString(), updateInput = true, fireChange = true);
+    $('#divFechaFirma').calendar('set date',_fechaFirma.toDateString(), updateInput = true, fireChange = true);
+    $('#idFinEspecificoMd').dropdown('set selected',data.idFinEspecifico);
+    $('#idCondicionMd').dropdown('set selected',data.idEstatus);
     $('#idProgramaMd').dropdown('set selected',data.idPrograma);
     $('#idContraparteMd').val(2);
     $('#idAmbitoMd').dropdown('set selected',data.idAmbito);
