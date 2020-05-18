@@ -23,7 +23,7 @@ class ConveniosModel extends Conexion
                     'fechaFin' => $row['fechaFin'],
                     'isIndefinida' => $row['isIndefinida'] == 0 ? false : true ,
                     'idFinEspecifico' => $row['idFinEspecifico'],
-                    'idCondicion' => $row['idEstatus'],
+                    'idEstatus' => $row['idEstatus'],
                     'idPrograma' => $row['idPrograma'], 
                     'idContraparte' => $row['idContraparte'], 
                     'idAmbito' => $row['idAmbito'], 
@@ -178,22 +178,23 @@ class ConveniosModel extends Conexion
          return $th->getMessage();
       }
    }
-   public function subirConvenio($nombreEncriptado,$ruta,$table)
-   {
-      try {
-         $pdo = Conexion::conectar();
-          $stmt = $pdo->prepare("INSERT INTO $table(encrypConvenio, rutaConvenio) VALUES (:encrypNomConvenio, :ruta)");
-          $stmt->bindParam(":encrypNomConvenio",$nombreEncriptado, PDO::PARAM_STR);
-          $stmt->bindParam(":ruta",$ruta, PDO::PARAM_STR);
-          if($stmt->execute()) {
-            $id = $pdo->lastInsertId();
-            return intval($id);
-          } else{
-            return "Error no se pudo guardar el archivo";   
-          }
-         $stmt->close();
-      } catch (Exception $th) {
-         //throw $th;
-      }
-   }
+   
+   // public function subirConvenio($nombreEncriptado,$ruta,$table)
+   // {
+   //    try {
+   //       $pdo = Conexion::conectar();
+   //        $stmt = $pdo->prepare("INSERT INTO $table(encrypConvenio, rutaConvenio) VALUES (:encrypNomConvenio, :ruta)");
+   //        $stmt->bindParam(":encrypNomConvenio",$nombreEncriptado, PDO::PARAM_STR);
+   //        $stmt->bindParam(":ruta",$ruta, PDO::PARAM_STR);
+   //        if($stmt->execute()) {
+   //          $id = $pdo->lastInsertId();
+   //          return intval($id);
+   //        } else{
+   //          return "Error no se pudo guardar el archivo";   
+   //        }
+   //       $stmt->close();
+   //    } catch (Exception $th) {
+   //       //throw $th;
+   //    }
+   // }
 }

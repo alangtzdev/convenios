@@ -21,7 +21,7 @@ class ContratosModel extends Conexion
                     'fechaFin' => $row['fechaFin'],
                     'isIndefinida' => $row['isIndefinida'] == 0 ? false : true ,
                     'idFinEspecifico' => $row['idFinEspecifico'],
-                    'idCondicion' => $row['idEstatus'],
+                    'idEstatus' => $row['idEstatus'],
                     'idPrograma' => $row['idPrograma'], 
                     'idContraparte' => $row['idContraparte'], 
                     'idAmbito' => $row['idAmbito'], 
@@ -50,8 +50,8 @@ class ContratosModel extends Conexion
 
              $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
              isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
-             VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idFinEspecifico, :idEstatus,
-              :idPrograma, :idContraparte,:idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento)");
+             VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idFinEspecifico, :idEstatus, :idPrograma, :idContraparte, 
+             :idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento)");
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
             $stmt->bindParam(":descripcion",$arrDatos['descripcion'], PDO::PARAM_STR);
             $stmt->bindParam(":financiamiento",$arrDatos['financiamiento']);

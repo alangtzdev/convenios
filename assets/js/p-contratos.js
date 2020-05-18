@@ -234,7 +234,7 @@ $(() =>{
         isIndefinida: $('#chkIndefinida').is(':checked'),
         fechaFin: $('#fechaFin').val(),
         idFinEspecifico: $('#idFinEspecificoMd').val(),
-        idEstaatus: $('#idCondicionMd').select(),
+        idEstatus: $('#idCondicionMd').val(),
         idPrograma: $('#idProgramaMd').val(),
         idContraparte: 1, //$('#idContraparteMd').val(),
         idAmbito: $('#idAmbitoMd').val(),

@@ -4,7 +4,7 @@
     include 'include/left-menu.php'; 
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-<link href="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css">
+<!-- <link href="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"> -->
 
 <!-- BEGIN CONTENT -->
 <!-- <div class="pusher"> -->
@@ -163,28 +163,25 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <h4 class="ui dividing header">Subir archivo</h4> -->
-                        <!-- <div class="field">
+                        <!-- <h4 class="ui dividing header">Subir archivo</h4>
+                        <div class="field">
                             <div class="fields">
                                 <div class="eleven wide field">
                                     <div class="ui labeled input">
                                         <div class="ui olive label">
                                             Archivo
                                         </div>
-                                        <input type="file" placeholder="mysite.com">
+                                        <input id="idArchivo" type="file" name="archivoNuevo"  data-file="archivoNew" data-idprogress="#archivoResult" data-divresult="#lblResult">
                                     </div>
-                                    <div class="ui indicating progress" data-value="1" data-total="100" id="example5">
+                                    <div class="ui indicating progress" data-value="0" id="archivoResult">
                                         <div class="bar">
                                             <div class="progress"></div>
-                                        </div> -->
-                        <!-- <div class="label">Waiting for you to press button</div> -->
-                        <!-- </div> -->
-                        <!-- <a id="aver" class="ui button" data-url="storage/prueba.pdf">
-                                        Rapidly Update
-                                    </a> -->
-                        <!-- </div> -->
-                        <!-- </div> -->
-                        <!-- </div> -->
+                                        </div>
+                                        <div class="label"id="lblResult"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                         <h4 class="ui dividing header">Compromisos</h4>
                         <div class="field">
                             <div class="fields">
@@ -293,7 +290,7 @@
 
 <?php include "include/footer.php"; ?>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-<script src="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+<!-- <script src="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script> -->
 <script src="assets/plugins/jquery.ui.widget.js"></script>
 <script src="assets/plugins/fileUpload/jquery.fileupload.js"></script>
 <script src="assets/js/p-convenios.js"></script>

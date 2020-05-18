@@ -25,6 +25,8 @@ class ConveniosApi
 //Obtenemos peticion
 
 $request = json_decode(file_get_contents('php://input'), true);
+$file = file_get_contents('php://input');
+
 
 // Dependiendo la peticion que recibamos realiza diferente accion
 

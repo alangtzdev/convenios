@@ -26,14 +26,7 @@ $(function () {
 //     }, 10);
 //   })
 // ;
-$('.rapid.example .ui.progress')
-  .progress({
-    duration : 100,
-    total    : 100,
-    text     : {
-      active: '{value} of {total} done'
-    }
-  });
+  $('#archivoResult').progress();
   $('#tableConvenios tbody').on('click', '#linkConvenio', function () {
     var table = $('#tableConvenios').DataTable();
     var data = table.row($(this).parents('tr')).data();
@@ -84,11 +77,40 @@ $('.rapid.example .ui.progress')
 
   $('#divFechaFin :input').attr('disabled', false);
 
-  $('#idFinEspecificoMd').on('change', function () {
+  // $('#idArchivo').fileupload(new uploadFile('#HFIdConvenio'));
 
-      getSubCatalogos($(this).val(), true, false);
+  // $('#idArchivo').fileupload({
+  //   url: './api/loadFileApi.php?file=' + $(this).data('file'),
+  //   acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
+  //   previewMaxWidth: 100,
+  //   previewMaxHeight: 100,
+  //   success: function (response, status, e, data) {
+  //     Toast.fire({
+  //       type: 'success',
+  //       title: "Imagen cargada correctamente."
+  //     });
+  //   },
+  //   error: function (e, data) {
+  //     Toast.fire({
+  //       type: 'warning',
+  //       title: "Error al cargar la imagen."
+  //     });
+  //     limpiaImagen();
+  //   },
+  //   done: function (e, data) {
+  //     $('#imgEmpleado').prop('src', data.result);
+  //     $('#imgEmpleado').data('image', 'profile');
+  //     $('#imgEmpleado').height(127);
+  //   },
+  //   progressall: function (e, data) {
+  //     var progress = parseInt(data.loaded / data.total * 100, 10);
+  //     // var progress = parseInt(data.loaded / data.total * 100, 10);
+  //     $($(this).data('idprogress')).progress({
+  //       percent: progress
+  //     });
+  //   }
+  // });
 
-  });
 
 });
 function mdAltaEdicion(command) {
@@ -383,10 +405,14 @@ function getResponsables() {
     });
 }
 function saveConvenio() {
-  console.log("TAMO ACTIVOS");
+  // let datos = new FormData(document.getElementById("formConvenios"));
+  // var fileField = document.querySelector("input[type='file']");
+  // let fileField_ = fileField.files[0]
+  // console.log(fileField_.name);
   
-  var fromDate = new Date($("#Date_From").val());
-  let idConvenio = $('#HFIdConvenio').val() != '' ? $('#HFIdConvenio').val() : '',
+  // var fromDate = new Date($("#Date_From").val());
+  let idConvenio = $('#HFIdConvenio').val() != '' ? $('#HFIdConvenio').val() : '';
+  // let archivo = $('#idFileUpload')[0].files[0];
     params = {
       HFCommandName: $('#HFCommandName').val(),
       idConvenio: idConvenio,
@@ -396,13 +422,13 @@ function saveConvenio() {
       isIndefinida: $('#chkIndefinida').is(':checked'),
       fechaFin: $('#fechaFin').val(),
       idFinEspecifico: $('#idFinEspecificoMd').val(),
-      idEstaatus: $('#idCondicionMd').select(),
+      idEstatus: $('#idCondicionMd').val(),
       idPrograma: $('#idProgramaMd').val(),
       idContraparte: 1, //$('#idContraparteMd').val(),
       idAmbito: $('#idAmbitoMd').val(),
       idOrigen: $('#idOrigenMd').val(),
       idTipoConvenio: $('#idTipoConvenioMd').val(),
-      idResponsable: 6,//$('#idResponsableMd').val(),
+      idResponsable: $('#idResponsableMd').val(),
       financiamiento: $('#txtFinaciamiento').val(),
       idPais: $('#idPaisMd').val(),
     };
