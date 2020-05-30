@@ -11,7 +11,9 @@ class ConveniosModel extends Conexion
             $arrayResult = array();
             $stmt = $cxn->prepare("SELECT idConvenio, nombre, descripcion, fechaCreacion, 
             fechaFirma, fechaFin, isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, 
-            idTipoConvenio, idResponsable, idPais, financiamiento   FROM $table");
+            idTipoConvenio, idResponsable, idPais, financiamiento, isIntercambioEstudiantes, isIntercambioProfesores, 
+            isAccesoBiblioteca, isEstServicioSocial , isDesarrolloProyectos, isCoedicionLibros,
+             isCostosInstitucionales, isInformeAvance, encrypArchivo, rutaArchivo FROM $table");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -31,7 +33,17 @@ class ConveniosModel extends Conexion
                     'idTipoConvenio' => $row['idTipoConvenio'], 
                     'idResponsable' => $row['idResponsable'], 
                     'idPais' => $row['idPais'], 
-                    'financiamiento' => $row['financiamiento']
+                    'financiamiento' => $row['financiamiento'],
+                    'isIntercambioEstudiantes' => $row['isIntercambioEstudiantes'] == 0 ? false : true,
+                    'isIntercambioProfesores' => $row['isIntercambioProfesores'] == 0 ? false : true,
+                    'isAccesoBiblioteca' => $row['isAccesoBiblioteca'] == 0 ? false : true,
+                    'isEstServicioSocial' => $row['isEstServicioSocial'] == 0 ? false : true,
+                    'isDesarrolloProyectos' => $row['isDesarrolloProyectos'] == 0 ? false : true,
+                    'isCoedicionLibros' => $row['isCoedicionLibros'] == 0 ? false : true,
+                    'isCostosInstitucionales' => $row['isCostosInstitucionales'] == 0 ? false : true,
+                    'isInformeAvance' => $row['isInformeAvance'] == 0 ? false : true,
+                    'encrypArchivo' => $row['encrypArchivo'] == null ? "" :  $row['encrypArchivo'],
+                    'rutaArchivo' => $row['rutaArchivo'] == null ? "" :  $row['rutaArchivo']
                 );
             }
             
@@ -41,6 +53,7 @@ class ConveniosModel extends Conexion
             return $th->getMessage();
         }
     }
+
    public function saveConvenioMdl($arrDatos,$table)
    {
       try {
@@ -52,9 +65,14 @@ class ConveniosModel extends Conexion
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idConvenio'] == "") {
 
              $stmt = $cxn->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
-             isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento) 
+             isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, 
+             idResponsable, idPais, financiamiento, encrypArchivo, rutaArchivo, isIntercambioEstudiantes, 
+             isIntercambioProfesores, isAccesoBiblioteca, isEstServicioSocial, isDesarrolloProyectos, 
+             isCoedicionLibros, isCostosInstitucionales, isInformeAvance) 
              VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idFinEspecifico, :idEstatus, :idPrograma, :idContraparte, 
-             :idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento)");
+             :idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento, :encrypArchivo, :rutaArchivo,
+             :isIntercambioEstudiantes, :isIntercambioProfesores, :isAccesoBiblioteca, :isEstServicioSocial, 
+             :isDesarrolloProyectos, :isCoedicionLibros, :isCostosInstitucionales, :isInformeAvance)");
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
             $stmt->bindParam(":descripcion",$arrDatos['descripcion'], PDO::PARAM_STR);
             $stmt->bindParam(":financiamiento",$arrDatos['financiamiento']);
@@ -71,6 +89,18 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":idTipoConvenio",$arrDatos['idTipoConvenio'], PDO::PARAM_INT);
             $stmt->bindParam(":idResponsable",$arrDatos['idResponsable'], PDO::PARAM_INT);
             $stmt->bindParam(":idPais",$arrDatos['idPais'], PDO::PARAM_INT);
+            $stmt->bindParam(":encrypArchivo", $arrDatos['encrypArchivo'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaArchivo",$arrDatos['rutaArchivo'], PDO::PARAM_STR);
+            $stmt->bindParam(":isIntercambioEstudiantes",$arrDatos['isIntercambioEstudiantes']);
+            $stmt->bindParam(":isIntercambioProfesores",$arrDatos['isIntercambioProfesores']);
+            $stmt->bindParam(":isAccesoBiblioteca",$arrDatos['isAccesoBiblioteca']);
+            $stmt->bindParam(":isEstServicioSocial",$arrDatos['isEstServicioSocial']);
+            $stmt->bindParam(":isDesarrolloProyectos",$arrDatos['isDesarrolloProyectos']);
+            $stmt->bindParam(":isCoedicionLibros",$arrDatos['isCoedicionLibros']);
+            $stmt->bindParam(":isCostosInstitucionales",$arrDatos['isCostosInstitucionales']);
+            $stmt->bindParam(":isInformeAvance",$arrDatos['isInformeAvance']);
+            
+
             if ($stmt->execute()) {
                return "success";
            } else {
@@ -83,7 +113,11 @@ class ConveniosModel extends Conexion
             fechaFirma = :fechaFirma, fechaFin = :fechaFin, isIndefinida = :isIndefinida, idFinEspecifico = :idFinEspecifico, 
             idEstatus = :idEstatus,  idPrograma = :idPrograma, idContraparte = :idContraparte, idAmbito = :idAmbito, 
             idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, idPais = :idPais, 
-            financiamiento = :financiamiento WHERE idconvenio = :idConvenio");
+            financiamiento = :financiamiento, encrypArchivo = :encrypArchivo, rutaArchivo = :rutaArchivo, isIntercambioEstudiantes = :isIntercambioEstudiantes,
+            isIntercambioProfesores = :isIntercambioProfesores, isAccesoBiblioteca = :isAccesoBiblioteca, isEstServicioSocial = :isEstServicioSocial, 
+            isDesarrolloProyectos = :isDesarrolloProyectos, isCoedicionLibros = :isCoedicionLibros, isCostosInstitucionales = :isCostosInstitucionales, 
+            isInformeAvance = :isInformeAvance
+            WHERE idconvenio = :idConvenio");
 
             $stmt->bindParam(":idConvenio", $arrDatos['idConvenio']);
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
@@ -102,6 +136,17 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":idTipoConvenio",$arrDatos['idTipoConvenio'], PDO::PARAM_INT);
             $stmt->bindParam(":idResponsable",$arrDatos['idResponsable'], PDO::PARAM_INT);
             $stmt->bindParam(":idPais",$arrDatos['idPais'], PDO::PARAM_INT);
+            $stmt->bindParam(":encrypArchivo", $arrDatos['encrypArchivo'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaArchivo",$arrDatos['rutaArchivo'], PDO::PARAM_STR);
+            $stmt->bindParam(":isIntercambioEstudiantes",$arrDatos['isIntercambioEstudiantes']);
+            $stmt->bindParam(":isIntercambioProfesores",$arrDatos['isIntercambioProfesores']);
+            $stmt->bindParam(":isAccesoBiblioteca",$arrDatos['isAccesoBiblioteca']);
+            $stmt->bindParam(":isEstServicioSocial",$arrDatos['isEstServicioSocial']);
+            $stmt->bindParam(":isDesarrolloProyectos",$arrDatos['isDesarrolloProyectos']);
+            $stmt->bindParam(":isCoedicionLibros",$arrDatos['isCoedicionLibros']);
+            $stmt->bindParam(":isCostosInstitucionales",$arrDatos['isCostosInstitucionales']);
+            $stmt->bindParam(":isInformeAvance",$arrDatos['isInformeAvance']);
+            
             if ($stmt->execute()) {
                 return "success";
             } else {
@@ -115,6 +160,7 @@ class ConveniosModel extends Conexion
          return $th->getMessage();
       }
    }
+
    public function deleteConvenioMdl($idConvenio,$table)
    {
       try {
@@ -133,6 +179,7 @@ class ConveniosModel extends Conexion
       }
       
    }
+   
    public function getAreasUsuario($idUsuario,$table)
    {
       try {

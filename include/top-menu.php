@@ -1,4 +1,4 @@
-<div class="ui yellow inverted top attached tiny menu"> 
+<div class="ui red-colsan inverted top attached tiny menu"> 
   <a class="item pizzabars"><i class="fas fa-bars"></i>&nbsp;Menu</a>
   <span class="item"><img src="/img/Logo.png"></span>
   <a class="active item" href="index.php">Inicio</a>

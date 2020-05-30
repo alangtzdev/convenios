@@ -21,7 +21,7 @@ function text_truncate(str, length, ending) {
     return str;
   }
 };
-function uploadFile(idhf) {
+function uploadFile(hfEncryp,hfRuta,lblResult) {
  
 
   this.add = function (e, data) {
@@ -44,11 +44,20 @@ function uploadFile(idhf) {
   };
 
   this.success = function (response, status, e, data) {
+    let datos =  JSON.parse(response);
       $(this.idprogress).removeClass('active');
-      $(idhf).val(response);
-      $($(this).data('divresult')).text('Archivo subido correctamente');
+      $(hfEncryp).val(datos.encrypArchivo);
+      $(hfRuta).val(datos.rutaArchivo)
+      $(lblResult).text('Archivo subido correctamente');
   };
   this.error = function(){ };
+
+}
+function cleanFile(idFile,ecrypFile,routeFile) {
+  $($(idFile).data('idprogress')).progress();
+  $($(idFile).data('idlblresult')).html('Ningun archivo seleccionado');
+  $(ecrypFile).val();
+  $(routeFile).val();
 
 }
 

@@ -3,7 +3,8 @@
     include 'include/top-menu.php'; 
     include 'include/left-menu.php'; 
 ?>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"> -->
+<link rel="stylesheet" href="assets/plugins/datatable/jquery.dataTables.min.css">
 <!-- <link href="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"> -->
 
 <!-- BEGIN CONTENT -->
@@ -24,15 +25,16 @@
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
-            <table id="tableConvenios" class="ui purple celled table responsive">
-                <thead>
-                    <tr>
-                        <th class="">Nombre</th>
-                        <th class="">Descripcion</th>
+            <table id="tableConvenios" class="table display responsive dt-responsive celled"  cellspacing="0">
+            <!-- class="table table-striped table-hover dt-responsive table-condensed display compact" cellspacing="0"> -->
+                <thead class="table-title">
+                    <tr>                
+                        <th>Convenio</th>
                         <th>Fecha firma</th>
                         <th>Fecha final</th>
-                        <th class="">Editar</th>
-                        <th class="">Eliminar</th>
+                        <th>Archivo</th>
+                        <th class="no-sort">Editar</th>
+                        <th class="no-sort">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,8 +44,7 @@
         <div class="exmaple">
             <div class="ui modal" id="mdAltaEdicion">
                 <i class="close icon"></i>
-                <div class="ui red header">
-                    Nuevo Convenio
+                <div class="ui red header" id="txtTitle">
                 </div>
                 <div class="content">
                     <!-- <div class="ui piled segment"> -->
@@ -163,58 +164,66 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <h4 class="ui dividing header">Subir archivo</h4>
+                        <h4 class="ui dividing header blue">Subir archivo</h4>
                         <div class="field">
                             <div class="fields">
-                                <div class="eleven wide field">
+                                <div class="eleven wide field" id="divArchivoNuevo">
                                     <div class="ui labeled input">
                                         <div class="ui olive label">
                                             Archivo
+                                            <!-- <span class="fileinput-exists"> Cambiar </span> -->
                                         </div>
-                                        <input id="idArchivo" type="file" name="archivoNuevo"  data-file="archivoNew" data-idprogress="#archivoResult" data-divresult="#lblResult">
+                                        <!-- <input id="idArchivo" type="file" name="archivoNuevo" data-file="archivoNew" data-idprogress="#archivoResult" data-divresult="#lblResult"> -->
+                                        
+                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"     onclick="subir('idArchivo')">Escoger archivos</button>
+                                        <input type="file" id="idArchivo" name="archivoNuevo" data-file="archivoNew"
+                                            data-idprogress="#archivoResult" data-idlblresult="#glosaArchivos" style="display: none">
+                                        <span id="glosaArchivos">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress" data-value="0" id="archivoResult">
                                         <div class="bar">
-                                            <div class="progress"></div>
+                                            <div id="progressArchivo" class="progress"></div>
                                         </div>
-                                        <div class="label"id="lblResult"></div>
+                                        <!-- <div class="label" id="lblResult" ></div> -->
                                     </div>
                                 </div>
+                                <div class="eleven wide field" id="divArchivoConsul">
+                                <a target="_blank" id="aArchivoRef" href="" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>
+                                <label for="" id="lblArchivoRef"></label>
+                                </div>
                             </div>
-                        </div> -->
-                        <h4 class="ui dividing header">Compromisos</h4>
+                        </div>
+                        <h4 class="ui dividing header blue">Compromisos</h4>
                         <div class="field">
                             <div class="fields">
                                 <div class="four wide field"><label>Intercambio estudiante</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkInterEst">
                                         <label>SI</label>
                                     </div>
                                 </div>
                                 <div class="four wide field"><label>Intercambio profesores</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkInterProfe">
                                         <label></label>
                                     </div>
                                 </div>
                                 <div class="four wide field"><label>Acceso biblioteca</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkAccessBiblio">
                                         <label></label>
                                     </div>
                                 </div>
                                 <div class="four wide field"><label>Servicio social estudiantes</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkSerSocial">
                                         <label></label>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                         <div class="field">
@@ -222,28 +231,28 @@
                                 <div class="four wide field"><label>Desarrollo de proyectos</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkDesProy">
                                         <label>SI</label>
                                     </div>
                                 </div>
                                 <div class="four wide field"><label>Coedición de libros</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkCoeLibros">
                                         <label></label>
                                     </div>
                                 </div>
                                 <div class="four wide field"><label>Costos institucionales</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkCostosInst">
                                         <label></label>
                                     </div>
                                 </div>
                                 <div class="four wide field"><label>Informes de avance</label>
                                     <div class="ui fitted checkbox">
                                         <!-- <label></label> -->
-                                        <input type="checkbox" name="checkbox">
+                                        <input type="checkbox" name="checkbox" id="chkInformesAvance">
                                         <label></label>
                                     </div>
                                 </div>
@@ -260,7 +269,7 @@
                     <div class="ui cancel red button">
                         cancelar
                     </div>
-                    <button type="submit" class="ui ok green right button">
+                    <button id="btnGuardar" type="submit" class="ui ok green right button">
                         Guardar
                     </button>
                     <!-- <div class="ui submit green inverted button">Guardar</div> -->
@@ -280,6 +289,8 @@
         </div>
         <input type='hidden' name='HFCommandName' id="HFCommandName" value="" />
         <input type='hidden' name='HFIdConvenio' id="HFIdConvenio" value="" />
+        <input type='hidden' name='HFEncrypArchivo' id="HFEncrypArchivo" value="" />
+        <input type='hidden' name='HFRutaArchivo' id="HFRutaArchivo" value="" />
 
     </div>
     <!-- El Contenido termina aqui -->
@@ -289,7 +300,8 @@
 <!-- END CONTENT -->
 
 <?php include "include/footer.php"; ?>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="assets/plugins/datatable/jquery.dataTables.min.js"></script>
+<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> -->
 <!-- <script src="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script> -->
 <script src="assets/plugins/jquery.ui.widget.js"></script>
 <script src="assets/plugins/fileUpload/jquery.fileupload.js"></script>

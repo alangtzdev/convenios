@@ -77,8 +77,7 @@ $(function () {
 
   $('#divFechaFin :input').attr('disabled', false);
 
-  // $('#idArchivo').fileupload(new uploadFile('#HFIdConvenio'));
-
+ 
   // $('#idArchivo').fileupload({
   //   url: './api/loadFileApi.php?file=' + $(this).data('file'),
   //   acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
@@ -141,7 +140,18 @@ function mdAltaEdicion(command) {
           type: 'date',
           startMode: 'year'
         });
+        $('#btnGuardar').show();
+        $('#divArchivoConsul').hide();
+        $('#divArchivoNuevo').show();
+        $('#HFCommandName').val(command);
+        
+        $('#txtTitle').text('ALTA');
         if (command == 'CONSULTA') {
+          $('#divArchivoConsul').show();
+          $('#divArchivoNuevo').hide();
+          $('#txtTitle').text('CONSULTA');
+          $('#btnGuardar').hide();
+          $('#idArchivo').attr('disable', true);
         //   $("#mdAltaEdicion .dropdown").each(function (index) {
         //     $(this).attr('disabled', true); 
         // });
@@ -164,9 +174,11 @@ function mdAltaEdicion(command) {
           // $('#divBody a').show();
           // $('#RdioSi, #RdioNo').iCheck('disable');
         } else if (command == 'EDITAR'){
+          $('#txtTitle').text('EDITAR');
 
         }
-        $('#HFCommandName').val(command);
+        
+       
         // var button = $(event.relatedTarget)
         // var isReadonly = (button.data('command') == "CONSULTA");
         // var isEdit = (button.data('command') == "EDITAR");
@@ -202,6 +214,7 @@ function mdAltaEdicion(command) {
 
       },
       onHide: function () {
+        cleanFile($('#idArchivo'),$('#HFEncrypArchivo'),$('#HFRutaArchivo'));
         $('#HFIdConvenio').val('');
         //Resets form input fieldsz
         // $('.ui.form').trigger("reset");
@@ -219,6 +232,16 @@ function mdAltaEdicion(command) {
       }
     }).modal('show');
 }
+function subir(id) {
+  var file = document.getElementById(id);
+  file.dispatchEvent(new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+  }));
+  $('#idArchivo').fileupload(new uploadFile('#HFEncrypArchivo', '#HFRutaArchivo', '#glosaArchivos'));
+
+}
 function getConvenios() {
   // waitMeShow('#divBody');
   var params = { idUsuario: 1 };
@@ -234,10 +257,12 @@ function getConvenios() {
         language: { "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json" },
         data: response,
         buttons: ['pdf'],
-        columnDefs: [{
-          className: "dt-center dt-body-center",
-          "targets": "_all"
-        }],
+        columnDefs: [
+          { "bSortable": false, "aTargets": [ 4, 5 ] },
+          {
+                   className: "dt-center",
+                   "targets": "_all"
+       }],
         columns: [
           { data: "nombre",
             mRender: function (data, type, full) {
@@ -246,16 +271,24 @@ function getConvenios() {
 
         
           },
-          {
-            data: text_truncate("descripcion", 19)
-          },
+          // {
+          //   data: text_truncate("descripcion", 19)
+          // },
           {
             data: "fechaFirma"
           },
+          
           {
             mRender: function (data, type, full) {
               return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
             }
+          },
+          {
+            mRender: function (data, type, full) {
+              // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
+              return (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'Sin archivo');
+            },
+            width: "8%",
           },
           {
             mRender: function (data, type, full) {
@@ -404,15 +437,10 @@ function getResponsables() {
       console.log('Hubo un problema con la petición Fetch:' + error.message);
     });
 }
+
 function saveConvenio() {
-  // let datos = new FormData(document.getElementById("formConvenios"));
-  // var fileField = document.querySelector("input[type='file']");
-  // let fileField_ = fileField.files[0]
-  // console.log(fileField_.name);
-  
-  // var fromDate = new Date($("#Date_From").val());
+
   let idConvenio = $('#HFIdConvenio').val() != '' ? $('#HFIdConvenio').val() : '';
-  // let archivo = $('#idFileUpload')[0].files[0];
     params = {
       HFCommandName: $('#HFCommandName').val(),
       idConvenio: idConvenio,
@@ -431,6 +459,16 @@ function saveConvenio() {
       idResponsable: $('#idResponsableMd').val(),
       financiamiento: $('#txtFinaciamiento').val(),
       idPais: $('#idPaisMd').val(),
+      isIntercambioEstudiantes: $('#chkInterEst').is(':checked'), 
+      isIntercambioProfesores : $('#chkInterProfe').is(':checked'), 
+      isAccesoBiblioteca : $('#chkAccessBiblio').is(':checked'), 
+      isEstServicioSocial : $('#chkSerSocial').is(':checked'), 
+      isDesarrolloProyectos : $('#chkDesProy').is(':checked'), 
+      isCoedicionLibros : $('#chkCoeLibros').is(':checked'), 
+      isCostosInstitucionales : $('#chkCostosInst').is(':checked'), 
+      isInformeAvance : $('#chkInformesAvance').is(':checked'), 
+      encrypArchivo: $('#HFEncrypArchivo').val(),
+      rutaArchivo: $('#HFRutaArchivo').val()
     };
   fetch('./api/conveniosApi.php', {
     method: "POST",
@@ -479,6 +517,22 @@ function loadData(data) {
   $('#txtFinaciamiento').val(data.financiamiento);
   $('#idPaisMd').val(data.idPais);
   $('#idResponsableMd').val(10);
+  if(data.rutaArchivo != ""){
+   $('#aArchivoRef').attr("href", data.rutaArchivo); 
+   $('#lblArchivoRef').text('Ver Archivo');
+  } else {
+    $('#aArchivoRef').attr("href", '#'); 
+    $('#lblArchivoRef').text('No hay archivo') ;
+  }
+
+  if(data.isIntercambioEstudiantes) { $('#chkInterEst').prop('checked', true); }
+  if(data.isIntercambioProfesores) { $('#chkInterProfe').prop('checked', true); }
+  if(data.isAccesoBiblioteca) { $('#chkAccessBiblio').prop('checked', true); }
+  if(data.isEstServicioSocial) { $('#chkSerSocial').prop('checked', true); }
+  if(data.isDesarrolloProyectos) { $('#chkDesProy').prop('checked', true); }
+  if(data.isCoedicionLibros) {$('#chkCoeLibros').prop('checked', true); }
+  if(data.isCostosInstitucionales) {$('#chkCostosInst').prop('checked', true);  }
+  if(data.isInformeAvance) {$('#chkInformesAvance').prop('checked', true) ; }
   if (data.isIndefinida) {
     $('#chkIndefinida').prop('checked', true);
   }

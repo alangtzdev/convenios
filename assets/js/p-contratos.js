@@ -1,10 +1,19 @@
 
 $(() =>{
+
     getContratos();
     getCatalogos();
     getPaises();
     getResponsables();
   
+    $('#archivoResult').progress();
+    $('#tableContratos tbody').on('click', '#linkContrato', function () {
+      var table = $('#tableContratos').DataTable();
+      var data = table.row($(this).parents('tr')).data();
+      mdAltaEdicion($(this).data('command'));
+      loadData(data, $(this).data('command'));
+    });
+
     $('#tableContratos tbody').on('click', '#perro', function () {
       var table = $('#tableContratos').DataTable();
       var data = table.row($(this).parents('tr')).data();
@@ -59,19 +68,56 @@ $(() =>{
             type: 'date',
             startMode: 'year'
           });
+          $('#btnGuardar').show();
+          $('#divArchivoConsul').hide();
+          $('#divArchivoNuevo').show();
           $('#HFCommandName').val(command);
+          $('#txtTitle').text('ALTA');
+
+          if (command == 'CONSULTA') {
+            $('#divArchivoConsul').show();
+            $('#divArchivoNuevo').hide();
+            $('#txtTitle').text('CONSULTA');
+            $('#btnGuardar').hide();
+            $('#idArchivo').attr('disable', true);
+            $('.ui.dropdown.selection').addClass('disabled');
+            $('.ui.calendar :input').attr('disabled', true);
+            $("#mdAltaEdicion :input").each(function (index) {
+
+              $(this).attr('readonly', true);
+
+            });
+          } else if (command == 'EDITAR'){
+
+            $('#txtTitle').text('EDITAR');
+  
+          }
         },
         onHide: function () {
+          cleanFile($('#idArchivo'),$('#HFEncrypArchivo'),$('#HFRutaArchivo'));
           $('#HFIdContrato').val('');
           $('.ui.form').form('reset');
           $('.ui.form .field.error').removeClass("error");
           $('.ui.form.error').removeClass("error");
+          $('.ui.form :input').attr('readonly', false);
+          $('.ui.dropdown.selection').removeClass('disabled');
+          $('.ui.calendar :input').attr('disabled', false);
         },
         onApprove: function () {
           $('.ui.form').form('submit');
           return false;
         }
       }).modal('show');
+  }
+  function subir(id) {
+    var file = document.getElementById(id);
+    file.dispatchEvent(new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true
+    }));
+    $('#idArchivo').fileupload(new uploadFile('#HFEncrypArchivo', '#HFRutaArchivo', '#glosaArchivos'));
+  
   }
   function getContratos() {
     // waitMeShow('#divBody');
@@ -88,20 +134,17 @@ $(() =>{
           language: { "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json" },
           data: response,
           buttons: ['pdf'],
-          columnDefs: [{
-            className: "dt-center dt-body-center",
-            "targets": "_all"
-          }],
+          columnDefs: [
+            { "bSortable": false, "aTargets": [ 4, 5 ] },
+            {
+                     className: "dt-center",
+                     "targets": "_all"
+         }],
           columns: [
             { data: "nombre",
             mRender: function (data, type, full) {
-                return '<a type="button" id="linkConvenio"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
+                return '<a type="button" id="linkContrato"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
             }
-
-        
-          },
-          {
-            data: text_truncate("descripcion", 19)
           },
           {
             data: "fechaFirma"
@@ -111,6 +154,13 @@ $(() =>{
                 return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
               }
             },
+            {
+              mRender: function (data, type, full) {
+                // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
+                return (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'Sin archivo');
+              },
+              width: "8%",
+            },            
             {
               mRender: function (data, type, full) {
                 return "<button id='perro' type='button' class='ui violet icon button' data-command='EDITAR'/><i class='fa fa-pencil'></i></button>";
@@ -223,7 +273,7 @@ $(() =>{
       });
   }
   function saveContrato() {
-    var fromDate = new Date($("#Date_From").val());
+ 
     let idContrato = $('#HFIdContrato').val() != '' ? $('#HFIdContrato').val() : '',
       params = {
         HFCommandName: $('#HFCommandName').val(),
@@ -240,9 +290,17 @@ $(() =>{
         idAmbito: $('#idAmbitoMd').val(),
         idOrigen: $('#idOrigenMd').val(),
         idTipoConvenio: $('#idTipoConvenioMd').val(),
-        idResponsable: 6,//$('#idResponsableMd').val(),
+        idResponsable: $('#idResponsableMd').val(),
         financiamiento: $('#txtFinaciamiento').val(),
-        idPais: 2//$('#idPaisMd').val(),
+        idPais: $('#idPaisMd').val(),
+        isContratacionPersonal: $('#chkContraPersonal').is(':checked'),
+        isVinculacionBecarios: $('#chkVinculaBeca').is(':checked'),
+        isProductosEntregables: $('#chkProductEntrega').is(':checked'),
+        isInformesFinancieros: $('#chkInfoFinan').is(':checked'),
+        isInformesTecnicos: $('#chkInfoTecnicos').is(':checked'),
+        isAuditoriaExterna: $('#chkAudiExterna').is(':checked'),
+        encrypArchivo: $('#HFEncrypArchivo').val(),
+        rutaArchivo: $('#HFRutaArchivo').val()
       };
     fetch('./api/contratosApi.php', {
       method: "POST",
@@ -292,6 +350,20 @@ $(() =>{
     $('#txtFinaciamiento').val(data.financiamiento);
     $('#idPaisMd').val(1);
     $('#idResponsableMd').val(10);
+    if(data.rutaArchivo != ""){
+      $('#aArchivoRef').attr("href", data.rutaArchivo); 
+      $('#lblArchivoRef').text('Ver Archivo');
+     } else {
+       $('#aArchivoRef').attr("href", '#'); 
+       $('#lblArchivoRef').text('No hay archivo') ;
+    }
+
+    if(data.isContratacionPersonal) { $('#chkContraPersonal').prop('checked', true); }
+    if(data.isVinculacionBecarios) { $('#chkVinculaBeca').prop('checked', true); }
+    if(data.isProductosEntregables) { $('#chkProductEntrega').prop('checked', true); }
+    if(data.isInformesFinancieros) { $('#chkInfoFinan').prop('checked', true); }
+    if(data.isInformesTecnicos) { $('#chkInfoTecnicos').prop('checked', true); }
+    if(data.isAuditoriaExterna) {$('#chkAudiExterna').prop('checked', true); }
     if (data.isIndefinida) {
       $('#chkIndefinida').prop('checked', true);
     }
