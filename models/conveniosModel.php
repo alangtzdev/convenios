@@ -60,8 +60,8 @@ class ConveniosModel extends Conexion
          $cxn = Conexion::conectar();
          $today = date("Y-m-d H:i:s");
 
-         $fechaFirma = date("y-m-d", strtotime($arrDatos['fechaFirma']));
-         $fechaFin = $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])); 
+         $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
+         $fechaFin = $arrDatos['isIndefinida'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idConvenio'] == "") {
 
              $stmt = $cxn->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,

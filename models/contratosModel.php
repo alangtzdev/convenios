@@ -55,8 +55,9 @@ class ContratosModel extends Conexion
       try {
          $today = date("Y-m-d H:i:s");
 
-         $fechaFirma = date("y-m-d", strtotime($arrDatos['fechaFirma']));
-         $fechaFin = $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])); 
+         
+         $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
+         $fechaFin = $arrDatos['isIndefinida'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idContrato'] == "") {
 
              $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
