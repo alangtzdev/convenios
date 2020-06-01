@@ -59,6 +59,7 @@ class ConveniosModel extends Conexion
       try {
          $cxn = Conexion::conectar();
          $today = date("Y-m-d H:i:s");
+         $isIndefinida = $arrDatos['isIndefinida'] == true ? 1 : 0;
 
          $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
          $fechaFin = $arrDatos['isIndefinida'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
@@ -79,7 +80,7 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":fechaCreacion",$today, PDO::PARAM_STR);
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
-            $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":isIndefinida",$isIndefinida);
             $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico']);
             $stmt->bindParam(":idEstatus",$arrDatos['idEstatus']);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma']);
@@ -126,7 +127,7 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":fechaCreacion",$today, PDO::PARAM_STR);
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
-            $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":isIndefinida",$isIndefinida);
             $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico']);
             $stmt->bindParam(":idEstatus",$arrDatos['idEstatus']);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma']);

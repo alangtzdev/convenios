@@ -55,7 +55,7 @@ class ContratosModel extends Conexion
       try {
          $today = date("Y-m-d H:i:s");
 
-         
+         $isIndefinida = $arrDatos['isIndefinida'] == true ? 1 : 0;
          $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
          $fechaFin = $arrDatos['isIndefinida'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idContrato'] == "") {
@@ -74,7 +74,7 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":fechaCreacion",$today, PDO::PARAM_STR);
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
-            $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":isIndefinida",$isIndefinida);
             $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico'], PDO::PARAM_INT);
             $stmt->bindParam(":idEstatus",$arrDatos['idEstatus'], PDO::PARAM_INT);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma'], PDO::PARAM_INT);
@@ -116,7 +116,7 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":fechaCreacion",$today, PDO::PARAM_STR);
             $stmt->bindParam(":fechaFirma",$fechaFirma); 
             $stmt->bindParam(":fechaFin",$fechaFin);
-            $stmt->bindParam(":isIndefinida",$arrDatos['isIndefinida']);
+            $stmt->bindParam(":isIndefinida",$isIndefinida);
             $stmt->bindParam(":idFinEspecifico",$arrDatos['idFinEspecifico'], PDO::PARAM_INT);
             $stmt->bindParam(":idEstatus",$arrDatos['idEstatus'], PDO::PARAM_INT);
             $stmt->bindParam(":idPrograma",$arrDatos['idPrograma'], PDO::PARAM_INT);
