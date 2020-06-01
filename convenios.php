@@ -58,7 +58,7 @@
                                     </select>
                                 </div>
                                 <div class="eight wide field">
-                                    <label>Condicion</label>
+                                    <label>Estatus</label>
                                     <select id="idCondicionMd" class="ui dropdown" name="dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
@@ -175,7 +175,7 @@
                                         </div>
                                         <!-- <input id="idArchivo" type="file" name="archivoNuevo" data-file="archivoNew" data-idprogress="#archivoResult" data-divresult="#lblResult"> -->
                                         
-                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"     onclick="subir('idArchivo')">Escoger archivos</button>
+                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"     onclick="subir('idArchivo')">Escoger archivo</button>
                                         <input type="file" id="idArchivo" name="archivoNuevo" data-file="archivoNew"
                                             data-idprogress="#archivoResult" data-idlblresult="#glosaArchivos" style="display: none">
                                         <span id="glosaArchivos">Ningun archivo seleccionado</span>

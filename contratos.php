@@ -55,7 +55,7 @@
                                     </select>
                                 </div>
                                 <div class="eight wide field">
-                                    <label>Condicion</label>
+                                    <label>Estatus</label>
                                     <select id="idCondicionMd" class="ui dropdown" name="dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
