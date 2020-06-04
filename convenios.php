@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="eight wide field">
                                     <label>Contraparte</label>
-                                    <select id="idContraParteMd" class="ui dropdown" name="dropdown">
+                                    <select id="idContraparteMd" class="ui dropdown" name="dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
                                 </div>

@@ -5,6 +5,7 @@ $(() =>{
     getCatalogos();
     getPaises();
     getResponsables();
+    getContraparte();
   
     $('#archivoResult').progress();
     $('#tableContratos tbody').on('click', '#linkContrato', function () {
@@ -272,6 +273,27 @@ $(() =>{
         console.log('Hubo un problema con la petición Fetch:' + error.message);
       });
   }
+  function getContraparte() {
+    fetch('./api/institucionesApi.php', {
+      method: "POST",
+      body: JSON.stringify({ 'getInstituciones': { } }),
+      dataType: "JSON"
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(response => {
+  
+        $(response).each(function (index, element) {
+            $('#idContraparteMd').append($('<option>').text(element.nombre).attr('value', element.idInstitucion));
+          
+        });
+  
+  
+      }).catch(function (error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+      });
+  }
   function saveContrato() {
  
     let idContrato = $('#HFIdContrato').val() != '' ? $('#HFIdContrato').val() : '',
@@ -286,7 +308,7 @@ $(() =>{
         idFinEspecifico: $('#idFinEspecificoMd').val() == "" ? null : $('#idFinEspecificoMd').val(),
         idEstatus: $('#idCondicionMd').val() == "" ? null : $('#idCondicionMd').val(),
         idPrograma: $('#idProgramaMd').val() == "" ? null : $('#idProgramaMd').val(),
-        idContraparte: 1, //$('#idContraparteMd').val(),
+        idContraparte: $('#idContraparteMd').val()  == "" ? null : $('#idContraparteMd').val(),
         idAmbito: $('#idAmbitoMd').val() == "" ? null : $('#idAmbitoMd').val(),
         idOrigen: $('#idOrigenMd').val() == "" ? null : $('#idOrigenMd').val(),
         idTipoConvenio: $('#idTipoConvenioMd').val() == "" ? null : $('#idTipoConvenioMd').val(),
@@ -338,8 +360,8 @@ $(() =>{
     $('#HFIdContrato').val(data.idContrato);
     $('#txtNombre').val(data.nombre);
     $('#txtDescripcion').val(data.descripcion);
-    $('#divFechaFirma').calendar('set date',_fechaFirma.toDateString(), updateInput = true, fireChange = true);
-    $('#divFechaFirma').calendar('set date',_fechaFirma.toDateString(), updateInput = true, fireChange = true);
+   
+    // $('#divFechaFirma').calendar('set date',_fechaFirma.toDateString(), updateInput = true, fireChange = true);
     $('#idFinEspecificoMd').dropdown('set selected',data.idFinEspecifico);
     $('#idCondicionMd').dropdown('set selected',data.idEstatus);
     $('#idProgramaMd').dropdown('set selected',data.idPrograma);
@@ -348,8 +370,8 @@ $(() =>{
     $('#idOrigenMd').dropdown('set selected',data.idOrigen);
     $('#idTipoConvenioMd').dropdown('set selected',data.idTipoConvenio);
     $('#txtFinaciamiento').val(data.financiamiento);
-    $('#idPaisMd').val(1);
-    $('#idResponsableMd').val(10);
+    $('#idPaisMd').dropdown('set selected',data.idPais);
+    $('#idResponsableMd').dropdown('set selected',data.idResponsable);
     if(data.rutaArchivo != ""){
       $('#aArchivoRef').attr("href", data.rutaArchivo); 
       $('#lblArchivoRef').text('Ver Archivo');
@@ -366,6 +388,9 @@ $(() =>{
     if(data.isAuditoriaExterna) {$('#chkAudiExterna').prop('checked', true); }
     if (data.isIndefinida) {
       $('#chkIndefinida').prop('checked', true);
+    }
+    if (data.fechaFirma != '') {
+      $('#divFechaFirma').calendar('set date',_fechaFirma.toDateString(), updateInput = true, fireChange = true);
     }
     if (data.fechaFin !== '') {
       const dateFinal = new Date(data.fechaFin);

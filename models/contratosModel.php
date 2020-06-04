@@ -19,8 +19,8 @@ class ContratosModel extends Conexion
                     'nombre' => $row['nombre'],
                     'descripcion' => $row['descripcion'],
                     'fechaCreacion' => $row['fechaCreacion'],
-                    'fechaFirma' => $row['fechaFirma'],
-                    'fechaFin' => $row['fechaFin'],
+                    'fechaFirma' => $row['fechaFirma'] == null ? '' : $row['fechaFirma'],
+                    'fechaFin' => $row['fechaFin']  == null ? '' : $row['fechaFin'],
                     'isIndefinida' => $row['isIndefinida'] == 0 ? false : true ,
                     'idFinEspecifico' => $row['idFinEspecifico'],
                     'idEstatus' => $row['idEstatus'],
@@ -57,7 +57,7 @@ class ContratosModel extends Conexion
 
          $isIndefinida = $arrDatos['isIndefinida'] == true ? 1 : 0;
          $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
-         $fechaFin = $arrDatos['isIndefinida'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
+         $fechaFin = $arrDatos['fechaFin'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idContrato'] == "") {
 
              $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
@@ -205,24 +205,6 @@ class ContratosModel extends Conexion
         
       } catch (\Throwable $th) {
          return $th->getMessage();
-      }
-   }
-   public function subirContrato($nombreEncriptado,$ruta,$table)
-   {
-      try {
-         $pdo = Conexion::conectar();
-          $stmt = $pdo->prepare("INSERT INTO $table(encrypContrato, rutaContrato) VALUES (:encrypNomContrato, :ruta)");
-          $stmt->bindParam(":encrypNomContrato",$nombreEncriptado, PDO::PARAM_STR);
-          $stmt->bindParam(":ruta",$ruta, PDO::PARAM_STR);
-          if($stmt->execute()) {
-            $id = $pdo->lastInsertId();
-            return intval($id);
-          } else{
-            return "Error no se pudo guardar el archivo";   
-          }
-         $stmt->close();
-      } catch (Exception $th) {
-         //throw $th;
       }
    }
 }

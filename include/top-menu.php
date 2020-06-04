@@ -4,12 +4,14 @@
   <a class="active item" href="index.php">Inicio</a>
   <a class="item" href="convenios.php">Convenios</a>
   <a class="item" href="contratos.php">Contratos</a>
+  <!-- <a class="item" href="catalogos.php">Catalogos</a> -->
+  <!-- <a class="item" href="usuarios.php">usuarios</a> -->
   <div class="ui dropdown item">
-    Lenguaje <i class="dropdown icon"></i>
+    Indices <i class="dropdown icon"></i>
     <div class="menu">
-      <a class="item">English</a>
-      <a class="item">Russian</a>
-      <a class="item">Español</a>
+      <a class="item" href="catalogos.php" >Catalogos</a>
+      <a class="item" href="Instituciones.php">Instituciones</a>
+      <a class="item" href="Usuarios.php">Usuarios</a>
     </div>
   </div>
   <div class="right menu">

@@ -4,6 +4,7 @@ require_once "globlalFuncModel.php";
 
 class ConveniosModel extends Conexion
 {
+
    public function getConveniosMdl($table)
     {
         try {
@@ -62,7 +63,7 @@ class ConveniosModel extends Conexion
          $isIndefinida = $arrDatos['isIndefinida'] == true ? 1 : 0;
 
          $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
-         $fechaFin = $arrDatos['isIndefinida'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
+         $fechaFin = $arrDatos['fechaFin'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idConvenio'] == "") {
 
              $stmt = $cxn->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
