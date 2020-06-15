@@ -223,7 +223,7 @@ function deleteCatalogo(idCatalogo) {
             $('body').toast({
               class: 'success',
               message: 'Catalogo eliminado correctamente !'
-            });o
+            });
           }).catch(error => {
             $('body').toast({ class: 'error', message: `An error occured !` + error.message });
           });

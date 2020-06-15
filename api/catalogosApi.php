@@ -22,7 +22,7 @@ require "../models/catalogosModel.php";
 
      public function saveCatalogo($arrDatos)
      {
-        $response = CatalogosModel::saveContratoMdl($arrDatos,"catalogos");
+        $response = CatalogosModel::saveCatalogoMdl($arrDatos,"catalogos");
         echo json_encode($response);
      }
 
@@ -54,5 +54,5 @@ if(isset($request["getCatalogos"])){
 
 } else if (isset($request["deleteCatalogo"])) {
     $c = new CatalogosApi ();
-    $c -> deleteCatalogo($request['deleteCatalogo']['idContrato']);
+    $c -> deleteCatalogo($request['deleteCatalogo']['idCatalogo']);
 }

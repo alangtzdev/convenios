@@ -145,6 +145,10 @@ function mdAltaEdicion(command) {
         $('#divArchivoConsul').hide();
         $('#divArchivoNuevo').show();
         $('#HFCommandName').val(command);
+        $('#idResponsableMd').dropdown({ignoreDiacritics: true,
+          sortSelect: true,
+          fullTextSearch:'exact'
+        });
         
         $('#txtTitle').text('ALTA');
         if (command == 'CONSULTA') {
@@ -406,8 +410,10 @@ function getPaises() {
       return response.json();
     })
     .then(response => {
+      // let datos =  JSON.parse(response);
 
       $(response).each(function (index, element) {
+          // $('#idPaisMD').addClass('fluid search');
           $('#idPaisMd').append($('<option>').text(element.nombre).attr('value', element.idPais));
         
       });
@@ -429,6 +435,7 @@ function getResponsables() {
     .then(response => {
 
       $(response).each(function (index, element) { 
+
           $('#idResponsableMd').append($('<option>').text(element.nombre +' ' +element.apellido).attr('value', element.idUsuario));
         
       });

@@ -10,10 +10,11 @@
     Indices <i class="dropdown icon"></i>
     <div class="menu">
       <a class="item" href="catalogos.php" >Catalogos</a>
-      <a class="item" href="Instituciones.php">Instituciones</a>
-      <a class="item" href="Usuarios.php">Usuarios</a>
+      <a class="item" href="Instituciones.php">Instituciones / Contraparte</a>
+      <a class="item" href="Usuarios.php">Usuarios / Responsables</a>
     </div>
   </div>
+  <a class="item" href="guia.php">Guia Rapida</a>
   <div class="right menu">
     <div class="header item">
       <i class="fas fa-graduation-cap fa-lg"></i> &nbsp; Contratos & Convenios

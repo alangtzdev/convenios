@@ -25,10 +25,10 @@
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
-            <table id="tableConvenios" class="table display responsive dt-responsive celled"  cellspacing="0">
-            <!-- class="table table-striped table-hover dt-responsive table-condensed display compact" cellspacing="0"> -->
+            <table id="tableConvenios" class="table display responsive dt-responsive celled" cellspacing="0">
+                <!-- class="table table-striped table-hover dt-responsive table-condensed display compact" cellspacing="0"> -->
                 <thead class="table-title">
-                    <tr>                
+                    <tr>
                         <th>Convenio</th>
                         <th>Fecha firma</th>
                         <th>Fecha final</th>
@@ -52,7 +52,7 @@
                         <div class="field">
                             <div class="fields">
                                 <div class="eight wide field">
-                                    <label>Fines especificos</label>
+                                    <label>Convenio</label>
                                     <select id="idFinEspecificoMd" class="ui dropdown" name="dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="eight wide field">
                                     <label for="">Responsable</label>
-                                    <select name="" id="idResponsableMd" class="ui dropdown">
+                                    <select name="" id="idResponsableMd" class="ui search dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
                                 </div>
@@ -158,9 +158,17 @@
                                 </div>
                                 <div class="eight wide field">
                                     <label for="">Pais</label>
-                                    <select name="" id="idPaisMd" class="ui dropdown">
+                                    <select name="" id="idPaisMd" class="ui search dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
+                                    <!-- <label for="">Pais</label>
+                                    <div class="ui fluid search selection dropdown">
+                                        <input type="hidden" name="country">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Select Country</div>
+                                        <div class="menu">
+                                        </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -174,10 +182,12 @@
                                             <!-- <span class="fileinput-exists"> Cambiar </span> -->
                                         </div>
                                         <!-- <input id="idArchivo" type="file" name="archivoNuevo" data-file="archivoNew" data-idprogress="#archivoResult" data-divresult="#lblResult"> -->
-                                        
-                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"     onclick="subir('idArchivo')">Escoger archivo</button>
+
+                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"
+                                            onclick="subir('idArchivo')">Escoger archivo</button>
                                         <input type="file" id="idArchivo" name="archivoNuevo" data-file="archivoNew"
-                                            data-idprogress="#archivoResult" data-idlblresult="#glosaArchivos" style="display: none">
+                                            data-idprogress="#archivoResult" data-idlblresult="#glosaArchivos"
+                                            style="display: none">
                                         <span id="glosaArchivos">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress" data-value="0" id="archivoResult">
@@ -188,8 +198,9 @@
                                     </div>
                                 </div>
                                 <div class="eleven wide field" id="divArchivoConsul">
-                                <a target="_blank" id="aArchivoRef" href="" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>
-                                <label for="" id="lblArchivoRef"></label>
+                                    <a target="_blank" id="aArchivoRef" href="" type="button"
+                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                    <label for="" id="lblArchivoRef"></label>
                                 </div>
                             </div>
                         </div>

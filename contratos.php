@@ -49,7 +49,7 @@
                         <div class="field">
                             <div class="fields">
                                 <div class="eight wide field">
-                                    <label>Fines especificos</label>
+                                    <label>Contrato</label>
                                     <select id="idFinEspecificoMd" class="ui dropdown" name="dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="eight wide field">
                                     <label for="">Responsable</label>
-                                    <select name="" id="idResponsableMd" class="ui dropdown">
+                                    <select name="" id="idResponsableMd" class="ui search dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
                                 </div>
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="eight wide field">
                                     <label for="">Pais</label>
-                                    <select name="" id="idPaisMd" class="ui dropdown">
+                                    <select name="" id="idPaisMd" class="ui search dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
                                 </div>

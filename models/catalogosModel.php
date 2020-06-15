@@ -84,7 +84,7 @@ class CatalogosModel extends Conexion
         }
     }
     //------------------------------ SAVE ----------------------------------
-    public function saveContratoMdl($arrDatos,$table)
+    public function saveCatalogoMdl($arrDatos,$table)
     {
       try {
          $today = date("Y-m-d H:i:s");
