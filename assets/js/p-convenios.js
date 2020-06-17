@@ -27,6 +27,18 @@ $(function () {
 //     }, 10);
 //   })
 // ;
+$("#txtFinaciamiento").on({
+  "keyup": function(event) {
+    $(event.target).val(function(index, value) {
+      return value.replace(/[^0-9.-]+/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+    });
+  }
+});
+// $('#txtFinaciamiento').on('change', function () {
+//   this.value = maskDinero(unmaskDinero(this.value));
+// });
+
   $('#archivoResult').progress();
   $('#tableConvenios tbody').on('click', '#linkConvenio', function () {
     var table = $('#tableConvenios').DataTable();
@@ -113,6 +125,12 @@ $(function () {
 
 
 });
+function unmaskDinero(numeroString) {
+  return +(numeroString.replace(/[^0-9.-]+/g,""));
+}
+function maskDinero(numeroInt) {
+  return "$" + parseFloat(numeroInt).toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
 function mdAltaEdicion(command) {
   $('#mdAltaEdicion')
     .modal({
@@ -485,7 +503,7 @@ function saveConvenio() {
       idOrigen: $('#idOrigenMd').val() == "" ? null : $('#idOrigenMd').val(),
       idTipoConvenio: $('#idTipoConvenioMd').val() == "" ? null : $('#idTipoConvenioMd').val(),
       idResponsable: $('#idResponsableMd').val() == "" ? null : $('#idResponsableMd').val(),
-      financiamiento: $('#txtFinaciamiento').val(),
+      financiamiento: ($('#txtFinaciamiento').val()).replace(/,/g, ""),
       idPais: $('#idPaisMd').val() == "" ? null : $('#idPaisMd').val(),
       isIntercambioEstudiantes: $('#chkInterEst').is(':checked') == true ? 1 : 0 , 
       isIntercambioProfesores : $('#chkInterProfe').is(':checked') == true ? 1 : 0 , 
@@ -542,7 +560,8 @@ function loadData(data) {
   $('#idAmbitoMd').dropdown('set selected',data.idAmbito);
   $('#idOrigenMd').dropdown('set selected',data.idOrigen);
   $('#idTipoConvenioMd').dropdown('set selected',data.idTipoConvenio);
-  $('#txtFinaciamiento').val(data.financiamiento);
+  $('#txtFinaciamiento').val((data.financiamiento).replace(/[^0-9.-]+/g, "")
+  .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ","));
   $('#idPaisMd').dropdown('set selected',data.idPais);
   $('#idResponsableMd').dropdown('set selected',data.idResponsable);
   if(data.rutaArchivo != ""){
