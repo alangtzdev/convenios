@@ -10,8 +10,8 @@
     Indices <i class="dropdown icon"></i>
     <div class="menu">
       <a class="item" href="catalogos.php" >Catalogos</a>
-      <a class="item" href="Instituciones.php">Instituciones / Contraparte</a>
-      <a class="item" href="Usuarios.php">Usuarios / Responsables</a>
+      <a class="item" href="instituciones.php">Instituciones / Contraparte</a>
+      <a class="item" href="usuarios.php">Usuarios / Responsables</a>
     </div>
   </div>
   <a class="item" href="guia.php">Guia Rapida</a>

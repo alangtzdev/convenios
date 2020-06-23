@@ -28,7 +28,7 @@
                     <tr>
                         <th class="">Contrato</th>
                         <th>Fecha firma</th>
-                        <th>Fecha final</th>
+                        <th>Fecha vigencia</th>
                         <th>Archivo</th>
                         <th class="no-sort">Editar</th>
                         <th class="no-sort">Eliminar</th>
@@ -93,7 +93,7 @@
                                         <label>SI</label>
                                     </div>
                                 </div>
-                                <div class="six wide field"><label>Fecha Vencimiento</label>
+                                <div class="six wide field"><label>Fecha vigencia</label>
                                     <div class="ui calendar" id="divFechaFin">
                                         <div class="ui input left icon">
                                             <i class="calendar icon"></i>
