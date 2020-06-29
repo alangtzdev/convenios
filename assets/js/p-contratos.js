@@ -1,11 +1,19 @@
-
-$(() =>{
+$(function () {
 
     getContratos();
     getCatalogos();
     getPaises();
     getResponsables();
     getContraparte();
+
+    $("#txtFinaciamiento").on({
+      "keyup": function(event) {
+        $(event.target).val(function(index, value) {
+          return value.replace(/[^0-9.-]+/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+        });
+      }
+    });
   
     $('#archivoResult').progress();
     $('#tableContratos tbody').on('click', '#linkContrato', function () {
@@ -56,6 +64,8 @@ $(() =>{
     $('#divFechaFin :input').attr('disabled', false);
   
   });
+
+  
   function mdAltaEdicion(command) {
     $('#mdAltaEdicion')
       .modal({
@@ -249,8 +259,11 @@ $(() =>{
             $('#idProgramaMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
   
           } else if (convenio == element.idTipoCatalogo) {
+            if (element.nombre !== 'Uso de Espacios') {
+              
+              $('#idTipoConvenioMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
+            }
   
-            $('#idTipoConvenioMd').append($('<option>').text(element.nombre).attr('value', element.idCatalogo));
   
           } else if (origen == element.idTipoCatalogo){
 
@@ -369,7 +382,7 @@ $(() =>{
     $('#idAmbitoMd').dropdown('set selected',data.idAmbito);
     $('#idOrigenMd').dropdown('set selected',data.idOrigen);
     $('#idTipoConvenioMd').dropdown('set selected',data.idTipoConvenio);
-    $('#txtFinaciamiento').val(data.financiamiento);
+    $('#txtFinaciamiento').val((data.financiamiento).replace(/[^0-9.-]+/g, "").replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ","));
     $('#idPaisMd').dropdown('set selected',data.idPais);
     $('#idResponsableMd').dropdown('set selected',data.idResponsable);
     if(data.rutaArchivo != ""){

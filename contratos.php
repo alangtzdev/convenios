@@ -10,11 +10,11 @@
 <div id="app" class="ui basic segment">
     <!-- El Contenido comienza aqui -->
     <div class="ui container">
-        <h2 class="ui dividing header ui">Contratos</h2>
+        <h2 class="ui dividing header ui">Proyectos financiados</h2>
         <div class="example">
             <div class="ui right floated main menu">
                 <button id="btnNuevoContrato" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i>
-                    Nuevo contrato
+                    Nuevo proyecto
                 </button>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <table id="tableContratos" class="table display responsive dt-responsive celled" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="">Contrato</th>
+                        <th class="">Nombre</th>
                         <th>Fecha firma</th>
                         <th>Fecha vigencia</th>
                         <th>Archivo</th>
@@ -49,7 +49,7 @@
                         <div class="field">
                             <div class="fields">
                                 <div class="eight wide field">
-                                    <label>Contrato</label>
+                                    <label>Proyecto</label>
                                     <select id="idFinEspecificoMd" class="ui dropdown" name="dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
@@ -65,7 +65,7 @@
                         <div class="field">
                             <div class="fields">
                                 <div class="six wide field">
-                                    <label>Nombre</label>
+                                    <label>Nombre del proyecto</label>
                                     <input type="text" id="txtNombre" name="name"
                                         placeholder="Nombre / instrumento juridico">
                                 </div>
@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="eight wide field">
                                     <label>Contraparte</label>
-                                    <select id="idContraparteMd" class="ui dropdown" name="dropdown">
+                                    <select id="idContraparteMd" class="ui search dropdown" name="dropdown">
                                         <option value="">Selecciona...</option>
                                     </select>
                                 </div>
@@ -151,7 +151,7 @@
                             <div class="fields">
                                 <div class="eight wide field">
                                     <label>Financiamiento</label>
-                                    <input type="number" id="txtFinaciamiento" name="financiamiento" placeholder="">
+                                    <input type="text" id="txtFinaciamiento" name="financiamiento" placeholder="">
                                 </div>
                                 <div class="eight wide field">
                                     <label for="">Pais</label>
