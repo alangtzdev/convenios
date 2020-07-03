@@ -5,7 +5,7 @@ class LoadFileApi
 {
     function subirArchivo($arrayDatos) {
         $response = LoadFileModel::upLoadFileMdl($arrayDatos);
-        echo json_encode($response);
+        echo is_string($response) ? $response : json_encode($response); 
     }
 }
 if (isset($_FILES['archivoNuevo'])) {

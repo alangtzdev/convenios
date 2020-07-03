@@ -165,12 +165,16 @@
                         <h4 class="ui dividing header blue">Subir archivo</h4>
                         <div class="field">
                             <div class="fields">
-                                <div class="eleven wide field" id="divArchivoNuevo">
+                            <div class="eleven wide field" id="divArchivoNuevo">
                                     <div class="ui labeled input">
-                                        <div class="ui olive label">Archivo</div>
-                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"     onclick="subir('idArchivo')">Escoger archivos</button>
+                                        <div class="ui olive label">
+                                            Archivo
+                                        </div>
+                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"
+                                            onclick="subir('idArchivo')">Escoger archivo</button>
                                         <input type="file" id="idArchivo" name="archivoNuevo" data-file="archivoNew"
-                                            data-idprogress="#archivoResult" data-idlblresult="#glosaArchivos" style="display: none">
+                                            data-idprogress="#archivoResult" data-idlblresult="#glosaArchivos"
+                                            style="display: none">
                                         <span id="glosaArchivos">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress" data-value="0" id="archivoResult">

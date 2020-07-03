@@ -49,6 +49,8 @@ function uploadFile(hfEncryp,hfRuta,lblResult) {
       $(hfEncryp).val(datos.encrypArchivo);
       $(hfRuta).val(datos.rutaArchivo)
       $(lblResult).text('Archivo subido correctamente');
+      console.log(datos);
+      
   };
   this.error = function(){ };
 
