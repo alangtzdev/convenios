@@ -165,27 +165,120 @@
                         <h4 class="ui dividing header blue">Subir archivo</h4>
                         <div class="field">
                             <div class="fields">
-                            <div class="eleven wide field" id="divArchivoNuevo">
+                                <div class="eleven wide field divInputUpload" id="divArchivoNuevo">
+                                    <label for="">Original</label>
                                     <div class="ui labeled input">
-                                        <div class="ui olive label">
-                                            Archivo
-                                        </div>
-                                        <button type="button" data-archivone="idArchivo" id="subirArchivo"
-                                            onclick="subir('idArchivo')">Escoger archivo</button>
-                                        <input type="file" id="idArchivo" name="archivoNuevo" data-file="archivoNew"
-                                            data-idprogress="#archivoResult" data-idlblresult="#glosaArchivos"
-                                            style="display: none">
+                                        <div class="ui olive label">Archivo</div>
+                                        <button type="button" onclick="subir('idArchivo')">Escoger archivo</button>
+                                        <input type="file" id="idArchivo" name="archivoNuevo" data-hfencryp="HFEncrypArchivo"
+                                            data-hfruta="HFRutaArchivo" data-idprogress="#archivoResult"
+                                            data-idlblresult="#glosaArchivos" style="display: none">
                                         <span id="glosaArchivos">Ningun archivo seleccionado</span>
                                     </div>
-                                    <div class="ui indicating progress" data-value="0" id="archivoResult">
+                                    <div class="ui indicating progress divProgress" data-value="0" id="archivoResult">
                                         <div class="bar">
                                             <div id="progressArchivo" class="progress"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="eleven wide field" id="divArchivoConsul">
-                                <a target="_blank" id="aArchivoRef" href="" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>
-                                <label for="" id="lblArchivoRef"></label>
+                                <div class="eleven wide field divLabel" id="divArchivoConsul">
+                                    <label for="">Original</label>
+                                    <a target="_blank" id="aArchivoRef" href="" type="button"
+                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                    <p id="lblArchivoRef" for=""></p>
+                                </div>
+                            </div>
+                            <div class="fields">
+                                <div class="eight wide field divInputUpload" id="divArchivoFinanParcial">
+                                    <label for="">Informe financiero parcial</label>
+                                    <div class="ui labeled input">
+                                        <div class="ui olive label">Archivo</div>
+                                        <button type="button" onclick="subir('idArchivoFinaParcial')">Escoger archivo</button>
+                                        <input type="file" id="idArchivoFinaParcial" name="archivoNuevo" data-hfencryp="HFEncrypFinanParcial"
+                                            data-hfruta="HFRutaFinanParcial" data-idprogress="#progressArchivoFinaParcial"
+                                            data-idlblresult="#lblFinParcial" style="display: none">
+                                        <span id="lblFinParcial">Ningun archivo seleccionado</span>
+                                    </div>
+                                    <div class="ui indicating progress divProgress" data-value="0" id="progressArchivoFinaParcial">
+                                        <div class="bar">
+                                            <div id="" class="progress"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
+                                    <label for="">Informe financiero parcial</label>
+                                    <a target="_blank" id="aRefFinaParcial" href="" type="button"
+                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                    <p id="lblRefFinParcial" for=""></p>
+                                </div>
+                                <div class="eight wide field divInputUpload">
+                                    <label for="">Informe financiero final</label>
+                                    <div class="ui labeled input">
+                                    <div class="ui olive label">Archivo</div>
+                                        <button type="button" onclick="subir('idArchivoFinFinal')">Escoger archivo</button>
+                                        <input type="file" id="idArchivoFinFinal" name="archivoNuevo" data-hfencryp="HFEcrypFinanFinal"
+                                            data-hfruta="HFRutaFinanFinal" data-idprogress="#progreArchivoFinFinal"
+                                            data-idlblresult="#lblFinFinal" style="display: none">
+                                        <span id="lblFinFinal">Ningun archivo seleccionado</span>
+                                    </div>
+                                    <div class="ui indicating progress divProgress" data-value="0" id="progreArchivoFinFinal">
+                                        <div class="bar">
+                                            <div id="" class="progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
+                                    <label for="">Informe financiero final</label>
+                                    <a target="_blank" id="aRefFinFinal" href="" type="button"
+                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                    <p id="lblRefFinFinal" for=""></p>
+                                </div>
+                            </div>
+                            <div class="fields">
+                                <div class="eight wide field divInputUpload">
+                                    <label for="">Informe tecnico parcial</label>
+                                    <div class="ui labeled input">
+                                        <div class="ui olive label">Archivo</div>
+                                        <button type="button" onclick="subir('idArchivoTecParcial')">Escoger archivo</button>
+                                        <input type="file" id="idArchivoTecParcial" name="archivoNuevo" data-hfencryp="HFEncrypTecnicoParcial"
+                                            data-hfruta="HFRutaTecnicoParcial" data-idprogress="#progreArchivoTecParcial"
+                                            data-idlblresult="#lblTecParcial" style="display: none">
+                                        <span id="lblTecParcial">Ningun archivo seleccionado</span>
+                                    </div>
+                                    <div class="ui indicating progress divProgress" data-value="0" id="progreArchivoTecParcial">
+                                        <div class="bar">
+                                            <div id="" class="progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
+                                    <label for="">Informe tecnico parcial</label>
+                                    <a target="_blank" id="aRefTecParcial" href="" type="button"
+                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                    <p id="lblRefTecParcial" for=""></p>
+                                </div>
+                                <div class="eight wide field divInputUpload">
+                                    <label for="">Informe tecnico final</label>
+                                    <div class="ui labeled input">
+                                        <div class="ui olive label">Archivo</div>
+                                        <button type="button" onclick="subir('idArchivoTecFinal')">Escoger archivo</button>
+                                        <input type="file" id="idArchivoTecFinal" name="archivoNuevo" data-hfencryp="HFEncrypTecnicoFinal"
+                                            data-hfruta="HFRutaTecnicoFinal" data-idprogress="#progreArchivoTecFinal"
+                                            data-idlblresult="#lblTecFinal" style="display: none">
+                                        <span id="lblTecFinal">Ningun archivo seleccionado</span>
+                                    </div>
+                                    <div class="ui indicating progress divProgress" data-value="0" id="progreArchivoTecFinal">
+                                        <div class="bar">
+                                            <div id="" class="progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
+                                    <label for="">Informe tecnico final</label>
+                                    <a target="_blank" id="aRefTecFinal" href="" type="button"
+                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                    <p id="lblRefTecFinal" for=""></p>
                                 </div>
                             </div>
                         </div>
@@ -276,6 +369,14 @@
         <input type='hidden' name='HFIdContrato' id="HFIdContrato" value="" />
         <input type='hidden' name='HFEncrypArchivo' id="HFEncrypArchivo" value="" />
         <input type='hidden' name='HFRutaArchivo' id="HFRutaArchivo" value="" />
+        <input type='hidden' name='HFEncrypFinanParcial' id="HFEncrypFinanParcial" value="" />
+        <input type='hidden' name='HFRutaFinanParcial' id="HFRutaFinanParcial" value="" />
+        <input type='hidden' name='HFEcrypFinanFinal' id="HFEcrypFinanFinal" value="" />
+        <input type='hidden' name='HFRutaFinanFinal' id="HFRutaFinanFinal" value="" />
+        <input type='hidden' name='HFEncrypTecnicoParcial' id="HREncrypTecnicoParcial" value="" />
+        <input type='hidden' name='HFRutaTecnicoParcial' id="HFRutaTecnicoParcial" value="" />
+        <input type='hidden' name='HFEncrypTecnicoFinal' id="HFEncrypTecnicoFinal" value="" />
+        <input type='hidden' name='HFRutaTecnicoFinal' id="HFRutaTecnicoFinal" value="" />
 
     </div>
     <!-- El Contenido termina aqui -->

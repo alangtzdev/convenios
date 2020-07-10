@@ -25,7 +25,7 @@ class LoadFileModel extends Conexion
 //  }
 
     public function upLoadFileMdl($arrayDatos)
-{
+    {
       try {
 
          $arrayResult = array();
@@ -48,8 +48,22 @@ class LoadFileModel extends Conexion
     } catch (Exception $th) {
        throw $th;
     }
+   }
 
- }
+   public function upLoadFileFinaciero($arrayDatos) {
+      try {
+         //code...
+      } catch (Throwable $th) {
+         //throw $th;
+      }
+   }
+   public function upLoadFileTecnico($arrayDatos) {
+      try {
+         //code...
+      } catch (Throwable $th) {
+         //throw $th;
+      }
+   }
 
 }
 

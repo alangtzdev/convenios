@@ -11,7 +11,8 @@ class ContratosModel extends Conexion
             fechaFirma, fechaFin, isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento, isContratacionPersonal, isVinculacionBecarios, 
             isProductosEntregables, isInformesFinancieros, isInformesTecnicos, isAuditoriaExterna,
-            encrypArchivo, rutaArchivo FROM $table");
+            encrypArchivo, rutaArchivo, encrypFinanParcial, rutaFinanParcial, encrypFinanFinal, rutaFinanFinal, encrypTecnicoParcial,
+            rutaTecnicoParcial, encrypTecnicoFinal, rutaTecnicoFinal FROM $table");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -39,7 +40,16 @@ class ContratosModel extends Conexion
                     'isInformesTecnicos' => $row['isInformesTecnicos'] == 0 ? false : true ,
                     'isAuditoriaExterna' => $row['isAuditoriaExterna'] == 0 ? false : true ,
                     'encrypArchivo' => $row['encrypArchivo'] == null ? "" :  $row['encrypArchivo'],
-                    'rutaArchivo' => $row['rutaArchivo'] == null ? "" :  $row['rutaArchivo']
+                    'rutaArchivo' => $row['rutaArchivo'] == null ? "" :  $row['rutaArchivo'],
+                    'encrypFinanParcial' => $row['encrypFinanParcial'] == null ? "" : $row['encrypFinanParcial'],
+                    'rutaFinanParcial' => $row['rutaFinanParcial'] == null ? "" : $row['rutaFinanParcial'],
+                    'encrypFinanFinal' => $row['encrypFinanFinal'] == null ? "" : $row['encrypFinanFinal'],
+                    'rutaFinanFinal' => $row['rutaFinanFinal'] == null ? "" : $row['rutaFinanFinal'],
+                    'encrypTecnicoParcial' => $row['encrypTecnicoParcial'] == null ? "" : $row['encrypTecnicoParcial'],
+                    'rutaTecnicoParcial' => $row['rutaTecnicoParcial'] == null ? "" : $row['rutaTecnicoParcial'],
+                    'encrypTecnicoFinal' => $row['encrypTecnicoFinal'] == null ? "" : $row['encrypTecnicoFinal'],
+                    'rutaTecnicoFinal' => $row['rutaTecnicoFinal'] == null ? "" : $row['rutaTecnicoFinal']
+                    
                 );
             }
             
@@ -63,11 +73,13 @@ class ContratosModel extends Conexion
              $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
              isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, idTipoConvenio, idResponsable, idPais, financiamiento,
              isContratacionPersonal, isVinculacionBecarios, isProductosEntregables, isInformesFinancieros, isInformesTecnicos, 
-             isAuditoriaExterna,  encrypArchivo, rutaArchivo) 
+             isAuditoriaExterna,  encrypArchivo, rutaArchivo, encrypFinanParcial, rutaFinanParcial, encrypFinanFinal, rutaFinanFinal, 
+             encrypTecnicoParcial, rutaTecnicoParcial, encrypTecnicoFinal, rutaTecnicoFinal) 
              VALUES (:nombre, :descripcion, :fechaCreacion, :fechaFirma, :fechaFin, :isIndefinida, :idFinEspecifico, :idEstatus, :idPrograma, :idContraparte, 
              :idAmbito, :idOrigen, :idTipoConvenio, :idResponsable, :idPais, :financiamiento, :isContratacionPersonal, :isVinculacionBecarios, 
              :isProductosEntregables, :isInformesFinancieros, :isInformesTecnicos, :isAuditoriaExterna, 
-             :encrypArchivo, :rutaArchivo)");
+             :encrypArchivo, :rutaArchivo, :encrypFinanParcial, :rutaFinanParcial, :encrypFinanFinal, :rutaFinanFinal, 
+             :encrypTecnicoParcial, :rutaTecnicoParcial, :encrypTecnicoFinal, :rutaTecnicoFinal)");
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
             $stmt->bindParam(":descripcion",$arrDatos['descripcion'], PDO::PARAM_STR);
             $stmt->bindParam(":financiamiento",$arrDatos['financiamiento']);
@@ -92,6 +104,14 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":isAuditoriaExterna",$arrDatos['isAuditoriaExterna']);
             $stmt->bindParam(":encrypArchivo", $arrDatos['encrypArchivo'], PDO::PARAM_STR);
             $stmt->bindParam(":rutaArchivo",$arrDatos['rutaArchivo'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypFinanParcial",$arrDatos['encrypFinanParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaFinanParcial",$arrDatos['rutaFinanParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypFinanFinal",$arrDatos['encrypFinanFinal'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaFinanFinal",$arrDatos['rutaFinanFinal'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypTecnicoParcial",$arrDatos['encrypTecnicoParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaTecnicoParcial",$arrDatos['rutaTecnicoParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypTecnicoFinal",$arrDatos['encrypTecnicoFinal'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaTecnicoFinal",$arrDatos['rutaTecnicoFinal'], PDO::PARAM_STR);
             if ($stmt->execute()) {
                return "success";
            } else {
@@ -106,7 +126,9 @@ class ContratosModel extends Conexion
             idOrigen = :idOrigen, idTipoConvenio = :idTipoConvenio, idResponsable = :idResponsable, 
             idPais = :idPais, financiamiento = :financiamiento, isContratacionPersonal = :isContratacionPersonal, isVinculacionBecarios = :isVinculacionBecarios, 
             isProductosEntregables = :isProductosEntregables, isInformesFinancieros = :isInformesFinancieros, isInformesTecnicos = :isInformesTecnicos,
-            isAuditoriaExterna = :isAuditoriaExterna,  encrypArchivo = :encrypArchivo, rutaArchivo = :rutaArchivo
+            isAuditoriaExterna = :isAuditoriaExterna,  encrypArchivo = :encrypArchivo, rutaArchivo = :rutaArchivo, encrypFinanParcial = :encrypFinanParcial, 
+            rutaFinanParcial = :rutaFinanParcial, encrypFinanFinal = :encrypFinanFinal, rutaFinanFinal = :rutaFinanFinal, encrypTecnicoParcial = :encrypTecnicoParcial, 
+            rutaTecnicoParcial = :rutaTecnicoParcial, encrypTecnicoFinal = :encrypTecnicoFinal, rutaTecnicoFinal = :rutaTecnicoFinal
             WHERE idcontrato = :idContrato");
 
             $stmt->bindParam(":idContrato", $arrDatos['idContrato']);
@@ -134,6 +156,14 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":isAuditoriaExterna",$arrDatos['isAuditoriaExterna']);
             $stmt->bindParam(":encrypArchivo", $arrDatos['encrypArchivo'], PDO::PARAM_STR);
             $stmt->bindParam(":rutaArchivo",$arrDatos['rutaArchivo'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypFinanParcial",$arrDatos['encrypFinanParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaFinanParcial",$arrDatos['rutaFinanParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypFinanFinal",$arrDatos['encrypFinanFinal'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaFinanFinal",$arrDatos['rutaFinanFinal'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypTecnicoParcial",$arrDatos['encrypTecnicoParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaTecnicoParcial",$arrDatos['rutaTecnicoParcial'], PDO::PARAM_STR);
+            $stmt->bindParam(":encrypTecnicoFinal",$arrDatos['encrypTecnicoFinal'], PDO::PARAM_STR);
+            $stmt->bindParam(":rutaTecnicoFinal",$arrDatos['rutaTecnicoFinal'], PDO::PARAM_STR);
             if ($stmt->execute()) {
                 return "success";
             } else {

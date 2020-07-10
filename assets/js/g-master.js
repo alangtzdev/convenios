@@ -25,7 +25,7 @@ function uploadFile(hfEncryp,hfRuta,lblResult) {
  
 
   this.add = function (e, data) {
-      data.url = './api/loadFileApi.php?file=' + $(this).data('file');
+      data.url = './api/loadFileApi.php';
       // $($(this).data('divresult')).html('');
       // $($(this).data('idprogress')).css('width', '0%');
       // $(this.idprogress).addClass('active');
