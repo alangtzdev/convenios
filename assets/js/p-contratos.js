@@ -417,28 +417,28 @@ $(function () {
        $('#lblArchivoRef').text('No hay archivo') ;
     }
      if(data.rutaFinanParcial != ""){
-       $('#aRefFinaParcial').attr(data.rutaFinanParcial);
+       $('#aRefFinaParcial').attr("href", data.rutaFinanParcial);
        $('#lblRefFinParcial').text('Ver Archivo');
      } else {
        $('#aRefFinaParcial').attr("href", '#'); 
        $('#lblRefFinParcial').text('No hay archivo');
      }
      if(data.rutaFinanFinal != ""){
-       $('#aRefFinFinal').attr(data.rutaFinanFinal);
+       $('#aRefFinFinal').attr("href", data.rutaFinanFinal);
        $('#lblRefFinFinal').text('Ver Archivo');
      } else {
        $('#aRefFinFinal').attr("href", '#'); 
        $('#lblRefFinFinal').text('No hay archivo');
      }
      if(data.rutaTecnicoParcial != ""){
-       $('#aRefTecParcial').attr(data.rutaTecnicoParcial);
+       $('#aRefTecParcial').attr("href", data.rutaTecnicoParcial);
        $('#lblRefTecParcial').text('Ver Archivo');
      } else {
        $('#aRefTecParcial').attr("href", '#'); 
        $('#lblRefTecParcial').text('No hay archivo');
      }
      if(data.rutaTecnicoFinal != ""){
-       $('#aRefTecFinal').attr(data.rutaTecnicoFinal);
+       $('#aRefTecFinal').attr("href", data.rutaTecnicoFinal);
        $('#lblRefTecFinal').text('Ver Archivo');
      } else {
        $('#aRefTecFinal').attr("href", '#'); 
