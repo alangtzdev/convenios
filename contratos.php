@@ -172,7 +172,7 @@
                                         <button type="button" onclick="subir('idArchivo')">Escoger archivo</button>
                                         <input type="file" id="idArchivo" name="archivoNuevo" data-hfencryp="HFEncrypArchivo"
                                             data-hfruta="HFRutaArchivo" data-idprogress="#archivoResult"
-                                            data-idlblresult="#glosaArchivos" style="display: none">
+                                            data-idlblresult="glosaArchivos" style="display: none">
                                         <span id="glosaArchivos">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress divProgress" data-value="0" id="archivoResult">
@@ -184,7 +184,7 @@
                                 <div class="eleven wide field divLabel" id="divArchivoConsul">
                                     <label for="">Original</label>
                                     <a target="_blank" id="aArchivoRef" href="" type="button"
-                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                        class="ui teal icon button"><i class="fa fa-file"></i></a>
                                     <p id="lblArchivoRef" for=""></p>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                                         <button type="button" onclick="subir('idArchivoFinaParcial')">Escoger archivo</button>
                                         <input type="file" id="idArchivoFinaParcial" name="archivoNuevo" data-hfencryp="HFEncrypFinanParcial"
                                             data-hfruta="HFRutaFinanParcial" data-idprogress="#progressArchivoFinaParcial"
-                                            data-idlblresult="#lblFinParcial" style="display: none">
+                                            data-idlblresult="lblFinParcial" style="display: none">
                                         <span id="lblFinParcial">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress divProgress" data-value="0" id="progressArchivoFinaParcial">
@@ -209,7 +209,7 @@
                                 <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
                                     <label for="">Informe financiero parcial</label>
                                     <a target="_blank" id="aRefFinaParcial" href="" type="button"
-                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                        class="ui teal icon button"><i class="fa fa-file"></i></a>
                                     <p id="lblRefFinParcial" for=""></p>
                                 </div>
                                 <div class="eight wide field divInputUpload">
@@ -219,7 +219,7 @@
                                         <button type="button" onclick="subir('idArchivoFinFinal')">Escoger archivo</button>
                                         <input type="file" id="idArchivoFinFinal" name="archivoNuevo" data-hfencryp="HFEcrypFinanFinal"
                                             data-hfruta="HFRutaFinanFinal" data-idprogress="#progreArchivoFinFinal"
-                                            data-idlblresult="#lblFinFinal" style="display: none">
+                                            data-idlblresult="lblFinFinal" style="display: none">
                                         <span id="lblFinFinal">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress divProgress" data-value="0" id="progreArchivoFinFinal">
@@ -231,7 +231,7 @@
                                 <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
                                     <label for="">Informe financiero final</label>
                                     <a target="_blank" id="aRefFinFinal" href="" type="button"
-                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                        class="ui teal icon button"><i class="fa fa-file"></i></a>
                                     <p id="lblRefFinFinal" for=""></p>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@
                                         <button type="button" onclick="subir('idArchivoTecParcial')">Escoger archivo</button>
                                         <input type="file" id="idArchivoTecParcial" name="archivoNuevo" data-hfencryp="HFEncrypTecnicoParcial"
                                             data-hfruta="HFRutaTecnicoParcial" data-idprogress="#progreArchivoTecParcial"
-                                            data-idlblresult="#lblTecParcial" style="display: none">
+                                            data-idlblresult="lblTecParcial" style="display: none">
                                         <span id="lblTecParcial">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress divProgress" data-value="0" id="progreArchivoTecParcial">
@@ -255,7 +255,7 @@
                                 <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
                                     <label for="">Informe tecnico parcial</label>
                                     <a target="_blank" id="aRefTecParcial" href="" type="button"
-                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                        class="ui teal icon button"><i class="fa fa-file"></i></a>
                                     <p id="lblRefTecParcial" for=""></p>
                                 </div>
                                 <div class="eight wide field divInputUpload">
@@ -265,7 +265,7 @@
                                         <button type="button" onclick="subir('idArchivoTecFinal')">Escoger archivo</button>
                                         <input type="file" id="idArchivoTecFinal" name="archivoNuevo" data-hfencryp="HFEncrypTecnicoFinal"
                                             data-hfruta="HFRutaTecnicoFinal" data-idprogress="#progreArchivoTecFinal"
-                                            data-idlblresult="#lblTecFinal" style="display: none">
+                                            data-idlblresult="lblTecFinal" style="display: none">
                                         <span id="lblTecFinal">Ningun archivo seleccionado</span>
                                     </div>
                                     <div class="ui indicating progress divProgress" data-value="0" id="progreArchivoTecFinal">
@@ -277,7 +277,7 @@
                                 <div class="eleven wide field divLabel" id="divArchiConsulFinanParcial">
                                     <label for="">Informe tecnico final</label>
                                     <a target="_blank" id="aRefTecFinal" href="" type="button"
-                                        class="ui teal icon button" /><i class="fa fa-file"></i></a>
+                                        class="ui teal icon button"><i class="fa fa-file"></i></a>
                                     <p id="lblRefTecFinal" for=""></p>
                                 </div>
                             </div>
