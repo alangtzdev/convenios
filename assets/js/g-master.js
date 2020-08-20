@@ -7,6 +7,7 @@ $(function () {
   // you can use any ui transition
     transition: 'drop'
   });
+  
 });
 function text_truncate(str, length, ending) {
   if (length == null) {
@@ -62,6 +63,24 @@ function cleanFile(idFile,ecrypFile,routeFile) {
   $(routeFile).val();
 
 }
+
+function waitMeShow(idForm) {
+  $(idForm).waitMe(
+  {
+      effect: 'facebook',
+      text: '...Cargando...',
+      bg: 'rgba(255,255,255,0.7)',
+      color: '#4B02DF',
+      sizeW: '',
+      sizeH: '',
+      source: ''
+  });
+};
+
+function waitMeHide(idForm) {
+  $(idForm).waitMe('hide');
+};
+
 
 function test(params) {
   $('#fileupload').fileupload({

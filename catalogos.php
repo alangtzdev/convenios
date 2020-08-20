@@ -9,7 +9,7 @@
 <!-- <div class="pusher"> -->
 <div id="app" class="ui basic segment">
     <!-- El Contenido comienza aqui -->
-    <div class="ui container">
+    <div class="ui container" id="idDivBody">
         <h2 class="ui dividing header ui">Catalogos</h2>
         <div class="example">
             <div class="ui right floated main menu">

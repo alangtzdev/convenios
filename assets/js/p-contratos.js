@@ -142,7 +142,7 @@ $(function () {
   
   }
   function getContratos() {
-    // waitMeShow('#divBody');
+    waitMeShow('#idDivBody');
     var params = { idUsuario: 1 };
     $.ajax({
       type: "POST",
@@ -176,13 +176,36 @@ $(function () {
                 return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
               }
             },
+            // {
+            //   mRender: function (data, type, full) {
+            //     // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
+            //     return (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'Sin archivo');
+            //   },
+            //   width: "8%",
+            // },
             {
               mRender: function (data, type, full) {
                 // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
                 return (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'Sin archivo');
               },
               width: "8%",
-            },            
+            },
+            {
+              mRender: function (data, type, full) {
+                // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
+                return ((full.rutaFinanParcial != "" ? '<a target="_blank"  href="' + full.rutaFinanParcial + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'S/P') +
+                 " | " + (full.rutaFinanFinal != "" ? '<a target="_blank"  href="' + full.rutaFinanFinal + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'S/F'));
+              },
+              width: "10%",
+            },
+            {
+              mRender: function (data, type, full) {
+                // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
+                return ((full.rutaTecnicoParcial != "" ? '<a target="_blank"  href="' + full.rutaTecnicoParcial + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'S/P') +
+                 " | " + (full.rutaTecnicoFinal != "" ? '<a target="_blank"  href="' + full.rutaTecnicoFinal + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'S/F'));
+              },
+              width: "10%",
+            },              
             {
               mRender: function (data, type, full) {
                 return "<button id='perro' type='button' class='ui violet icon button' data-command='EDITAR'/><i class='fa fa-pencil'></i></button>";
@@ -196,10 +219,10 @@ $(function () {
               width: "8%",
             }]
         });
-        // waitMeHide('#divBody');
+        waitMeHide('#idDivBody');
       },
       error: function (data) {
-        // waitMeHide('#divBody');
+        waitMeHide('#idDivBody');
         var dataError = data.responseText;
         // swal("Cancelled", dataError + " !", "error");
       }

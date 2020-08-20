@@ -2,7 +2,7 @@
 
 class Conexion
 {
-    public function conectar()
+    public static function conectar()
     {
         try {
             $arrOptions = array(

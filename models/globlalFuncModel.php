@@ -1,7 +1,7 @@
 <?php
 class GlobalFunctModel
 {
-    public function utf8Size($arrayResult)
+    public static function utf8Size($arrayResult)
     {
         if (is_array($arrayResult)) {
             foreach ($arrayResult as $key => $value) {

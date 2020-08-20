@@ -113,6 +113,7 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":encrypTecnicoFinal",$arrDatos['encrypTecnicoFinal'], PDO::PARAM_STR);
             $stmt->bindParam(":rutaTecnicoFinal",$arrDatos['rutaTecnicoFinal'], PDO::PARAM_STR);
             if ($stmt->execute()) {
+               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
                return "success";
            } else {
                return "Error";
@@ -165,6 +166,7 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":encrypTecnicoFinal",$arrDatos['encrypTecnicoFinal'], PDO::PARAM_STR);
             $stmt->bindParam(":rutaTecnicoFinal",$arrDatos['rutaTecnicoFinal'], PDO::PARAM_STR);
             if ($stmt->execute()) {
+               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
                 return "success";
             } else {
                 return "Hubo un error al editar el contrato" .nombre;
@@ -183,6 +185,7 @@ class ContratosModel extends Conexion
          $stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE idcontrato = :id");
          $stmt->bindParam(":id", $idContrato, PDO::PARAM_INT);
          if($stmt->execute()){
+            BitacoraModel::saveTransaccion("alan", "Eliminar", "contratos", $idContrato, $table);
             return "success";
          }
          else{

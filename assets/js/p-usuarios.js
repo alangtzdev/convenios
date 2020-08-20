@@ -74,6 +74,7 @@ function mdAltaEdicion(command) {
     }).modal('show');
 }
 function getUsuarios() {
+  waitMeShow('#idDivBody');
     fetch('./api/usuariosApi.php', {
         method: "POST",
         body: JSON.stringify({ 'getUsuarios': {} }),
@@ -124,6 +125,7 @@ function getUsuarios() {
                         width: "8%",
                     }]
             });
+            waitMeHide('#idDivBody');
         }).catch(function (error) {
             console.log('Hubo un problema con la petición Fetch:' + error.message);
         });

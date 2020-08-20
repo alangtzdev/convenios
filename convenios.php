@@ -11,7 +11,7 @@
 <!-- <div class="pusher"> -->
 <div id="app" class="ui basic segment">
     <!-- El Contenido comienza aqui -->
-    <div class="ui container">
+    <div class="ui container" id="idDivBody">
         <h2 class="ui dividing header ui">Convenios</h2>
         <div class="example">
             <div class="ui right floated main menu">
@@ -32,6 +32,7 @@
                         <th>Convenio</th>
                         <th>Fecha firma</th>
                         <th>Fecha vigencia</th>
+                        <!-- <th>Finaciamiento</th> -->
                         <th>Archivo</th>
                         <th class="no-sort">Editar</th>
                         <th class="no-sort">Eliminar</th>

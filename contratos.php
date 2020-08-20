@@ -9,7 +9,7 @@
 <!-- <div class="pusher"> -->
 <div id="app" class="ui basic segment">
     <!-- El Contenido comienza aqui -->
-    <div class="ui container">
+    <div class="ui container" id="idDivBody">
         <h2 class="ui dividing header ui">Proyectos financiados</h2>
         <div class="example">
             <div class="ui right floated main menu">
@@ -29,7 +29,9 @@
                         <th class="">Nombre</th>
                         <th>Fecha firma</th>
                         <th>Fecha vigencia</th>
-                        <th>Archivo</th>
+                        <th>Original</th>
+                        <th>Finaciero Parcial/Final</th>
+                        <th>Tecnico Parcial/Final</th>
                         <th class="no-sort">Editar</th>
                         <th class="no-sort">Eliminar</th>
                     </tr>

@@ -266,7 +266,7 @@ function subir(id) {
 
 }
 function getConvenios() {
-  // waitMeShow('#divBody');
+  waitMeShow('#idDivBody');
   var params = { idUsuario: 1 };
   $.ajax({
     type: "POST",
@@ -299,13 +299,17 @@ function getConvenios() {
           // },
           {
             data: "fechaFirma"
-          },
-          
+          },                   
           {
             mRender: function (data, type, full) {
               return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
             }
           },
+          // {
+          //   mRender: function (data, type, full) {
+          //     return ((full.financiamiento).replace(/[^0-9.-]+/g, "").replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ","));
+          //   }
+          // },
           {
             mRender: function (data, type, full) {
               // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
@@ -326,10 +330,10 @@ function getConvenios() {
             width: "8%",
           }]
       });
-      // waitMeHide('#divBody');
+      waitMeHide('#idDivBody');
     },
     error: function (data) {
-      // waitMeHide('#divBody');
+      waitMeHide('#iDivBody');
       var dataError = data.responseText;
       // swal("Cancelled", dataError + " !", "error");
     }

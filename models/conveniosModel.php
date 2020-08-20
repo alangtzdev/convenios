@@ -1,6 +1,7 @@
 <?php
 require_once "../include/config.php";
 require_once "globlalFuncModel.php";
+require_once "bitacoraModel.php";
 
 class ConveniosModel extends Conexion
 {
@@ -104,11 +105,16 @@ class ConveniosModel extends Conexion
             
 
             if ($stmt->execute()) {
+               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
+               // var_dump($response);
                return "success";
+            
            } else {
                return "Error";
            }
-           $stmt->close();
+
+           $stmt = null;
+
          } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idConvenio'] != ""){
             // var_dump($arrDatos['idConvenio'],$arrDatos);
             $stmt = $cxn->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, fechaCreacion = :fechaCreacion, 
@@ -150,9 +156,10 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":isInformeAvance",$arrDatos['isInformeAvance']);
             
             if ($stmt->execute()) {
+               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
                 return "success";
             } else {
-                return "Hubo un error al editar el convenio" .nombre;
+                return "Hubo un error al editar el convenio ".$arrDatos['nombre'];
             }
             $stmt->close();
          } else {
@@ -170,6 +177,7 @@ class ConveniosModel extends Conexion
          $stmt = $cxn->prepare("DELETE FROM $table WHERE idconvenio = :id");
          $stmt->bindParam(":id", $idConvenio, PDO::PARAM_INT);
          if($stmt->execute()){
+            BitacoraModel::saveTransaccion("alan", "Eliminar", "convenios", $idConvenio, $table);
             return "success";
          }
          else{

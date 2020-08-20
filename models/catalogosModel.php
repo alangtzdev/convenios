@@ -41,7 +41,7 @@ class CatalogosModel extends Conexion
         try {
             $cxn = Conexion::conectar();
             $stmt = $cxn->prepare("SELECT * FROM $table where idTipocatalogo = :idEnumTipoCatalogo");
-            binparam(":idEnumTipoCatalogo",$enumTipoCatalogo[$tipoCatalogo], PDO::PARAM_INT);
+            bindParam(":idEnumTipoCatalogo",$enumTipoCatalogo[$tipoCatalogo], PDO::PARAM_INT);
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -100,7 +100,7 @@ class CatalogosModel extends Conexion
            } else {
                return "Error";
            }
-           $stmt->close();
+           $stmt::close();
          } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idCatalogo'] != ""){
             // var_dump($arrDatos['idConvenio'],$arrDatos);
             $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, 
@@ -113,7 +113,7 @@ class CatalogosModel extends Conexion
             if ($stmt->execute()) {
                 return "success";
             } else {
-                return "Hubo un error al editar el catalogo" .nombre;
+                return "Hubo un error al editar el catalogo" .$arrDatos['nombre'];
             }
             $stmt->close();
          } else {

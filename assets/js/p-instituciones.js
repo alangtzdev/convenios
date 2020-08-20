@@ -74,6 +74,7 @@ function mdAltaEdicion(command) {
     }).modal('show');
 }
 function getInstituciones() {
+  waitMeShow('#idDivBody');
     fetch('./api/institucionesApi.php', {
         method: "POST",
         body: JSON.stringify({ 'getInstituciones': {} }),
@@ -124,6 +125,8 @@ function getInstituciones() {
                         width: "8%",
                     }]
             });
+
+            waitMeHide('#idDivBody');
         }).catch(function (error) {
             console.log('Hubo un problema con la petición Fetch:' + error.message);
         });

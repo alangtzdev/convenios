@@ -11,7 +11,7 @@
     <!-- El Contenido comienza aqui -->
     <div class="g-contenido">
         <div class="ui masthead vertical segment">
-            <div class="ui container">
+            <div class="ui container" id="idDivBody">
                 <div class="introduction">
                     <h2 class="ui dividing header ui purple">
                         Correcto
