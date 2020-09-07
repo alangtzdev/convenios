@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["username"])) {
+    header('Location: login.php');
+    // echo '<script>window.location ="login.php"</script>';
+} 
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,4 +23,4 @@
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/semantic.amazon.css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="../css/custom.css"> -->
   </head>
-  <body id="root">
+ <body id="root">

@@ -30,7 +30,7 @@
         <a class="ui item supp"><i class="fas fa-paper-plane"></i></a>
         <a class="ui item supp"><i class="far fa-bell"></i></a>
         <a class="ui item supp"><i class="fas fa-certificate"></i></a>
-        <a class="ui item supp" id="logout"><i class="fas fa-sign-out-alt"></i>Salir</a>
+        <a class="ui item supp" id="logout" href="salir.php"><i class="fas fa-sign-out-alt"></i>Salir</a>
     </div>
 </div>
 <div class="ui bottom attached segment">

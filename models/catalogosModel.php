@@ -5,7 +5,7 @@ class CatalogosModel extends Conexion
 {
     // $enumTipoCatalogo = array('Ambito' => 1,'Programa' => 2,'Convenio'  => 3,'tipoConvenio' =>4);
     // -------------------------------------------------------------------------------------------
-    public function getCatalogosModel($table)
+    public static function getCatalogosModel($table)
     {
         try {
             $cxn = Conexion::conectar();
@@ -36,7 +36,7 @@ class CatalogosModel extends Conexion
         # code...
     }
     // -------------------------------------------------------------------------------------------
-    public function getCatxTipoModel($tipoCatalogo, $table) 
+    public static function getCatxTipoModel($tipoCatalogo, $table) 
     {
         try {
             $cxn = Conexion::conectar();
@@ -61,7 +61,7 @@ class CatalogosModel extends Conexion
 
     }
     // -------------------------------------------------------------------------------------------
-    public function getTiposCatalogosMdl($table)
+    public static function getTiposCatalogosMdl($table)
     {
         try {
             $cxn = Conexion::conectar();
@@ -84,7 +84,7 @@ class CatalogosModel extends Conexion
         }
     }
     //------------------------------ SAVE ----------------------------------
-    public function saveCatalogoMdl($arrDatos,$table)
+    public static function saveCatalogoMdl($arrDatos,$table)
     {
       try {
          $today = date("Y-m-d H:i:s");
@@ -100,7 +100,8 @@ class CatalogosModel extends Conexion
            } else {
                return "Error";
            }
-           $stmt::close();
+           $stmt->close();
+           $stmt = null;
          } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idCatalogo'] != ""){
             // var_dump($arrDatos['idConvenio'],$arrDatos);
             $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, descripcion = :descripcion, 
@@ -116,6 +117,7 @@ class CatalogosModel extends Conexion
                 return "Hubo un error al editar el catalogo" .$arrDatos['nombre'];
             }
             $stmt->close();
+            $stmt = null;
          } else {
             return "Hubo un problema: " + $arrDatos['HFCommandName'] + ", " + $arrDatos['idCatalogo'];
          }

@@ -1,5 +1,5 @@
 <?php 
-    include 'include/header.html';
+    include 'include/header.php';
     include 'include/top-menu.php'; 
     include 'include/left-menu.php'; 
 ?>

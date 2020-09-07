@@ -28,4 +28,3 @@ class RutasAPi{
         include $modulo;
     }
 }
-?>

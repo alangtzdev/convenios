@@ -1,7 +1,22 @@
 <?php 
 require "../models/usuariosModel.php";
+require "sesionesApi.php";
+
  class UsuariosApi
  {
+     public function getLogin($arrDatos) 
+     {
+        $response = UsuariosModel::getUsuarioMdl($arrDatos,"usuarios");
+        // var_dump($response);
+        if (array_key_exists('code',$response)) {
+           echo json_encode($response);
+        } else {
+            // var_dump($response);
+            echo json_encode($response);
+            Sessiones::iniciarSesionLogin($response[0]['correo'],$response[0]['idUsuario']);
+            // $_SESSION['sessionStart']  = $response[0]['nombre'];
+        }
+     }
      public function getUsuarios()
      {
         $response = UsuariosModel::getUsuariosMdl("usuarios");
@@ -23,9 +38,15 @@ require "../models/usuariosModel.php";
  
 $request = json_decode(file_get_contents('php://input'), true);
 
-if(isset($request["getUsuarios"])){
+if(isset($request["getLogin"])){
     $a = new UsuariosApi ();
-    $a -> getUsuarios();
+    $a -> getLogin($request['getLogin']);
+    // var_dump($request['getLogin']);
+
+}
+else if(isset($request["getUsuarios"])){
+    $b = new UsuariosApi ();
+    $b -> getUsuarios();
 } else if (isset($request["saveUsuario"])) {
 
     $c = new UsuariosApi ();
@@ -33,7 +54,7 @@ if(isset($request["getUsuarios"])){
 
 } else if (isset($request["deleteUsuario"])) {
 
-    $c = new UsuariosApi ();
-    $c -> deleteUsuario($request['deleteUsuario']['idUsuario']);
+    $d = new UsuariosApi ();
+    $d -> deleteUsuario($request['deleteUsuario']['idUsuario']);
     
 }

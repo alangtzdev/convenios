@@ -56,7 +56,7 @@ class ConveniosModel extends Conexion
         }
     }
 
-   public function saveConvenioMdl($arrDatos,$table)
+   public static function saveConvenioMdl($arrDatos,$table,$username)
    {
       try {
          $cxn = Conexion::conectar();
@@ -105,7 +105,7 @@ class ConveniosModel extends Conexion
             
 
             if ($stmt->execute()) {
-               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
+               BitacoraModel::saveTransaccion($username, $table, $arrDatos['HFCommandName'], $arrDatos['nombre']);
                // var_dump($response);
                return "success";
             
@@ -156,7 +156,7 @@ class ConveniosModel extends Conexion
             $stmt->bindParam(":isInformeAvance",$arrDatos['isInformeAvance']);
             
             if ($stmt->execute()) {
-               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
+               BitacoraModel::saveTransaccion($username, $table, $arrDatos['HFCommandName'], $arrDatos['idConvenio']);
                 return "success";
             } else {
                 return "Hubo un error al editar el convenio ".$arrDatos['nombre'];
@@ -170,14 +170,14 @@ class ConveniosModel extends Conexion
       }
    }
 
-   public function deleteConvenioMdl($idConvenio,$table)
+   public static function deleteConvenioMdl($idConvenio,$table,$username)
    {
       try {
          $cxn = Conexion::conectar();
          $stmt = $cxn->prepare("DELETE FROM $table WHERE idconvenio = :id");
          $stmt->bindParam(":id", $idConvenio, PDO::PARAM_INT);
          if($stmt->execute()){
-            BitacoraModel::saveTransaccion("alan", "Eliminar", "convenios", $idConvenio, $table);
+            BitacoraModel::saveTransaccion($username, $table, "ELIMINAR", $idConvenio);
             return "success";
          }
          else{

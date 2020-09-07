@@ -1,9 +1,10 @@
 <?php
 require_once "../include/config.php";
+require_once "bitacoraModel.php";
 
 class ContratosModel extends Conexion
 {
-   public function getContratosMdl($table)
+   public static function getContratosMdl($table)
     {
         try {
             $arrayResult = array();
@@ -60,7 +61,7 @@ class ContratosModel extends Conexion
         }
     }
 
-   public function saveContratoMdl($arrDatos,$table)
+   public static function saveContratoMdl($arrDatos,$table,$username)
    {
       try {
          $today = date("Y-m-d H:i:s");
@@ -113,7 +114,7 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":encrypTecnicoFinal",$arrDatos['encrypTecnicoFinal'], PDO::PARAM_STR);
             $stmt->bindParam(":rutaTecnicoFinal",$arrDatos['rutaTecnicoFinal'], PDO::PARAM_STR);
             if ($stmt->execute()) {
-               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
+               BitacoraModel::saveTransaccion($username, $table, $arrDatos['HFCommandName'], $arrDatos['nombre']);
                return "success";
            } else {
                return "Error";
@@ -166,10 +167,10 @@ class ContratosModel extends Conexion
             $stmt->bindParam(":encrypTecnicoFinal",$arrDatos['encrypTecnicoFinal'], PDO::PARAM_STR);
             $stmt->bindParam(":rutaTecnicoFinal",$arrDatos['rutaTecnicoFinal'], PDO::PARAM_STR);
             if ($stmt->execute()) {
-               BitacoraModel::saveTransaccion("alan", $arrDatos['HFCommandName'], "convenios", $arrDatos['descripcion'], $table);
+               BitacoraModel::saveTransaccion($username, $table, $arrDatos['HFCommandName'], $arrDatos['idContrato']);
                 return "success";
             } else {
-                return "Hubo un error al editar el contrato" .nombre;
+                return "Hubo un error al editar el contrato" .$arrDatos['nombre'];
             }
             $stmt->close();
          } else {
@@ -179,13 +180,13 @@ class ContratosModel extends Conexion
          return $th->getMessage();
       }
    }
-   public function deleteContratoMdl($idContrato,$table)
+   public static function deleteContratoMdl($idContrato,$table,$username)
    {
       try {
          $stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE idcontrato = :id");
          $stmt->bindParam(":id", $idContrato, PDO::PARAM_INT);
          if($stmt->execute()){
-            BitacoraModel::saveTransaccion("alan", "Eliminar", "contratos", $idContrato, $table);
+            BitacoraModel::saveTransaccion($username, $table, "ELIMINAR", $idContrato);
             return "success";
          }
          else{
@@ -197,7 +198,7 @@ class ContratosModel extends Conexion
       }
       
    }
-   public function getAreasUsuario($idUsuario,$table)
+   public static function getAreasUsuario($idUsuario,$table)
    {
       try {
          $jsonArray = array();
@@ -214,11 +215,8 @@ class ContratosModel extends Conexion
         die($th->getMessage());
       }
    }
-
-   
    /**----------------------------**/
-
-   public function getCategoriasArea($idArea,$table)
+   public static function getCategoriasArea($idArea,$table)
    {
       try {
          $jsonArray = array();
