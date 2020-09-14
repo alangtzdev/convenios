@@ -65,22 +65,29 @@ class UsuariosModel extends Conexion
             $cxn = Conexion::conectar();
             $arrayResult = array();
             $stmt = $cxn->prepare("SELECT * FROM $table");
-            $exeResult = $stmt->execute();
-            if ($exeResult) {
+            $stmt->execute();
+            // if ($exeResult) {
 
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-                    $arrayResult = array(
-                        'idUsuario' => $row['idUsuario'],
-                        'nombre' => $row['nombre'],
-                        'apellido' => $row['apellido']
-                    );
+                //     $arrayResult = array(
+                //         'idUsuario' => $row['idUsuario'],
+                //         'nombre' => $row['nombre'],
+                //         'apellido' => $row['apellido']
+                //     );
+                // }
+                $arrayResult = $stmt->fetchAll();
+                if (!empty($arrayResult)) {
+
+                    return $arrayResult;
+                } else {
+
+                    throw new Exception("No se pudieron obterner los datos");
                 }
-
-                return $arrayResult;
-            } else {
-                return "No se pudieron obterner los datos";
-            }
+                
+            // } else {
+            //     return "No se pudieron obterner los datos";
+            // }
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
