@@ -7,13 +7,17 @@ class ContratosModel extends Conexion
    public static function getContratosMdl($table)
     {
         try {
+           $instituciones = "instituciones";
+           $catalogos= "catalogos";
             $arrayResult = array();
-            $stmt = Conexion::conectar()->prepare("SELECT idContrato, nombre, descripcion, fechaCreacion, 
+            $stmt = Conexion::conectar()->prepare("SELECT idContrato, c.nombre as nombre, c.descripcion as descripcion, fechaCreacion, 
             fechaFirma, fechaFin, isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento, isContratacionPersonal, isVinculacionBecarios, 
             isProductosEntregables, isInformesFinancieros, isInformesTecnicos, isAuditoriaExterna,
             encrypArchivo, rutaArchivo, encrypFinanParcial, rutaFinanParcial, encrypFinanFinal, rutaFinanFinal, encrypTecnicoParcial,
-            rutaTecnicoParcial, encrypTecnicoFinal, rutaTecnicoFinal FROM $table");
+            rutaTecnicoParcial, encrypTecnicoFinal, rutaTecnicoFinal, i.nombre as contraparte, cat.nombre as tipoConvenio FROM $table as c
+            INNER JOIN $instituciones  as i on idInstitucion = c.idContraparte
+            INNER JOIN $catalogos as cat on idCatalogo = c.idTipoConvenio");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -49,9 +53,9 @@ class ContratosModel extends Conexion
                     'encrypTecnicoParcial' => $row['encrypTecnicoParcial'] == null ? "" : $row['encrypTecnicoParcial'],
                     'rutaTecnicoParcial' => $row['rutaTecnicoParcial'] == null ? "" : $row['rutaTecnicoParcial'],
                     'encrypTecnicoFinal' => $row['encrypTecnicoFinal'] == null ? "" : $row['encrypTecnicoFinal'],
-                    'rutaTecnicoFinal' => $row['rutaTecnicoFinal'] == null ? "" : $row['rutaTecnicoFinal']
-                    
-                );
+                    'rutaTecnicoFinal' => $row['rutaTecnicoFinal'] == null ? "" : $row['rutaTecnicoFinal'],
+                    'contraparte' => $row['contraparte'],
+                    'tipoConvenio' => $row['tipoConvenio'] );
             }
             
             return $arrayResult;

@@ -152,6 +152,7 @@ $(function () {
       success: function (response) {
         var table = $('#tableContratos').DataTable();
         table.destroy();
+        let arrColor = {'General' : 'orange','Específico':'olive','Contrato':'teal','Marco':'violet','Colaboración':'pink','Uso de Espacios':'brown'};
         $('#tableContratos').DataTable({
           language: { "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json" },
           data: response,
@@ -169,11 +170,20 @@ $(function () {
             }
           },
           {
+            data: "contraparte"
+          },
+          {
             data: "fechaFirma"
           },
             {
               mRender: function (data, type, full) {
                 return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
+              }
+            },
+            {
+              data: "tipoConvenio",
+              mRender: function (data, type, full) {
+                  return '<label class="ui ' +arrColor[full.tipoConvenio]+ ' tag label"><strong>' + data + '</strong></label>';
               }
             },
             // {

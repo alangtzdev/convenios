@@ -9,13 +9,18 @@ class ConveniosModel extends Conexion
    public function getConveniosMdl($table)
     {
         try {
+           $instituciones = "instituciones";
+           $catalogos = "catalogos";
             $cxn = Conexion::conectar();
             $arrayResult = array();
-            $stmt = $cxn->prepare("SELECT idConvenio, nombre, descripcion, fechaCreacion, 
+            $stmt = $cxn->prepare("SELECT idConvenio, c.nombre as nombre, c.descripcion as descripcion, fechaCreacion, 
             fechaFirma, fechaFin, isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento, isIntercambioEstudiantes, isIntercambioProfesores, 
             isAccesoBiblioteca, isEstServicioSocial , isDesarrolloProyectos, isCoedicionLibros,
-             isCostosInstitucionales, isInformeAvance, encrypArchivo, rutaArchivo FROM $table");
+             isCostosInstitucionales, isInformeAvance, encrypArchivo, rutaArchivo, i.nombre as contraparte, cat.nombre as tipoConvenio
+              FROM $table as c
+             INNER JOIN $instituciones  as i on idInstitucion = c.idContraparte
+             INNER JOIN $catalogos as cat on idCatalogo = c.idTipoConvenio");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -45,8 +50,10 @@ class ConveniosModel extends Conexion
                     'isCostosInstitucionales' => $row['isCostosInstitucionales'] == 0 ? false : true,
                     'isInformeAvance' => $row['isInformeAvance'] == 0 ? false : true,
                     'encrypArchivo' => $row['encrypArchivo'] == null ? "" :  $row['encrypArchivo'],
-                    'rutaArchivo' => $row['rutaArchivo'] == null ? "" :  $row['rutaArchivo']
-                );
+                    'rutaArchivo' => $row['rutaArchivo'] == null ? "" :  $row['rutaArchivo'],
+                    'contraparte' => $row['contraparte'],
+                    'tipoConvenio' => $row['tipoConvenio']              
+                  );
             }
             
             return $arrayResult;

@@ -30,9 +30,10 @@
                 <thead class="table-title">
                     <tr>
                         <th>Convenio</th>
+                        <th>Contraparte</th>
                         <th>Fecha firma</th>
                         <th>Fecha vigencia</th>
-                        <!-- <th>Finaciamiento</th> -->
+                        <th>Tipo</th>
                         <th>Archivo</th>
                         <th class="no-sort">Editar</th>
                         <th class="no-sort">Eliminar</th>

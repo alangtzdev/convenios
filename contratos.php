@@ -27,8 +27,10 @@
                 <thead>
                     <tr>
                         <th class="">Nombre</th>
+                        <th>Contraparte</th>
                         <th>Fecha firma</th>
                         <th>Fecha vigencia</th>
+                        <th>Tipo</th>
                         <th>Original</th>
                         <th>Finaciero Parcial/Final</th>
                         <th>Tecnico Parcial/Final</th>
