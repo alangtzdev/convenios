@@ -10,11 +10,11 @@
 <div id="app" class="ui basic segment">
     <!-- El Contenido comienza aqui -->
     <div class="ui container" id="idDivBody">
-        <h2 class="ui dividing header ui">Usuarios</h2>
+        <h2 class="ui dividing header ui">Permisos</h2>
         <div class="example">
             <div class="ui right floated main menu">
-                <button id="btnNuevoUsuario" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i>
-                    Nueva usuario
+                <button id="btnNuevoPermiso" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i>
+                    Nuevo permiso
                 </button>
             </div>
         </div>
@@ -24,14 +24,13 @@
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
 
-            <table id="tableUsuarios" class="table display responsive dt-responsive celled" cellspacing="0">
+            <table id="tablePermisos" class="table display responsive dt-responsive celled" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Correo</th>
-                        <th>Usuario</th>
-                        <th>Rol</th>
+                        <th>Accion</th>
+                        <th>Icon</th>
+                        <th>Class</th>
                         <th class="no-sort">Editar</th>
                         <th class="no-sort">Eliminar</th>
                     </tr>
@@ -47,16 +46,18 @@
                 </div>
                 <div class="content">
                     <!-- <div class="ui piled segment"> -->
-                    <form class="ui form" id="formUsuarios">
+                    <form class="ui form" id="formPermisos">
                         <div class="field">
                             <div class="fields">
                                 <div class="six wide field">
                                     <label>Nombres</label>
-                                    <input type="text" id="txtNombre" name="name" placeholder="Nombre(s)">
+                                    <input type="text" id="txtNombre" name="name"
+                                        placeholder="Nombre(s)">
                                 </div>
                                 <div class="five wide field">
                                     <label>Apellidos</label>
-                                    <input type="text" id="txtApellido" name="apellido" placeholder="Apellidos">
+                                    <input type="text" id="txtApellido" name="apellido"
+                                        placeholder="Apellidos">
                                 </div>
                                 <div class="five wide field">
                                     <label>Rol</label>
@@ -66,14 +67,6 @@
                                 </div>
                             </div>
                             <div class="fields">
-                                <div class="six wide field">
-                                    <label for="">Correo</label>
-                                    <input type="text" id="txtCorreo" name="correo">
-                                </div>
-                                <div class="six wide field">
-                                    <label for="">Usuario</label>
-                                    <input type="text" id="txtUsuario" name="usuario">
-                                </div>
                                 <div class="four wide field">
                                     <label for="">Es usario responsable</label>
                                     <div class="ui checkbox">
@@ -82,7 +75,12 @@
                                         <label>SI</label>
                                     </div>
                                 </div>
+                                <div class="four wide field">
 
+                                </div>
+                                <div class="four wide field">
+
+                                </div>
                             </div>
                         </div>
                         <div class="ui error message"></div>
@@ -113,7 +111,7 @@
         </div>
 
         <input type='hidden' name='HFCommandName' id="HFCommandName" value="" />
-        <input type='hidden' name='HFIdUsuario' id="HFIdUsuario" value="" />
+        <input type='hidden' name='HFIdPermiso' id="HFIdPermiso" value="" />
 
     </div>
     <!-- El Contenido termina aqui -->
@@ -125,4 +123,4 @@
 <?php include "include/footer.php"; ?>
 <script src="assets/plugins/datatable/jquery.dataTables.min.js"></script>
 <script src="assets/plugins/jquery.ui.widget.js"></script>
-<script src="assets/js/p-usuarios.js"></script>
+<script src="assets/js/p-permisos.js"></script>

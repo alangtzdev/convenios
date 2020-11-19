@@ -45,10 +45,41 @@ class UsuariosModel extends Conexion
 
                     throw new Exception("Contraseña o correo incoreccto");
                 }
+                $stmt_ = null;
                 // }
             } else {
                 throw new Exception("Este usuario " . $arrDatos['email'] . " no esta registrado");
             }
+            $stmt = null;
+        } catch (Exception $th) {
+            http_response_code(401);
+            return [
+                'code' => http_response_code(),
+                'message' => $th->getMessage()
+            ];
+            exit();
+        }
+    }
+    public static function getPerfilMdl($email, $table)
+    {
+        try {
+
+            // var_dump($arrDatos['nombre']);
+            $cxn = Conexion::conectar();
+            $arrayResult = array();
+            $stmt = $cxn->prepare("SELECT * FROM $table where correo = :correo");
+            $stmt->bindParam(":correo", $email, PDO::PARAM_STR);
+            $stmt->execute();
+            $arrayResult = $stmt->fetchAll();
+            if (!empty($arrayResult)) {
+
+                return $arrayResult;
+            } else {
+
+                throw new Exception("No se pudieron obterner los datos");
+            }
+            $stmt = null;
+
         } catch (Exception $th) {
             http_response_code(401);
             return [
@@ -62,28 +93,34 @@ class UsuariosModel extends Conexion
     public static function getUsuariosMdl($table)
     {
         try {
+            $roles = "roles";
             $cxn = Conexion::conectar();
             $arrayResult = array();
-            $stmt = $cxn->prepare("SELECT * FROM $table");
+            $stmt = $cxn->prepare("SELECT *,u.idRol as idRol, r.rol as rol FROM $table as u 
+            left join $roles as r on r.idRol = u.idRol");
             $stmt->execute();
             // if ($exeResult) {
 
-                // while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-                //     $arrayResult = array(
-                //         'idUsuario' => $row['idUsuario'],
-                //         'nombre' => $row['nombre'],
-                //         'apellido' => $row['apellido']
-                //     );
-                // }
-                $arrayResult = $stmt->fetchAll();
-                if (!empty($arrayResult)) {
+                    $arrayResult[] = array(
+                        'idUsuario' => $row['idUsuario'],
+                        'nombre' => $row['nombre'],
+                        'apellido' => $row['apellido'],
+                        'correo' => $row['correo'] == null ?  "" : $row['correo'],
+                        'isResponsable' => $row['isResponsable'] == null ?  "" : $row['isResponsable'],
+                        'usuario' => $row['usuario'] == null ?  "" : $row['usuario'],
+                        'rol' => $row['rol'] == null ?  "" : $row['rol'],
+                    );
+                }
+                // $arrayResult = $stmt->fetchAll();
+                // if (!empty($arrayResult)) {
 
                     return $arrayResult;
-                } else {
+                // } else {
 
-                    throw new Exception("No se pudieron obterner los datos");
-                }
+                //     throw new Exception("No se pudieron obterner los datos");
+                // }
                 
             // } else {
             //     return "No se pudieron obterner los datos";
@@ -91,6 +128,36 @@ class UsuariosModel extends Conexion
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
+    }
+    // -------------------------------------------------------------------------------------------
+    public static function actualizarPerfilMdl($arrDatos, $table)
+    {
+        // var_dump($arrDatos);
+        try {
+            $contrasenia = $arrDatos['contrasenia'];
+            $contraHash = password_hash($contrasenia, PASSWORD_BCRYPT);
+            $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, apellido = :apellido, usuario = :usuario, contrasenia = 
+            :contrasenia WHERE idUsuario = :idUsuario");
+
+             $stmt->bindParam(":idUsuario", $arrDatos['idUsuario'], PDO::PARAM_INT);
+             $stmt->bindParam(":nombre", $arrDatos['nombre'], PDO::PARAM_STR);
+             $stmt->bindParam(":apellido", $arrDatos['apellido'], PDO::PARAM_STR);
+            $stmt->bindParam(":usuario",$arrDatos['usuario'], PDO::PARAM_STR);
+            $stmt->bindParam(":contrasenia",$arrDatos['contrasenia']);
+            $exeResult = $stmt->execute();
+            if($exeResult) {
+               return "success";
+             } else{
+               return "Error";   
+            }
+
+            $stmt->close();
+            $stmt = null;
+   
+         } catch (Exception $th) {
+            return  $th->getMessage(); 
+         }
+         
     }
     // -------------------------------------------------------------------------------------------
     public static function saveUsuarioMdl($arrDatos, $table)
@@ -102,10 +169,14 @@ class UsuariosModel extends Conexion
                 //  if (pregmatch('/^[a-zA-ZáeíóúÁÉÍÓÚ ]+$/', $arrDatos['nombre'])) {
                 //      # code...
                 //  }
-                $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, apellido) 
-             VALUES (:nombre, :apellido)");
+                $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, apellido, correo, usuario, isResponsable, idRol) 
+             VALUES (:nombre, :apellido, :correo, :usuario, :isResponsable, :idRol)");
                 $stmt->bindParam(":nombre", $arrDatos['nombre'], PDO::PARAM_STR);
                 $stmt->bindParam(":apellido", $arrDatos['apellido'], PDO::PARAM_STR);
+                 $stmt->bindParam(":idRol", $arrDatos['idRol'], PDO::PARAM_INT);
+                 $stmt->bindParam(":correo", $arrDatos['correo'], PDO::PARAM_STR);
+                 $stmt->bindParam(":usuario", $arrDatos['usuario'], PDO::PARAM_STR);
+                 $stmt->bindParam(":isResponsable", $arrDatos['isResponsable'], PDO::PARAM_BOOL);
                 if ($stmt->execute()) {
                     return "success";
                 } else {
@@ -115,16 +186,21 @@ class UsuariosModel extends Conexion
                 $stmt = null;
             } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idUsuario'] != "") {
 
-                $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, apellido = :apellido 
+                $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, apellido = :apellido,
+                correo = :correo, usuario = :usuario, isResponsable = :isResponsable, idRol = :idRol 
             WHERE idUsuario = :idUsuario");
 
                 $stmt->bindParam(":idUsuario", $arrDatos['idUsuario'], PDO::PARAM_INT);
                 $stmt->bindParam(":nombre", $arrDatos['nombre'], PDO::PARAM_STR);
                 $stmt->bindParam(":apellido", $arrDatos['apellido'], PDO::PARAM_STR);
+                $stmt->bindParam(":idRol", $arrDatos['idRol'], PDO::PARAM_INT);
+                $stmt->bindParam(":correo", $arrDatos['correo'], PDO::PARAM_STR);
+                $stmt->bindParam(":usuario", $arrDatos['usuario'], PDO::PARAM_STR);
+                $stmt->bindParam(":isResponsable", $arrDatos['isResponsable'], PDO::PARAM_BOOL);
                 if ($stmt->execute()) {
                     return "success";
                 } else {
-                    return "Hubo un error al editar la institucion" . nombre;
+                    return "Hubo un error al editar la institucion" .$arrDatos['nombre'];
                 }
                 $stmt->close();
                 $stmt = null;

@@ -1,5 +1,6 @@
 $(() => {
     getUsuarios();
+    getRoles();
 
     $('#btnNuevoUsuario').click(function () {
         mdAltaEdicion($(this).data('command'));
@@ -90,7 +91,7 @@ function getUsuarios() {
             let color = "";
             
             $('#tableUsuarios').DataTable({
-                language: { "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json" },
+                language: { "url": "./assets/plugins/datatable/Spanish.json" },
                 data: response,
                 buttons: ['pdf'],
                 columnDefs: [
@@ -113,6 +114,18 @@ function getUsuarios() {
                           }
                     },
                     {
+                      data: "correo"
+                    },
+                    {
+                      data: "usuario"
+                    },
+                    {
+                      mRender: function (data, type, full) {
+                        // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
+                        return (full.rol != "" ? full.rol : 'Sin rol asignado');
+                      }
+                    },
+                    {
                         mRender: function (data, type, full) {
                             return "<button id='editar' type='button' class='ui violet icon button' data-command='EDITAR'/><i class='fa fa-pencil'></i></button>";
                         },
@@ -131,13 +144,39 @@ function getUsuarios() {
         });
     
 }
+function getRoles() {
+  fetch('./api/rolesApi.php', {
+    method: "POST",
+    body: JSON.stringify({ 'getRoles': {} }),
+    dataType: "JSON"
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(response => {
+      // let datos =  JSON.parse(response);
 
+      $(response).each(function (index, element) {
+          // $('#idPaisMD').addClass('fluid search');
+          $('#idRolMd').append($('<option>').text(element.rol).attr('value', element.idRol));
+        
+      });
+
+
+    }).catch(function (error) {
+      console.log('Hubo un problema con la petición Fetch:' + error.message);
+    });
+}
 function loadData(data) {
 
     $('#HFCommandName').val('EDITAR');
     $('#HFIdUsuario').val(data.idUsuario);
     $('#txtNombre').val(data.nombre);
     $('#txtApellido').val(data.apellido);
+    $('#idRolMd').dropdown('set selected',data.idRol);
+    $('#txtCorreo').val(data.correo);
+    $('#txtUsuario').val(data.usuario);
+    if(data.isResponsable) { $('#chkIsResp').prop('checked', true); }
 
 }
 
@@ -148,7 +187,11 @@ function saveUsuario() {
     HFCommandName: $('#HFCommandName').val(),
     idUsuario: idUsuario,
     nombre: $('#txtNombre').val(),
-    apellido: $('#txtApellido').val()
+    apellido: $('#txtApellido').val(),
+    idRol: $('#idRolMd').val(),
+    correo: $('#txtCorreo').val(),
+    usuario: $('#txtUsuario').val(),
+    isResponsable: $('#chkIsResp').is(':checked') == true ? 1 : 0 , 
   };
 fetch('./api/usuariosApi.php', {
   method: "POST",

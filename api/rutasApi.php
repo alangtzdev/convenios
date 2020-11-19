@@ -10,6 +10,12 @@ class RutasAPi{
                $_GET["ruta"] == "catalogos" ||
                $_GET["ruta"] == "instituciones" ||
                $_GET["ruta"] == "usuarios" ||
+               $_GET["ruta"] == "perfil" ||
+               $_GET["ruta"] == "roles" ||
+               $_GET["ruta"] == "modulos" ||
+               $_GET["ruta"] == "permisos" ||
+               $_GET["ruta"] == "modulosxrol" ||
+               $_GET["ruta"] == "permisosxacceso" ||
                $_GET["ruta"] == "guia"){
 
                    $modulo = $_GET["ruta"].".php";

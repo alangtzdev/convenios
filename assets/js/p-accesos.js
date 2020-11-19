@@ -1,11 +1,11 @@
 $(() => {
-    getInstituciones();
-
-    $('#btnNuevoInstitucion').click(function () {
+    getAccesos();
+    getRoles();
+    $('#btnNuevoAcceso').click(function () {
         mdAltaEdicion($(this).data('command'));
     });
 
-    $('#formInstituciones').form({
+    $('#formAccesoes').form({
       on: 'blur',
       fields: {
         empty: {
@@ -19,30 +19,50 @@ $(() => {
         }
       },
       onSuccess: function () {
-        saveInstitucion();
+        saveAcceso();
         return false;
       }
     });
 
-    $('#tableInstituciones tbody').on('click', '#linkInstitucion', function () {
-      var table = $('#tableInstituciones').DataTable();
+    $('#tableAccesos tbody').on('click', '#linkAcceso', function () {
+      var table = $('#tableAccesos').DataTable();
       var data = table.row($(this).parents('tr')).data();
       mdAltaEdicion($(this).data('command'));
       loadData(data, $(this).data('command'));
     });
 
-    $('#tableInstituciones tbody').on('click', '#editar', function () {
-      var table = $('#tableInstituciones').DataTable();
+    $('#tableAccesos tbody').on('click', '#editar', function () {
+      var table = $('#tableAccesos').DataTable();
       var data = table.row($(this).parents('tr')).data();
       mdAltaEdicion($(this).data('command'));
       loadData(data, $(this).data('command'));
     });
+    
+    $("#idRolMd").dropdown({
+      allowAdditions: true,
+        allowReselection: true,
+      action:function(value,text){
+        console.log("a");
+      }
+    });
+    // $('#idRolMd').dropdown({
+    //   // on: 'blur',
+    //   // allowReselection: true,
+    //   onChange:  function(val) {
+    //     alert(val)
+    //   }
+    // });
 });
+function copy() { 
+  getModulos(console.log(document.getElementById("idRolMd").value));
+}
+
 function mdAltaEdicion(command) {
     $('#mdAltaEdicion')
     .modal({
       closable: false,
       onShow: function () {
+        $("#idRolMd").dropdown('refresh');
         $('#btnGuardar').show();
         $('#HFCommandName').val(command);
         $('#txtTitle').text('ALTA');
@@ -60,7 +80,7 @@ function mdAltaEdicion(command) {
         }
       },
       onHide: function () {
-        $('#HFIdInstitucion').val('');
+        $('#HFIdAcceso').val('');
         $('.ui.form').form('reset');
         $('.ui.form .field.error').removeClass("error");
         $('.ui.form.error').removeClass("error");
@@ -73,23 +93,23 @@ function mdAltaEdicion(command) {
       }
     }).modal('show');
 }
-function getInstituciones() {
+function getAccesos() {
   waitMeShow('#idDivBody');
-    fetch('./api/institucionesApi.php', {
+    fetch('./api/accesosApi.php', {
         method: "POST",
-        body: JSON.stringify({ 'getInstituciones': {} }),
+        body: JSON.stringify({ 'getAccesos': {} }),
         dataType: "JSON"
     })
         .then(response => {
             return response.json();
         })
         .then(response => {
-            var table = $('#tableInstituciones').DataTable();
+            var table = $('#tableAccesos').DataTable();
             table.destroy();
             let arrColor = ['orange','yellow','olive','green','teal','blue','violet','purple','pink','brown','grey','black'];
             let color = "";
             
-            $('#tableInstituciones').DataTable({
+            $('#tableAccesos').DataTable({
                  language: { "url": "./assets/plugins/datatable/Spanish.json" },
                 data: response,
                 buttons: ['pdf'],
@@ -103,7 +123,7 @@ function getInstituciones() {
                     {
                         data: "nombre",
                         mRender: function (data, type, full) {
-                            return '<a type="button" id="linkInstitucion"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
+                            return '<a type="button" id="linkAcceso"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
                         }
                     },
                     {
@@ -120,7 +140,7 @@ function getInstituciones() {
                     },
                     {
                         mRender: function (data, type, full) {
-                            return '<button data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button" onclick="deleteInstitucion(' + full.idInstitucion + ')"/><i class="fa fa-trash"></i></button>';
+                            return '<button data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button" onclick="deleteAcceso(' + full.idAcceso + ')"/><i class="fa fa-trash"></i></button>';
                         },
                         width: "8%",
                     }]
@@ -132,39 +152,86 @@ function getInstituciones() {
         });
     
 }
+function getRoles() {
+    fetch('./api/rolesApi.php', {
+      method: "POST",
+      body: JSON.stringify({ 'getRoles': {} }),
+      dataType: "JSON"
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(response => {
+        // let datos =  JSON.parse(response);
+  
+        $(response).each(function (index, element) {
+            // $('#idPaisMD').addClass('fluid search');
+            $('#idRolMd').append($('<option>').text(element.rol).attr('value', element.idRol));
+          
+        });
+  
+  
+      }).catch(function (error) {
+        console.log('Hubo un problema con la petición Fetch:' + error.message);
+      });
+}
+function getModulos() {
+  fetch('./api/rolesApi.php', {
+    method: "POST",
+    body: JSON.stringify({ 'getModulos_Rol': {} }),
+    dataType: "JSON"
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(response => {
+      // let datos =  JSON.parse(response);
 
+      $(response).each(function (index, element) {
+          // $('#idPaisMD').addClass('fluid search');
+          $('#idModuloMd').append($('<option>').text(element.rol).attr('value', element.idRol));
+        
+      });
+
+
+    }).catch(function (error) {
+      console.log('Hubo un problema con la petición Fetch:' + error.message);
+    });
+}
 function loadData(data) {
 
     $('#HFCommandName').val('EDITAR');
-    $('#HFIdInstitucion').val(data.idInstitucion);
+    $('#HFIdAcceso').val(data.idAcceso);
     $('#txtNombre').val(data.nombre);
     $('#txtAbreviacion').val(data.abreviacion);
 
 }
+function onChange(cal) {
+alert(cal);  
+}
+function saveAcceso() {
 
-function saveInstitucion() {
-
-  let idInstitucion = $('#HFIdInstitucion').val() != '' ? $('#HFIdInstitucion').val() : '',
+  let idAcceso = $('#HFIdAcceso').val() != '' ? $('#HFIdAcceso').val() : '',
   params = {
     HFCommandName: $('#HFCommandName').val(),
-    idInstitucion: idInstitucion,
+    idAcceso: idAcceso,
     nombre: $('#txtNombre').val(),
     abreviacion: $('#txtAbreviacion').val()
   };
-fetch('./api/institucionesApi.php', {
+fetch('./api/accesosApi.php', {
   method: "POST",
-  body: JSON.stringify({ 'saveInstitucion': params }),
+  body: JSON.stringify({ 'saveAcceso': params }),
   dataType: "JSON"
 })
   .then(response => {
     return response.json();
   })
   .then(response => {
-    getInstituciones();
+    getAccesos();
     $('#mdAltaEdicion').modal('hide');
     $('body').toast({
       class: 'success',
-      message: `Institucion guardado correctamente !`
+      message: `Acceso guardado correctamente !`
     });
   }).catch(error => {
     $('body').toast({ class: 'error', message: `An error occured !` + error.message });
@@ -172,7 +239,7 @@ fetch('./api/institucionesApi.php', {
 
 }
 
-function deleteInstitucion(idInstitucion) {
+function deleteAcceso(idAcceso) {
     $('#domtoastactions')
       .toast({
         displayTime: 0,
@@ -181,20 +248,20 @@ function deleteInstitucion(idInstitucion) {
           // return false;
         },
         onApprove: function () {
-          fetch('./api/institucionesApi.php', {
+          fetch('./api/accesosApi.php', {
             method: "POST",
-            body: JSON.stringify({ 'deleteInstitucion': { idInstitucion: idInstitucion } }),
+            body: JSON.stringify({ 'deleteAcceso': { idAcceso: idAcceso } }),
             dataType: "JSON"
           })
             .then(response => {
               return response.json();
             })
             .then(response => {
-              getInstituciones();
+              getAccesos();
               $('#mdAltaEdicion').modal('hide');
               $('body').toast({
                 class: 'success',
-                message: 'Institucion eliminado correctamente !'
+                message: 'Acceso eliminado correctamente !'
               });
             }).catch(error => {
               $('body').toast({ class: 'error', message: `An error occured !` + error.message });

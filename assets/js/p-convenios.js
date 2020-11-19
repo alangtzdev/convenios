@@ -278,7 +278,7 @@ function getConvenios() {
       table.destroy();
       let arrColor = {'General' : 'orange','Específico':'olive','Contrato':'teal','Marco':'violet','Colaboración':'pink','Uso de Espacios':'brown'};
       $('#tableConvenios').DataTable({
-        language: { "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json" },
+         language: { "url": "./assets/plugins/datatable/Spanish.json" },
         data: response,
         buttons: ['pdf'],
         columnDefs: [

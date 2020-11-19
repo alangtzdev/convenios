@@ -95,7 +95,7 @@ function getCatalogos() {
             let color = "";
             
             $('#tableCatalogos').DataTable({
-                language: { "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Spanish.json" },
+                 language: { "url": "./assets/plugins/datatable/Spanish.json" },
                 data: response,
                 buttons: ['pdf'],
                 columnDefs: [

@@ -10,11 +10,11 @@
 <div id="app" class="ui basic segment">
     <!-- El Contenido comienza aqui -->
     <div class="ui container" id="idDivBody">
-        <h2 class="ui dividing header ui">Usuarios</h2>
+        <h2 class="ui dividing header ui">Permisos por acceso</h2>
         <div class="example">
             <div class="ui right floated main menu">
-                <button id="btnNuevoUsuario" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i>
-                    Nueva usuario
+                <button id="btnNuevoAcceso" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i>
+                    Asignar permisos
                 </button>
             </div>
         </div>
@@ -24,14 +24,11 @@
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
 
-            <table id="tableUsuarios" class="table display responsive dt-responsive celled" cellspacing="0">
+            <table id="tableAccesos" class="table display responsive dt-responsive celled" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Apellidos</th>
-                        <th>Correo</th>
-                        <th>Usuario</th>
-                        <th>Rol</th>
+                        <th>Abreviacion</th>
                         <th class="no-sort">Editar</th>
                         <th class="no-sort">Eliminar</th>
                     </tr>
@@ -47,42 +44,35 @@
                 </div>
                 <div class="content">
                     <!-- <div class="ui piled segment"> -->
-                    <form class="ui form" id="formUsuarios">
+                    <form class="ui form" id="formAccesos">
+                        <div class="fields">
+                            <div class="eight wide field">
+                                <label>Rol</label>
+                                <select id="idRolMd" class="ui dropdown" name="dropdown" onchange="copy();">
+                                    <option value="">Selecciona...</option>
+                                </select>
+                            </div>
+                            <div class="eight wide field">
+                                <label>Modulos del Rol</label>
+                                <select id="idModuloMd" class="ui dropdown" name="dropdown">
+                                    <option value="">Selecciona...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4 class="ui dividing header blue">Permisos/Acciones por Modulo</h4>
                         <div class="field">
                             <div class="fields">
-                                <div class="six wide field">
+                                <div class="eight wide field">
                                     <label>Nombres</label>
                                     <input type="text" id="txtNombre" name="name" placeholder="Nombre(s)">
                                 </div>
-                                <div class="five wide field">
+                                <div class="eight wide field">
                                     <label>Apellidos</label>
                                     <input type="text" id="txtApellido" name="apellido" placeholder="Apellidos">
                                 </div>
                                 <div class="five wide field">
-                                    <label>Rol</label>
-                                    <select id="idRolMd" class="ui dropdown" name="dropdown">
-                                        <option value="">Selecciona...</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="fields">
-                                <div class="six wide field">
-                                    <label for="">Correo</label>
-                                    <input type="text" id="txtCorreo" name="correo">
-                                </div>
-                                <div class="six wide field">
-                                    <label for="">Usuario</label>
-                                    <input type="text" id="txtUsuario" name="usuario">
-                                </div>
-                                <div class="four wide field">
-                                    <label for="">Es usario responsable</label>
-                                    <div class="ui checkbox">
-                                        <label></label>
-                                        <input id="chkIsResp" type="checkbox" name="checkbox">
-                                        <label>SI</label>
-                                    </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                         <div class="ui error message"></div>
@@ -113,7 +103,7 @@
         </div>
 
         <input type='hidden' name='HFCommandName' id="HFCommandName" value="" />
-        <input type='hidden' name='HFIdUsuario' id="HFIdUsuario" value="" />
+        <input type='hidden' name='HFIdAcceso' id="HFIdAcceso" value="" />
 
     </div>
     <!-- El Contenido termina aqui -->
@@ -125,4 +115,4 @@
 <?php include "include/footer.php"; ?>
 <script src="assets/plugins/datatable/jquery.dataTables.min.js"></script>
 <script src="assets/plugins/jquery.ui.widget.js"></script>
-<script src="assets/js/p-usuarios.js"></script>
+<script src="assets/js/p-accesos.js"></script>

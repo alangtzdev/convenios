@@ -1,5 +1,5 @@
 $(function () {
-      $('.ui.sidebar').sidebar({
+  $('.ui.sidebar').sidebar({
     context: $('.bottom.segment')
   }).sidebar('attach events', '.item.pizzabars');
 
@@ -7,6 +7,8 @@ $(function () {
   // you can use any ui transition
     transition: 'drop'
   });
+
+  accesoMenu('#divMenuA');
   
 });
 function text_truncate(str, length, ending) {
