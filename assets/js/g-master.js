@@ -9,6 +9,17 @@ $(function () {
   });
 
   accesoMenu('#divMenuA');
+    var url = window.location.pathname,
+        urlRegExp = new RegExp(url.replace(/\/$/, '') + "$");
+    $('#divMenuA a.accesso').each(function () {
+        if (urlRegExp.test(this.href.replace(/\/$/, ''))) {
+            $(this).addClass('active');
+            alert($(this).data("access"));
+        }
+    });
+
+
+
   
 });
 function text_truncate(str, length, ending) {

@@ -52,7 +52,7 @@ function logIn() {
             message: 'Bienvenido ' + datos[0].nombre + '!'
           });
           // $('#HFSessionStart').val("OK");
-          window.location = './index.php?ruta=inicio';
+          window.location = './?ruta=inicio';
             
     
     

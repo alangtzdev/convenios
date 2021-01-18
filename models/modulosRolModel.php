@@ -17,7 +17,7 @@ class ModulosRolModel extends Conexion {
             if (!empty($arrayResult)) {
                     return $arrayResult;
             } else {
-                throw new Exception("No se pudieron obterner los datos");
+                throw new Exception("No hay datos disponibles", $idRol);
             }
 
         } catch (\Throwable $th) {

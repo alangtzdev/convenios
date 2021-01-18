@@ -10,6 +10,7 @@
 <script src="assets/plugins/js-cookie-2.0.0/js.cookie.js"></script>
 <script src="assets/js/g-master.js"></script>
 <script src="assets/js/g-menu.js"></script>
+<script src="assets/js/g-acciones.js"></script>
 
 </body>
 </html>

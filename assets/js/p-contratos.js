@@ -5,6 +5,7 @@ $(function () {
     getPaises();
     getResponsables();
     getContraparte();
+    crearAcciones();
 
     $("#txtFinaciamiento").on({
       "keyup": function(event) {
@@ -27,7 +28,7 @@ $(function () {
       loadData(data, $(this).data('command'));
     });
 
-    $('#tableContratos tbody').on('click', '#perro', function () {
+    $('#tableContratos tbody').on('click', '#btnEditar', function () {
       var table = $('#tableContratos').DataTable();
       var data = table.row($(this).parents('tr')).data();
       mdAltaEdicion($(this).data('command'));
@@ -218,13 +219,13 @@ $(function () {
             },              
             {
               mRender: function (data, type, full) {
-                return "<button id='perro' type='button' class='ui violet icon button' data-command='EDITAR'/><i class='fa fa-pencil'></i></button>";
+                return "<button id='btnEditar' type='button' class='ui violet icon button' data-command='EDITAR' disabled/><i class='fa fa-pencil'></i></button>";
               },
               width: "8%",
             },
             {
               mRender: function (data, type, full) {
-                return '<button data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button" onclick="deleteContrato(' + full.idContrato + ')"/><i class="fa fa-trash"></i></button>';
+                return '<button id="btnEditar" data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button" onclick="deleteContrato(' + full.idContrato + ')" disabled/><i class="fa fa-trash"></i></button>';
               },
               width: "8%",
             }]

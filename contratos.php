@@ -13,7 +13,7 @@
         <h2 class="ui dividing header ui">Proyectos financiados</h2>
         <div class="example">
             <div class="ui right floated main menu">
-                <button id="btnNuevoContrato" class="ui primary button" data-command="ALTA"><i class="fa fa-plus"></i>
+                <button id="btnNuevoContrato" class="ui primary button" data-command="ALTA" disabled><i class="fa fa-plus"></i>
                     Nuevo proyecto
                 </button>
             </div>

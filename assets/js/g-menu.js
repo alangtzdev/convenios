@@ -1,102 +1,68 @@
 function accesoMenu(selector) {
-    // waitMeShow(selector);
-    let params = {
-        // idUsuario: parseInt(Cookies.get('idUsuario')),
-        idRol: parseInt(Cookies.get('idRol'))
-      };
-    fetch('./api/modulosRolApi.php', {
-        method: 'POST',
-        body: JSON.stringify({ 'getModulosRol': params }),
-        dataType: 'JSON'
+  // waitMeShow(selector);
+  let params = {
+    // idUsuario: parseInt(Cookies.get('idUsuario')),
+    idRol: parseInt(Cookies.get('idRol'))
+  };
+  fetch('./api/modulosRolApi.php', {
+    method: 'POST',
+    body: JSON.stringify({ 'getModulosRol': params }),
+    dataType: 'JSON'
+  })
+    .then(response => {
+      return response.json();
     })
-        .then(response => {
-            return response.json();
-        })
-        .then(response => {
+    .then(response => {
 
-            let menu_list = [];
-            $.each(response, function (indexInArray, valueOfElement) { 
-                menu_list.push(valueOfElement);
-            });
-            console.log(menu_list);
-            crearMenu(menu_list, selector);
-            navActions();
-        }).catch(e => {
+      let menu_list = [];
+      $.each(response, function (indexInArray, valueOfElement) {
+        menu_list.push(valueOfElement);
+      });
+      console.log(menu_list);
+      crearMenu(menu_list, selector);
+      navActions();
+    }).catch(e => {
 
-        });
+    });
 
 }
 function crearMenu(menu, selector) {
-    let flPadre = menu.filter(f => { 
-        return f.idModuloPa === 0; 
-    });
-    for (let val of flPadre) {
-      crearSubMenu(menu, val, selector);
-    }
+  let flPadre = menu.filter(f => {
+    return f.idModuloPa === 0;
+  });
+  for (let val of flPadre) {
+    crearSubMenu(menu, val, selector);
   }
-function crearSubMenu(menu, flPadre, selector) {
-    let flSubMenu = menu.filter(f => { return f.idModuloPa === flPadre.idModulo; });
-    $aMenu = $('<a class="item" href=""></a>');
-    
-    if (flSubMenu.length > 0) {
-      // let nombreMenu = flPadre.nombre, $id = nombreMenu,
-      // $divP = $('<div id="'+ flPadre.modulo +'" class="ui dropdown item"></div>'),
-      // $divS = $('<div class="menu"></div>');
-      // $divP.append('<i class="dropdown icon"></i>');
-      // $divP.text(nombreMenu);
-      // // $aMenu.attr('href', 'index.php?ruta='+ flPadre.modulo +'').text(flPadre.nombre);
-      // $divP.append($divS);
-      // $(selector).append($divP);
-      for (let val of flSubMenu) {
-        $aSubMenu = $('<a class="item" href=""></a>');
-        $aSubMenu.attr('href', 'index.php?ruta='+ val.modulo +'').text(val.nombre);
-        $('#subMenuA').append($aSubMenu);
-      }
-    } else {
-        $aMenu.attr('href', 'index.php?ruta='+ flPadre.modulo +'').text(flPadre.nombre);
-        // aMenu = '<a class="item" href="index.php?ruta='+ flPadre.modulo +'" >'+ flPadre.nombre +'</a>';
-    }
-    // $(selector).append($aMenu);
-    $aMenu.insertBefore('#perra');
-    // $aMenu.empty();
-    // $(aMenu).insertAfter('.right menu');
 }
-  /*      for (let val of flSubMenu) {
-        $aMenu.attr('href', 'index.php?ruta='+ val.modulo +'').text(val.nombre);
-        $('#subMenuA').append($aMenu);
-        // crearSubMenu(menu, val, '#subMenuA');
-      }
-    } else {
-        $aMenu.attr('href', 'index.php?ruta='+ flPadre.modulo +'').text(flPadre.nombre);
-        // aMenu = '<a class="item" href="index.php?ruta='+ flPadre.modulo +'" >'+ flPadre.nombre +'</a>';
-    }
-    $aMenu.insertBefore('#perra');*/
-function navActions() {
-      // accionesMenu();
-      // $('#divMenuA')
-      //   .find($(`a[href='${$(location).attr('href') }'`))
-      //   // .parents('div.collapse')
-      //   // .addBack()
-      //   .each(
-      //     function () {
-      //       $(this)
-      //         // .collapse('show')
-      //         .parent()
-      //         .addClass('active')
-      //         // .children('a')
-      //         // .data('section');
-      //     });
-        //   $('#divMenuA a').click(function (e) {
-        //     // e.preventDefault();
-        //     $('a').removeClass('active');
-        //     $(this).addClass('active');
-        // });
+function crearSubMenu(menu, flPadre, selector) {
+  let flSubMenu = menu.filter(f => { return f.idModuloPa === flPadre.idModulo; });
+  let $aMenu = $('<a class="item acceso" href="ok"></a>');
 
-//  $(`.nav-link[href="${location.pathname}"]`).parent().addClass("active");
-$('#divMenuA a').click(function(e){
-  // e.preventDefault();
-     $('#divMenuA a').removeClass("active");
-     $(this).addClass("active");
-     
- });
+  if (flSubMenu.length > 0) {
+
+    for (let val of flSubMenu) {
+     let $aSubMenu = $('<a class="item acceso" href=""></a>');
+      $aSubMenu.attr('href', '?ruta=' + val.modulo + '').text(val.nombre).data("value", flPadre.idModulo_Rol);
+      $('#subMenuA').append($aSubMenu);
+    }
+  } else {
+    $aMenu.attr('href', '?ruta=' + flPadre.modulo + '').text(flPadre.nombre).data("value", flPadre.idModulo_Rol);
+    $aMenu.insertBefore('#perra');
+    // aMenu = '<a class="item" href="index.php?ruta='+ flPadre.modulo +'" >'+ flPadre.nombre +'</a>';
+  }
+
+}
+function navActions() {
+  // accionesMenu();
+  var url = window.location.href;
+  let ok = url.split('?')[1];
+  let urlRegExp = new RegExp(ok.replace(/\/$/, '') + "$");
+  $('a.acceso').each(function () {
+    if (urlRegExp.test(this.href.replace(/\/$/, ''))) {
+      $(this).addClass('active');
+      // alert($(this).data("value"));
+      Cookies.set('idModulo_Rol', $(this).data('value'), { expires: 1});
+      // crearAccion($(this).data("value"));
+    }
+  });
 }     

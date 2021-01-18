@@ -27,8 +27,9 @@
             <table id="tableAccesos" class="table display responsive dt-responsive celled" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Abreviacion</th>
+                        <th>Rol</th>
+                        <th>Modulo</th>
+                        <th>Permisos</th>
                         <th class="no-sort">Editar</th>
                         <th class="no-sort">Eliminar</th>
                     </tr>
@@ -47,33 +48,23 @@
                     <form class="ui form" id="formAccesos">
                         <div class="fields">
                             <div class="eight wide field">
-                                <label>Rol</label>
-                                <select id="idRolMd" class="ui dropdown" name="dropdown" onchange="copy();">
+                                <label>Role</label>
+                                <select id="idRolMd" class="ui dropdown ddRolMd" name="dropdown">
                                     <option value="">Selecciona...</option>
                                 </select>
                             </div>
                             <div class="eight wide field">
                                 <label>Modulos del Rol</label>
-                                <select id="idModuloMd" class="ui dropdown" name="dropdown">
-                                    <option value="">Selecciona...</option>
+                                <select id="idModuloMd" class="ui dropdown ddModuloMd" name="dropdown">
+                                    <option class="textModulo" value="">Selecciona...</option>
                                 </select>
                             </div>
                         </div>
                         <h4 class="ui dividing header blue">Permisos/Acciones por Modulo</h4>
                         <div class="field">
-                            <div class="fields">
-                                <div class="eight wide field">
-                                    <label>Nombres</label>
-                                    <input type="text" id="txtNombre" name="name" placeholder="Nombre(s)">
-                                </div>
-                                <div class="eight wide field">
-                                    <label>Apellidos</label>
-                                    <input type="text" id="txtApellido" name="apellido" placeholder="Apellidos">
-                                </div>
-                                <div class="five wide field">
-
-                                </div>
-                            </div>
+                        <div id="divPermisos" class="fields">
+                                
+                        </div>
                         </div>
                         <div class="ui error message"></div>
                     </form>
