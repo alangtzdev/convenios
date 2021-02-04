@@ -15,7 +15,7 @@
         <h2 class="ui dividing header ui">Convenios</h2>
         <div class="example">
             <div class="ui right floated main menu">
-                <button id="btnNuevoConvenio" class="ui primary button" data-command="ALTA" disabled><i class="fa fa-plus"></i>
+                <button id="btnNuevo" class="ui primary button" data-command="ALTA" disabled><i class="fa fa-plus"></i>
                     Nuevo convenio
                 </button>
             </div>

@@ -56,7 +56,7 @@ $(function() {
     });
 
 
-    $('#btnNuevoConvenio').click(function() {
+    $('#btnNuevo').click(function() {
         mdAltaEdicion($(this).data('command'));
     });
 
@@ -331,13 +331,13 @@ function getConvenios() {
                     },
                     {
                         mRender: function(data, type, full) {
-                            return "<button id='btnEditar' type='button' class='ui violet icon button' data-command='EDITAR' disabled/><i class='fa fa-pencil'></i></button>";
+                            return "<button id='btnEditar' type='button' class='ui violet icon button btnEditar' data-command='EDITAR' disabled/><i class='fa fa-pencil'></i></button>";
                         },
                         width: "8%",
                     },
                     {
                         mRender: function(data, type, full) {
-                            return '<button id="btnEliminar" data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button" onclick="deleteConvenio(' + full.idConvenio + ')" disabled/><i class="fa fa-trash"></i></button>';
+                            return '<button id="btnEliminar" data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button btnEliminar" onclick="deleteConvenio(' + full.idConvenio + ')" disabled/><i class="fa fa-trash"></i></button>';
                         },
                         width: "8%",
                     }
