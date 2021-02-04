@@ -7,9 +7,9 @@ class InstitucionesModel extends Conexion
     public function getInstitucionesMdl($table)
     {
         try {
-            $cxn = Conexion::conectar();
+            // $cxn = Conexion::conectar();
             $arrayResult = array();
-            $stmt = $cxn->prepare("SELECT * FROM $table");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $table");
             $exeResult = $stmt->execute();
             if ($exeResult) {
 

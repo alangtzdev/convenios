@@ -11,9 +11,9 @@ class ConveniosModel extends Conexion
         try {
            $instituciones = "instituciones";
            $catalogos = "catalogos";
-            $cxn = Conexion::conectar();
+            // $cxn = Conexion::conectar();
             $arrayResult = array();
-            $stmt = $cxn->prepare("SELECT idConvenio, c.nombre as nombre, c.descripcion as descripcion, fechaCreacion, 
+            $stmt = Conexion::conectar()->prepare("SELECT idConvenio, c.nombre as nombre, c.descripcion as descripcion, fechaCreacion, 
             fechaFirma, fechaFin, isIndefinida, idFinEspecifico, idEstatus, idPrograma, idContraparte, idAmbito, idOrigen, 
             idTipoConvenio, idResponsable, idPais, financiamiento, isIntercambioEstudiantes, isIntercambioProfesores, 
             isAccesoBiblioteca, isEstServicioSocial , isDesarrolloProyectos, isCoedicionLibros,
