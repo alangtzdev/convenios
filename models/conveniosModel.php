@@ -6,7 +6,7 @@ require_once "bitacoraModel.php";
 class ConveniosModel extends Conexion
 {
 
-   public function getConveniosMdl($table)
+   public static function getConveniosMdl($table)
     {
         try {
            $instituciones = "instituciones";
@@ -197,7 +197,7 @@ class ConveniosModel extends Conexion
       
    }
    
-   public function getAreasUsuario($idUsuario,$table)
+   public static function getAreasUsuario($idUsuario,$table)
    {
       try {
          $cxn = Conexion::conectar();
@@ -219,7 +219,7 @@ class ConveniosModel extends Conexion
    
    /**----------------------------**/
 
-   public function getCategoriasArea($idArea,$table)
+   public static function getCategoriasArea($idArea,$table)
    {
       try {
          $cxn = Conexion::conectar();

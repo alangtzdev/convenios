@@ -126,7 +126,7 @@ class CatalogosModel extends Conexion
       }
     }
 
-    public function deleteCatalogoMdl($idCatalogo,$table)
+    public static function deleteCatalogoMdl($idCatalogo,$table)
    {
       try {
          $stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE idCatalogo = :id");

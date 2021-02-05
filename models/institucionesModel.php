@@ -4,7 +4,7 @@ require_once "../include/config.php";
 class InstitucionesModel extends Conexion
 {
     // -------------------------------------------------------------------------------------------
-    public function getInstitucionesMdl($table)
+    public static function getInstitucionesMdl($table)
     {
         try {
             // $cxn = Conexion::conectar();
@@ -31,7 +31,7 @@ class InstitucionesModel extends Conexion
         # code...
     }
     // -------------------------------------------------------------------------------------------
-    public function saveInstitucionMdl($arrDatos,$table)
+    public static function saveInstitucionMdl($arrDatos,$table)
     {
       try {
          $today = date("Y-m-d H:i:s");
@@ -69,7 +69,7 @@ class InstitucionesModel extends Conexion
       }
     }
 
-    public function deleteInstitucionMdl($idInstitucion,$table)
+    public static function deleteInstitucionMdl($idInstitucion,$table)
     {
       try {
          $stmt = Conexion::conectar()->prepare("DELETE FROM $table WHERE idInstitucion = :id");

@@ -23,8 +23,9 @@ require "../models/institucionesModel.php";
  }
  
 $request = json_decode(file_get_contents('php://input'), true);
-// var_dump($request);
+
 if(isset($request["getInstituciones"])){
+    
     $a = new InstitucionesApi ();
     $a -> getInstituciones();
 

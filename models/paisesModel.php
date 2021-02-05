@@ -5,7 +5,7 @@ class PaisesModel extends Conexion
 {
     // $enumTipoCatalogo = array('Ambito' => 1,'Programa' => 2,'Convenio'  => 3,'tipoConvenio' =>4);
     // -------------------------------------------------------------------------------------------
-    public function getPaisesMdl($table)
+    public static function getPaisesMdl($table)
     {
         try {
             // $cxn = Conexion::conectar();
