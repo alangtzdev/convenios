@@ -1,5 +1,6 @@
-function crearAcciones() {
-    let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+function crearAcciones(id) {
+    let idModulo_Rol = id;
+    // let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
     fetch('./api/accesosApi.php', {
             method: 'POST',
             body: JSON.stringify({ 'getAccesosModuloRol': { idModulo_Rol: idModulo_Rol } }),
@@ -15,16 +16,19 @@ function crearAcciones() {
                     case 'ALTA':
                         if (element.estatus === 1) {
                             $('#btnNuevo').attr('disabled', false);
-                        }
-                        break;
-                    case 'ELIMINAR':
-                        if (element.estatus === 1) {
-                            $('.btnEditar').attr('disabled', false);
+                            console.log('ok');
                         }
                         break;
                     case 'EDITAR':
                         if (element.estatus === 1) {
+                            $('.btnEditar').attr('disabled', false);
+                            console.log('editar, ok');
+                        }
+                        break;
+                    case 'ELIMINAR':
+                        if (element.estatus === 1) {
                             $('.btnEliminar').attr('disabled', false);
+                            console.log('eli,ok');
                         }
                         break;
                     default:

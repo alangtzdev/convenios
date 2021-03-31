@@ -4,7 +4,7 @@ $(function() {
     getPaises();
     getResponsables();
     getContraparte();
-    crearAcciones()
+    
         // getResponsables();
         //   $('#example5').progress();
         //   $('#aver')
@@ -120,7 +120,12 @@ $(function() {
     //     });
     //   }
     // });
+    $('#tableConvenios').on('page.dt', function () {
+        let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+        crearAcciones(idModulo_Rol);
 
+
+    } );
 
 });
 
@@ -344,6 +349,7 @@ function getConvenios() {
                 ]
             });
             waitMeHide('#idDivBody');
+            //crearAcciones();
         },
         error: function(data) {
             waitMeHide('#iDivBody');

@@ -62,7 +62,8 @@ function navActions() {
       $(this).addClass('active');
       // alert($(this).data("value"));
       Cookies.set('idModulo_Rol', $(this).data('value'), { expires: 1});
-      // crearAccion($(this).data("value"));
+      console.log($(this).data('value'));
+      crearAcciones($(this).data("value"));
     }
   });
 }     

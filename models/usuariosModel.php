@@ -125,7 +125,7 @@ class UsuariosModel extends Conexion
             // } else {
             //     return "No se pudieron obterner los datos";
             // }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return $th->getMessage();
         }
     }

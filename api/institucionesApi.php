@@ -26,17 +26,17 @@ $request = json_decode(file_get_contents('php://input'), true);
 
 if(isset($request["getInstituciones"])){
     
-    $a = new InstitucionesApi ();
-    $a -> getInstituciones();
+    $a = new InstitucionesApi();
+    $a->getInstituciones();
 
 }  else if (isset($request["saveInstitucion"])) {
 
-    $c = new InstitucionesApi ();
-    $c -> saveInstitucion($request['saveInstitucion']);
+    $c = new InstitucionesApi();
+    $c->saveInstitucion($request['saveInstitucion']);
 
 } else if (isset($request["deleteInstitucion"])) {
 
-    $c = new InstitucionesApi ();
-    $c -> deleteInstitucion($request['deleteInstitucion']['idInstitucion']);
+    $c = new InstitucionesApi();
+    $c->deleteInstitucion($request['deleteInstitucion']['idInstitucion']);
     
 }

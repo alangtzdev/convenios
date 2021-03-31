@@ -14,7 +14,7 @@ class ModulosModel extends Conexion
             $arrayResult = $stmt->fetchAll();
             return $arrayResult;
 
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return $th->getMessage();
         }
         # code...

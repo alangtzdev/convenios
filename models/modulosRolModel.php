@@ -20,7 +20,7 @@ class ModulosRolModel extends Conexion {
                 throw new Exception("No hay datos disponibles", $idRol);
             }
 
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return $th->getMessage();
         }
         # code...

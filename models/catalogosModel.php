@@ -30,7 +30,7 @@ class CatalogosModel extends Conexion
                 return "No se pudieron obterner los datos";
             }
 
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return $th->getMessage();
         }
         # code...

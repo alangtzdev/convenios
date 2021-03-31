@@ -219,7 +219,7 @@ function loadData(data) {
     $("input[name=permisos]").each(function () {
       if ((this.value).trim() === arrPermisos[0][index]) {
         $(this).prop('checked', true);
-        $(this).prop('disabled', true);
+        $(this).prop('disabled', false);
       }
     });
   }

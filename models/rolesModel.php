@@ -31,7 +31,7 @@ class RolesModel extends Conexion
                 return "No se pudieron obterner los datos";
             }
 
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return $th->getMessage();
         }
         # code...
@@ -120,7 +120,7 @@ class RolesModel extends Conexion
                  }
                 }
             return "success";
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             //throw $th;
         }
     }

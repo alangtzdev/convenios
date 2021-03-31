@@ -238,7 +238,7 @@ class ContratosModel extends Conexion
             throw new Exception("No se encuentran categorias para esta Area");
          }
         
-      } catch (\Throwable $th) {
+      } catch (Throwable $th) {
          return $th->getMessage();
       }
    }

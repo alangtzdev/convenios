@@ -27,7 +27,7 @@ class AccesosModel extends Conexion
             } else {
                 throw new Exception("No se pudieron obterner los datos");
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return $th->getMessage();
         }
         # code...
@@ -50,7 +50,7 @@ class AccesosModel extends Conexion
             } else {
                 throw new Exception("No se pudieron obterner los datos");
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return $th->getMessage();
         }
         # code...
@@ -84,9 +84,10 @@ class AccesosModel extends Conexion
                 $stmt = Conexion::conectar()->prepare("UPDATE  $table SET idModulo_rol = :idModulo_rol, idRol = :idRol, estatus = :estatus 
             WHERE idAcceso = :idAcceso");
 
+                $stmt->bindParam(":idAcceso", $arrDatos['idAcceso'], PDO::PARAM_INT);
                 $stmt->bindParam(":idModulo_rol", $arrDatos['idModuloRol'], PDO::PARAM_INT);
                 $stmt->bindParam(":idRol", $arrDatos['idRol'], PDO::PARAM_STR);
-                $stmt->bindParam(":estatus", $arrDatos['estatus'], PDO::PARAM_BOOL);
+                $stmt->bindParam(":estatus", $estatus, PDO::PARAM_BOOL);
                 if ($stmt->execute()) {
 
                     $response = AccesosModel::deletePermisosAccesoMdl($tablePermisosAcceso, $arrDatos['idAcceso']);
@@ -113,7 +114,7 @@ class AccesosModel extends Conexion
             $stmtM = Conexion::conectar()->prepare("INSERT INTO $table (idPermiso, idAcceso) VALUES (:idPermiso, :idAcceso)");
 
             foreach ($arrPermisos as $key => $value) {
-                $stmtM->bindParam(":idPermiso",$value, PDO::PARAM_STR);
+                $stmtM->bindParam(":idPermiso",$value, PDO::PARAM_INT);
                 $stmtM->bindParam(":idAcceso", $idAcceso, PDO::PARAM_INT);
 
                 if (!$stmtM->execute()) {
@@ -121,7 +122,7 @@ class AccesosModel extends Conexion
                 }
             }
             return "success";
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             //throw $th;
         }
     }

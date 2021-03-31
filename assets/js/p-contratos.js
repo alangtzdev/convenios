@@ -5,7 +5,7 @@ $(function() {
     getPaises();
     getResponsables();
     getContraparte();
-    crearAcciones();
+
 
     $("#txtFinaciamiento").on({
         "keyup": function(event) {
@@ -232,6 +232,7 @@ function getContratos() {
                 ]
             });
             waitMeHide('#idDivBody');
+            // crearAcciones();
         },
         error: function(data) {
             waitMeHide('#idDivBody');
