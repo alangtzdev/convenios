@@ -66,6 +66,13 @@ $(function() {
 
     $('#divFechaFin :input').attr('disabled', false);
 
+    $('#tableContratos').on('page.dt', function () {
+        let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+        crearAcciones(idModulo_Rol);
+
+
+    } );
+
 });
 
 
@@ -240,6 +247,9 @@ function getContratos() {
             // swal("Cancelled", dataError + " !", "error");
         }
     });
+
+    let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+    crearAcciones(idModulo_Rol);
 }
 
 function getPaises() {

@@ -122,15 +122,15 @@
                                 </div>
                             </div>
                             <div class="meta">
-                                Total de contratos
+                                Total de Proy. financiados 
                             </div>
                             <div class="description">
-                                Elliot requested permission to view your contact details
+                                Proyectos financiados agregados hasta hoy!
                             </div>
                         </div>
                         <div class="extra content">
                             <div class="ui two buttons">
-                               <a  class="ui yellow button"href="index.php?ruta=convenios">Ir a contratos</a>
+                               <a  class="ui yellow button"href="index.php?ruta=convenios">Ir a Proyectos</a>
                             </div>
                         </div>
                     </div>
@@ -148,12 +148,12 @@
                                Privado
                             </div>
                             <div class="description">
-                                Elliot requested permission to view your contact details
+                            Proyectos financiados Privados
                             </div>
                         </div>
                         <div class="extra content">
                             <div class="ui two buttons">
-                                <div class="ui green button">More Info</div>
+                                <div class="ui green button"></div>
                             </div>
                         </div>
                     </div>
@@ -171,12 +171,12 @@
                                 Publico
                             </div>
                             <div class="description">
-                                Elliot requested permission to view your contact details
+                            Proyectos financiados Publicos
                             </div>
                         </div>
                         <div class="extra content">
                             <div class="ui two buttons">
-                                <div class="ui teal button">More Info</div>
+                                <div class="ui teal button"></div>
                             </div>
                         </div>
                     </div>
@@ -194,12 +194,12 @@
                                 Social
                             </div>
                             <div class="description">
-                                Elliot requested permission to view your contact details
+                            Proyectos financiados Sociales
                             </div>
                         </div>
                         <div class="extra content">
                             <div class="ui two buttons">
-                                <div class="ui purple button">More Info</div>
+                                <div class="ui purple button"></div>
                             </div>
                         </div>
                     </div>

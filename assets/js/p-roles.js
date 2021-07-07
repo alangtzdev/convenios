@@ -114,7 +114,6 @@ function mdAltaEdicion(command) {
         } else if (command == 'EDITAR') {
 
           $('#txtTitle').text('EDITAR');
-
         }
       },
       onHide: function () {
@@ -147,7 +146,7 @@ function loadData(data) {
     $("input[name=modulos]").each(function () {
       if ((this.value).trim() === arrModulos[0][index]) {
         $(this).prop('checked', true);
-        $(this).prop('disabled', true);
+        $(this).prop('disabled', false);
       }
     });
   }

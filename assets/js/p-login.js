@@ -33,7 +33,7 @@ function logIn() {
         email: $('#txtEmail').val(),
         password: $('#txtPassword').val()
       };
-    fetch('./api/usuariosApi.php', {
+    fetch('../../api/usuariosApi.php', {
         method: "POST",
         body: JSON.stringify({ 'getLogin': params }),
         dataType: "JSON"

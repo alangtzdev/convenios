@@ -357,6 +357,8 @@ function getConvenios() {
             // swal("Cancelled", dataError + " !", "error");
         }
     });
+    let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+    crearAcciones(idModulo_Rol);
 }
 
 function getCatalogos() {

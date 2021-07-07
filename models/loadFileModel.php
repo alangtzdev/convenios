@@ -24,7 +24,7 @@ class LoadFileModel extends Conexion
 
 //  }
 
-    public function upLoadFileMdl($arrayDatos)
+    public static function upLoadFileMdl($arrayDatos)
     {
       try {
 
