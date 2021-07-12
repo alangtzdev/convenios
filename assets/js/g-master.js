@@ -72,8 +72,8 @@ function uploadFile(hfEncryp,hfRuta,lblResult) {
 function cleanFile(idFile,ecrypFile,routeFile) {
   $($(idFile).data('idprogress')).progress();
   $($(idFile).data('idlblresult')).html('Ningun archivo seleccionado');
-  $(ecrypFile).val();
-  $(routeFile).val();
+  $(ecrypFile).val('');
+  $(routeFile).val('');
 
 }
 

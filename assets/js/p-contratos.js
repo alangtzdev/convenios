@@ -436,8 +436,6 @@ function saveContrato() {
 function loadData(data) {
     $.each(data, function(index, value) {
         console.log(index);
-
-
     });
 
     const dateFirma = new Date(data.fechaFirma);
@@ -448,7 +446,7 @@ function loadData(data) {
     // const day = today.getDate()
 
     // Creating a new Date (with the delta)
-    $('#HFCommandName').val('EDITAR');
+    // $('#HFCommandName').val('EDITAR');
     $('#HFIdContrato').val(data.idContrato);
     $('#txtNombre').val(data.nombre);
     $('#txtDescripcion').val(data.descripcion);
@@ -498,6 +496,23 @@ function loadData(data) {
     } else {
         $('#aRefTecFinal').attr("href", '#');
         $('#lblRefTecFinal').text('No hay archivo');
+    }
+    if ($('#HFCommandName').val() == "EDITAR" && data.encrypArchivo !== "") {
+        
+        $('#HFEncrypArchivo').val(data.encrypArchivo),
+        $('#HFRutaArchivo').val(data.rutaArchivo),
+
+        $('#HFEncrypFinanParcial').val(data.encrypFinanParcial),
+        $('#HFRutaFinanParcial').val(data.rutaFinanParcial),
+
+        $('#HFEcrypFinanFinal').val(data.encrypFinanFinal),
+        $('#HFRutaFinanFinal').val(data.rutaFinanFinal),
+
+        $('#HREncrypTecnicoParcial').val(data.encrypTecnicoParcial),
+        $('#HFRutaTecnicoParcial').val(data.rutaTecnicoParcial),
+
+        $('#HFEncrypTecnicoFinal').val(data.encrypTecnicoFinal),
+        $('#HFRutaTecnicoFinal').val(data.rutaTecnicoFinal)
     }
 
 

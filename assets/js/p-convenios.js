@@ -583,7 +583,7 @@ function loadData(data) {
     // const day = today.getDate()
 
     // Creating a new Date (with the delta)
-    $('#HFCommandName').val('EDITAR');
+    // $('#HFCommandName').val('EDITAR');
     $('#HFIdConvenio').val(data.idConvenio);
     $('#txtNombre').val(data.nombre);
     $('#txtDescripcion').val(data.descripcion);
@@ -625,6 +625,10 @@ function loadData(data) {
         const dateFinal = new Date(data.fechaFin);
         const _fechaFin = new Date(dateFinal.getFullYear(), dateFinal.getMonth(), dateFinal.getDate() + 1);
         $('#divFechaFin').calendar('set date', _fechaFin.toDateString(), updateInput = true, fireChange = true);
+    }
+    if ($('#HFCommandName').val() == "EDITAR" && data.encrypArchivo !== "") {
+        $('#HFEncrypArchivo').val(data.encrypArchivo),
+        $('#HFRutaArchivo').val(data.rutaArchivo)
     }
     // $('#formConvenios :input")').addClass("edited");
 }
