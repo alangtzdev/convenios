@@ -16,8 +16,8 @@ class ContratosModel extends Conexion
             isProductosEntregables, isInformesFinancieros, isInformesTecnicos, isAuditoriaExterna,
             encrypArchivo, rutaArchivo, encrypFinanParcial, rutaFinanParcial, encrypFinanFinal, rutaFinanFinal, encrypTecnicoParcial,
             rutaTecnicoParcial, encrypTecnicoFinal, rutaTecnicoFinal, i.nombre as contraparte, cat.nombre as tipoConvenio FROM $table as c
-            INNER JOIN $instituciones  as i on idInstitucion = c.idContraparte
-            INNER JOIN $catalogos as cat on idCatalogo = c.idTipoConvenio");
+            LEFT JOIN $instituciones  as i on idInstitucion = c.idContraparte
+            LEFT JOIN $catalogos as cat on idCatalogo = c.idTipoConvenio");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -54,8 +54,8 @@ class ContratosModel extends Conexion
                     'rutaTecnicoParcial' => $row['rutaTecnicoParcial'] == null ? "" : $row['rutaTecnicoParcial'],
                     'encrypTecnicoFinal' => $row['encrypTecnicoFinal'] == null ? "" : $row['encrypTecnicoFinal'],
                     'rutaTecnicoFinal' => $row['rutaTecnicoFinal'] == null ? "" : $row['rutaTecnicoFinal'],
-                    'contraparte' => $row['contraparte'],
-                    'tipoConvenio' => $row['tipoConvenio'] );
+                    'contraparte' => $row['contraparte'] == null ? "Sin asignar" : $row['contraparte'],
+                    'tipoConvenio' => $row['tipoConvenio'] == null ? "Sin asignar" : $row['tipoConvenio'] );
             }
             
             return $arrayResult;
@@ -72,7 +72,7 @@ class ContratosModel extends Conexion
 
          $isIndefinida = $arrDatos['isIndefinida'] == true ? 1 : 0;
          $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
-         $fechaFin = $arrDatos['fechaFin'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
+         $fechaFin = $arrDatos['fechaFin'] != "" ? ($arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin']))) : null; 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idContrato'] == "") {
 
              $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,

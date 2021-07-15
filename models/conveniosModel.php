@@ -19,8 +19,8 @@ class ConveniosModel extends Conexion
             isAccesoBiblioteca, isEstServicioSocial , isDesarrolloProyectos, isCoedicionLibros,
              isCostosInstitucionales, isInformeAvance, encrypArchivo, rutaArchivo, i.nombre as contraparte, cat.nombre as tipoConvenio
               FROM $table as c
-             INNER JOIN $instituciones  as i on idInstitucion = c.idContraparte
-             INNER JOIN $catalogos as cat on idCatalogo = c.idTipoConvenio");
+             LEFT JOIN $instituciones  as i on idInstitucion = c.idContraparte
+             LEFT JOIN $catalogos as cat on idCatalogo = c.idTipoConvenio");
             $stmt->execute();
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -51,8 +51,8 @@ class ConveniosModel extends Conexion
                     'isInformeAvance' => $row['isInformeAvance'] == 0 ? false : true,
                     'encrypArchivo' => $row['encrypArchivo'] == null ? "" :  $row['encrypArchivo'],
                     'rutaArchivo' => $row['rutaArchivo'] == null ? "" :  $row['rutaArchivo'],
-                    'contraparte' => $row['contraparte'],
-                    'tipoConvenio' => $row['tipoConvenio']              
+                    'contraparte' => $row['contraparte']  == null ? "Sin asignar" :  $row['contraparte'],
+                    'tipoConvenio' => $row['tipoConvenio']  == null ? "Sin asignar" :  $row['tipoConvenio']             
                   );
             }
             
@@ -71,7 +71,7 @@ class ConveniosModel extends Conexion
          $isIndefinida = $arrDatos['isIndefinida'] == true ? 1 : 0;
 
          $fechaFirma = $arrDatos['fechaFirma'] != "" ? date("y-m-d", strtotime($arrDatos['fechaFirma'])) : null;
-         $fechaFin = $arrDatos['fechaFin'] != "" ? $arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin'])) : null; 
+         $fechaFin = $arrDatos['fechaFin'] != "" ? ($arrDatos['isIndefinida'] == true ? null : date("y-m-d", strtotime($arrDatos['fechaFin']))) : null; 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idConvenio'] == "") {
 
              $stmt = $cxn->prepare("INSERT INTO $table (nombre, descripcion, fechaCreacion, fechaFirma, fechaFin,
