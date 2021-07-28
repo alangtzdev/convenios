@@ -1,8 +1,8 @@
-<?php 
-    include 'include/header.php';
-    include 'include/top-menu.php'; 
-    include 'include/left-menu.php';
-     
+<?php
+include 'include/header.php';
+include 'include/top-menu.php';
+include 'include/left-menu.php';
+
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
@@ -19,7 +19,7 @@
                     <div class="ui fluid card">
                         <div class="content">
                             <div class="ui right floated header red">
-                            <i class="handshake icon"></i>
+                                <i class="handshake icon"></i>
                             </div>
                             <div class="header">
                                 <div class="ui red header" id="totalConvenios">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="extra content">
                             <div class="ui two buttons">
-                               <a  class="ui red button"href="index.php?ruta=convenios">Ir a convenios</a>
+                                <a class="ui red button" href="index.php?ruta=convenios">Ir a convenios</a>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                 Marco
                             </div>
                             <div class="description">
-                                Convenios de Marco 
+                                Convenios de Marco
                             </div>
                         </div>
                         <div class="extra content">
@@ -99,7 +99,7 @@
                                 Especificos
                             </div>
                             <div class="description">
-                              Convenios especificos
+                                Convenios especificos
                             </div>
                         </div>
                         <div class="extra content">
@@ -115,14 +115,14 @@
                     <div class="ui fluid card">
                         <div class="content">
                             <div class="ui right floated header red">
-                            <i class="handshake icon"></i>
+                                <i class="handshake icon"></i>
                             </div>
                             <div class="header">
                                 <div class="ui red header" id="totalContratos">
                                 </div>
                             </div>
                             <div class="meta">
-                                Total de Proy. financiados 
+                                Total de Proy. financiados
                             </div>
                             <div class="description">
                                 Proyectos financiados agregados hasta hoy!
@@ -130,7 +130,7 @@
                         </div>
                         <div class="extra content">
                             <div class="ui two buttons">
-                               <a  class="ui yellow button"href="index.php?ruta=convenios">Ir a Proyectos</a>
+                                <a class="ui yellow button" href="index.php?ruta=convenios">Ir a Proyectos</a>
                             </div>
                         </div>
                     </div>
@@ -145,10 +145,10 @@
                                 <div class="ui header green" id="txtPrivado"></div>
                             </div>
                             <div class="meta">
-                               Privado
+                                Privado
                             </div>
                             <div class="description">
-                            Proyectos financiados Privados
+                                Proyectos financiados Privados
                             </div>
                         </div>
                         <div class="extra content">
@@ -171,7 +171,7 @@
                                 Publico
                             </div>
                             <div class="description">
-                            Proyectos financiados Publicos
+                                Proyectos financiados Publicos
                             </div>
                         </div>
                         <div class="extra content">
@@ -194,7 +194,7 @@
                                 Social
                             </div>
                             <div class="description">
-                            Proyectos financiados Sociales
+                                Proyectos financiados Sociales
                             </div>
                         </div>
                         <div class="extra content">
@@ -206,6 +206,27 @@
                 </div>
             </div>
 
+    </div>
+
+    <div class="ui modal inicioMd">
+        <i class="close icon"></i>
+        <div class="ui center aligned header">
+            Atencion!
+        </div>
+        <div class="image content">
+            <div class="ui image">
+                <img src="assets/img/msjInicio.png">
+            </div>
+        </div>
+        <div class="actions">
+            <!-- <div class="ui black deny button">
+                Nope
+            </div> -->
+            <div class="ui positive right labeled icon button">
+                Enterado
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
     </div>
 
 

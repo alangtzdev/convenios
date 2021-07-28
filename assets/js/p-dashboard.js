@@ -1,6 +1,9 @@
 $(function () {
     getDatosConvenios();
     getDatosContratos();
+    $('.inicioMd')
+  .modal('show')
+;
 });
 function getDatosConvenios() {
     fetch('./api/dashboardApi.php',{
