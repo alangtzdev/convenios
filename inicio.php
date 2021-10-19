@@ -211,13 +211,24 @@ include 'include/left-menu.php';
     <div class="ui modal inicioMd">
         <i class="close icon"></i>
         <div class="ui center aligned header">
-            Atencion!
+            Atento aviso!
         </div>
-        <div class="image content">
-            <div class="ui image">
-                <img src="assets/img/msjInicio.png">
+        <div class="content" style="background: #235b4e;">
+            <div class="ui justified description" style="color: #fff;">
+                <p>El módulo tiene como propósito poner al alcance de los usuarios la información actualizada sobre los convenios de colaboración
+                    académica e interinstitucional, así como la información de contratos y los proyectos con financiamiento externo
+                    que se desarrollan en El Colegio de San Luis.
+                </p>
+                <p>Contiene información básica sobre instituciones participantes, tipo de convenio, fecha de firma, vigencia, versión PDF y en el caso de proyectos o contratos, se agrega el nombre del proyecto, información financiera, informes de avance y en su caso los informes técnicos que se presentan a lo largo del desarrollo del proyecto.</p>
+                <p>Por la naturaleza de la información que aquí se presenta, los usuarios tienen acceso al módulo para hacer las consultas correspondientes y en los casos que sea necesario el acceso para descargas e impresión de documentos, se requiere autorización expresa de la Secretaría General a través del administrador del módulo.
+                    La actualización, mantenimiento y operación de este módulo esta a cargo de los titulares de la Unidad Jurídica, del Responsable de Proyectos de la Dirección de Contabilidad y de la Unidad de Tecnologías de la Información y Comunicaciones.</p>
+                <p></p>
+            </div>
+            <div class="ui center aligned header" style="background: #235b4e; color:#fff">
+                Secretaria General
             </div>
         </div>
+
         <div class="actions">
             <!-- <div class="ui black deny button">
                 Nope
