@@ -11,7 +11,7 @@ class Conexion
               );
             $charset = 'utf8';  
 
-            $linkDb = new PDO("mysql:host=127.0.0.1:3306;dbname=conycon;charset=$charset", "akalep", "123kalep", $arrOptions);
+            $linkDb = new PDO("mysql:host=127.0.0.1:3308;dbname=conycon;charset=$charset", "akalep", "123kalep", $arrOptions);
 
             $linkDb->setAttribute(PDO::ATTR_ERRMODE,
                 PDO::ERRMODE_EXCEPTION);
