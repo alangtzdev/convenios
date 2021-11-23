@@ -3,8 +3,6 @@
     include 'include/top-menu.php'; 
     include 'include/left-menu.php'; 
 ?>
-<link rel="stylesheet" href="assets/plugins/datatable/jquery.dataTables.min.css">
-
 <!-- BEGIN CONTENT -->
 <!-- <div class="pusher"> -->
 <div id="app" class="ui basic segment">
@@ -23,7 +21,7 @@
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
-            <table id="tableContratos" class="table display responsive dt-responsive celled" cellspacing="0">
+            <table id="tableContratos" class="ui celled table" style="width:100%">
                 <thead>
                     <tr>
                         <th class="">Nombre</th>
@@ -390,7 +388,6 @@
 <!-- END CONTENT -->
 
 <?php include "include/footer.php"; ?>
-<script src="assets/plugins/datatable/jquery.dataTables.min.js"></script>
 <script src="assets/plugins/jquery.ui.widget.js"></script>
 <script src="assets/plugins/fileUpload/jquery.fileupload.js"></script>
 <script src="assets/js/p-contratos.js"></script>

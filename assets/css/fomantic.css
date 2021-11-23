@@ -22708,7 +22708,9 @@
 
  .ui.dividing.header {
      padding-bottom: .21428571rem;
-     border-bottom: 1px solid rgba(34, 36, 38, .15)
+     border-bottom: 1px solid rgba(34, 36, 38, .15);
+     background: #235b4e29;
+     border-radius: 12px;
  }
 
  .ui.dividing.header .sub.header {
@@ -43559,7 +43561,7 @@
 
  .ui.ui.inverted.red-colsan.menu,
  .ui.ui.ui.inverted.menu .red-colsan.active.item {
-     background-color: #8c1713
+     background-color: #235b4e  /*#8c1713*/
  }
  .ui.ui.inverted.red.menu,
  .ui.ui.ui.inverted.menu .red.active.item {

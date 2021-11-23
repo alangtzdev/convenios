@@ -16,7 +16,7 @@ include 'include/left-menu.php';
         <h2 class="ui dividing header">Dashboard</h4>
             <div class="ui grid stackable padded">
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid red card">
                         <div class="content">
                             <div class="ui right floated header red">
                                 <i class="handshake icon"></i>
@@ -27,21 +27,16 @@ include 'include/left-menu.php';
                                 </div>
                             </div>
                             <div class="meta">
-                                Total de convenios
+                                Total
                             </div>
                             <div class="description">
-                                Convenios agregados hasta el dia de hoy!
-                            </div>
-                        </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <a class="ui red button" href="index.php?ruta=convenios">Ir a convenios</a>
+                                Convenios hasta el dia de hoy
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid green card">
                         <div class="content">
                             <div class="ui right floated header green">
                                 <i class="icon clock"></i>
@@ -50,21 +45,16 @@ include 'include/left-menu.php';
                                 <div class="ui header green" id="txtColaboracion"></div>
                             </div>
                             <div class="meta">
-                                De colaboracion
+                                Total
                             </div>
                             <div class="description">
-                                Agregar o actulizar el tipo de convenio que sea de <strong>Colaboracion</strong>
-                            </div>
-                        </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui green button">More Info</div>
+                                Convenio que sea de colaboracion
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid teal card">
                         <div class="content">
                             <div class="ui right floated header teal">
                                 <i class="icon briefcase"></i>
@@ -73,21 +63,16 @@ include 'include/left-menu.php';
                                 <div class="ui teal header" id="txtMarco"></div>
                             </div>
                             <div class="meta">
-                                Marco
+                                Total
                             </div>
                             <div class="description">
                                 Convenios de Marco
                             </div>
                         </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui teal button">More Info</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid purple card">
                         <div class="content">
                             <div class="ui right floated header purple">
                                 <i class="icon trophy"></i>
@@ -96,15 +81,10 @@ include 'include/left-menu.php';
                                 <div class="ui purple header" id="txtEspecifico"></div>
                             </div>
                             <div class="meta">
-                                Especificos
+                                Total
                             </div>
                             <div class="description">
                                 Convenios especificos
-                            </div>
-                        </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui purple button">More Info</div>
                             </div>
                         </div>
                     </div>
@@ -112,31 +92,26 @@ include 'include/left-menu.php';
             </div>
             <div class="ui grid stackable padded">
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid yellow card">
                         <div class="content">
-                            <div class="ui right floated header red">
+                            <div class="ui right floated header yellow">
                                 <i class="handshake icon"></i>
                             </div>
                             <div class="header">
-                                <div class="ui red header" id="totalContratos">
+                                <div class="ui yellow header" id="totalContratos">
                                 </div>
                             </div>
                             <div class="meta">
-                                Total de Proy. financiados
+                                Total
                             </div>
                             <div class="description">
-                                Proyectos financiados agregados hasta hoy!
-                            </div>
-                        </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <a class="ui yellow button" href="index.php?ruta=convenios">Ir a Proyectos</a>
+                                Proyectos financiados agregados hasta el dia de hoy
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid green card">
                         <div class="content">
                             <div class="ui right floated header green">
                                 <i class="icon clock"></i>
@@ -145,21 +120,16 @@ include 'include/left-menu.php';
                                 <div class="ui header green" id="txtPrivado"></div>
                             </div>
                             <div class="meta">
-                                Privado
+                                Total
                             </div>
                             <div class="description">
                                 Proyectos financiados Privados
                             </div>
                         </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui green button"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid teal card">
                         <div class="content">
                             <div class="ui right floated header teal">
                                 <i class="icon briefcase"></i>
@@ -168,21 +138,16 @@ include 'include/left-menu.php';
                                 <div class="ui teal header" id="txtPublico"></div>
                             </div>
                             <div class="meta">
-                                Publico
+                                Total
                             </div>
                             <div class="description">
                                 Proyectos financiados Publicos
                             </div>
                         </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui teal button"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="four wide computer eight wide tablet sixteen wide mobile column">
-                    <div class="ui fluid card">
+                    <div class="ui fluid purple card">
                         <div class="content">
                             <div class="ui right floated header purple">
                                 <i class="icon trophy"></i>
@@ -191,15 +156,10 @@ include 'include/left-menu.php';
                                 <div class="ui purple header" id="txtSocial"></div>
                             </div>
                             <div class="meta">
-                                Social
+                                Total
                             </div>
                             <div class="description">
                                 Proyectos financiados Sociales
-                            </div>
-                        </div>
-                        <div class="extra content">
-                            <div class="ui two buttons">
-                                <div class="ui purple button"></div>
                             </div>
                         </div>
                     </div>
@@ -211,7 +171,6 @@ include 'include/left-menu.php';
     <div class="ui modal inicioMd">
         <i class="close icon"></i>
         <div class="ui center aligned header">
-            Atento aviso!
         </div>
         <div class="content" style="background: #235b4e;">
             <div class="ui justified description" style="color: #fff;">

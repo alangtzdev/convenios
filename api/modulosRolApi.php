@@ -1,6 +1,8 @@
 <?php
 require "../models/modulosRolModel.php";
 
+
+
 class ModulosRolAPi
 {
     public static function getModulosRol($idRol){
