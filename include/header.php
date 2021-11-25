@@ -31,9 +31,11 @@ if(isset($_SESSION['actividad'])){
 
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.4/dist/semantic.min.css"> -->
     <link rel="stylesheet" type="text/css" href="./assets/css/fomantic.css">
+    <link rel="stylesheet" href="assets/plugins/dataTable/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatable/jquery.dataTable.Semanticui.min.css">
     <link rel="stylesheet" href="./assets/plugins/waitme/waitMe.css">
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/semantic.amazon.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../css/custom.css"> -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
 </head>
 
 <body id="root">

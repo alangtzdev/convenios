@@ -291,7 +291,7 @@ function getConvenios() {
                 data: response,
                 buttons: ['pdf'],
                 columnDefs: [
-                    { "bSortable": false, "aTargets": [4, 5] },
+                    { "bSortable": false, "aTargets": [5,6,7] },
                     {
                         className: "dt-center",
                         "targets": "_all"
@@ -306,7 +306,10 @@ function getConvenios() {
 
                     },
                     {
-                        data: "contraparte"
+                        data: "contraparte",
+                        mRender: function (data, type, full) {
+                            return '<div class="ui label"><i class="school icon"></i>' + data +'</div>'
+                          }
                     },
                     {
                         data: "fechaFirma"

@@ -4,7 +4,6 @@
     include 'include/left-menu.php'; 
 ?>
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"> -->
-<link rel="stylesheet" href="assets/plugins/datatable/jquery.dataTables.min.css">
 <!-- <link href="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"> -->
 
 <!-- BEGIN CONTENT -->
@@ -25,7 +24,7 @@
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
             <div class="ui hidden divider"></div>
-            <table id="tableConvenios" class="table display responsive dt-responsive celled" cellspacing="0">
+            <table id="tableConvenios" class="ui celled table" style="width:100%">
                 <!-- class="table table-striped table-hover dt-responsive table-condensed display compact" cellspacing="0"> -->
                 <thead class="table-title">
                     <tr>
@@ -313,7 +312,6 @@
 <!-- END CONTENT -->
 
 <?php include "include/footer.php"; ?>
-<script src="assets/plugins/datatable/jquery.dataTables.min.js"></script>
 <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script> -->
 <!-- <script src="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script> -->
 <script src="assets/plugins/jquery.ui.widget.js"></script>
