@@ -107,7 +107,7 @@ function mdAltaEdicion(command) {
                     $('.ui.calendar :input').attr('disabled', true);
                     $("#mdAltaEdicion :input").each(function(index) {
 
-                        $(this).attr('readonly', true);
+                        $(this).attr('disabled', true);
 
                     });
                 } else if (command == 'EDITAR') {
@@ -125,7 +125,7 @@ function mdAltaEdicion(command) {
                 $('.ui.form').form('reset');
                 $('.ui.form .field.error').removeClass("error");
                 $('.ui.form.error').removeClass("error");
-                $('.ui.form :input').attr('readonly', false);
+                $('.ui.form :input').attr('disabled', false);
                 $('.ui.dropdown.selection').removeClass('disabled');
                 $('.ui.calendar :input').attr('disabled', false);
             },
@@ -458,7 +458,7 @@ function loadData(data) {
     $('#idFinEspecificoMd').dropdown('set selected', data.idFinEspecifico);
     $('#idCondicionMd').dropdown('set selected', data.idEstatus);
     $('#idProgramaMd').dropdown('set selected', data.idPrograma);
-    $('#idContraparteMd').val(2);
+    $('#idContraparteMd').dropdown('set selected', data.idContraparte);
     $('#idAmbitoMd').dropdown('set selected', data.idAmbito);
     $('#idOrigenMd').dropdown('set selected', data.idOrigen);
     $('#idTipoConvenioMd').dropdown('set selected', data.idTipoConvenio);

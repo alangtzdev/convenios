@@ -39737,7 +39737,9 @@
  .ui.form .disabled.fields .field,
  .ui.form .field :disabled {
      pointer-events: none;
-     opacity: .45
+     opacity: .65;
+     color: #10a3a3;
+     background-color: #e1f7f7;
  }
 
  .ui.form .field.disabled>label,
@@ -52811,7 +52813,9 @@
  .ui.dropdown .menu>.disabled.item {
      cursor: default;
      pointer-events: none;
-     opacity: .45
+     opacity: .65;
+     color: #10a3a3;
+     background-color: #e1f7f7;
  }
 
  .ui.dropdown .menu {

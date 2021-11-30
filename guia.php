@@ -31,7 +31,7 @@
                 <i class="right chevron icon divider"></i>
                 <a class="section">Usuarios</a>
                 <i class="right chevron icon divider"></i>
-                <div class="active section"><i class="fa fa-plus"> </i><a class="section" href="usuarios.php"> Nuevo usuario</a></div>
+                <div class="active section"><i class="fa fa-plus"> </i><a class="section" href="?ruta=usuarios"> Nuevo usuario</a></div>
             </div>
             <!-- <h5 class="ui header"><i class="fa fa-school"> </i> Crear nueva contraparte</h5> -->
             <h2 class="ui blue header">
@@ -44,7 +44,7 @@
                 <i class="right chevron icon divider"></i>
                 <a class="section">Instituciones</a>
                 <i class="right chevron icon divider"></i>
-                <div class="active section"><i class="fa fa-plus"> </i><a class="section" href="instituciones.php"> Nueva Institucion</a></div>
+                <div class="active section"><i class="fa fa-plus"> </i><a class="section" href="?ruta=instituciones"> Nueva Institucion</a></div>
             </div>
             <!-- <h5 class="ui header"><i class="fa fa-book"> </i> Crear Nuevo: Programa, Origen, Ambito, etc.</h5> -->
             <h2 class="ui violet header">
@@ -57,7 +57,7 @@
                 <i class="right chevron icon divider"></i>
                 <a class="section">Catalogos</a>
                 <i class="right chevron icon divider"></i>
-                <div class="active section"><i class="fa fa-plus"> </i><a class="section" href="catalogos.php"> Nuevo Catalogo</a></div>
+                <div class="active section"><i class="fa fa-plus"> </i><a class="section" href="?ruta=catalogos"> Nuevo Catalogo</a></div>
             </div>
             <!-- <h5 class="ui header"><i class="fa fa-bookmark"> </i> Crear Nueva Categoria</h5> -->
             <h2 class="ui purple header">

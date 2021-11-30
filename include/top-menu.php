@@ -7,7 +7,7 @@
         </div>
     </div>
     <a class="item<?php if(isset($_GET["ruta"]) &&  $_GET["ruta"] == "guia") { echo " active"; } else { " "; } ?>"
-        href="index.php?ruta=guia">Guia Rapida</a>
+        href="?ruta=guia">Guia Rapida</a>
     <div class="right menu">
         <div class="header item">
             <i class="fas fa-graduation-cap fa-lg"></i> &nbsp; Contratos & Convenios

@@ -188,7 +188,7 @@ function mdAltaEdicion(command) {
                     $('.ui.dropdown.selection').addClass('disabled');
                     $('.ui.calendar :input').attr('disabled', true);
                     $("#mdAltaEdicion :input").each(function(index) {
-                        $(this).attr('readonly', true);
+                        $(this).attr('disabled', true);
 
                         // $(this).parent('div').removeClass('has-error');
                         // $('span.help-block-error').remove();
@@ -210,23 +210,23 @@ function mdAltaEdicion(command) {
 
 
                 // var button = $(event.relatedTarget)
-                // var isReadonly = (button.data('command') == "CONSULTA");
+                // var isdisabled = (button.data('command') == "CONSULTA");
                 // var isEdit = (button.data('command') == "EDITAR");
                 // if (event.target.tagName != "INPUT") {
                 //     $('#HFCommandName').val(button.data('command'));
 
                 // }
                 // $("#mdAltaEdicion :input").each(function (index) {
-                //     $(this).attr('readonly', isReadonly);
+                //     $(this).attr('disabled', isdisabled);
                 //     $(this).parent('div').removeClass('has-error');
                 //     $('span.help-block-error').remove();
                 //     $('div.progress').hide();
                 //     $(this).parent('div').removeClass('progress');
-                //     $('#dateCaducidadCirculacion').prop('disabled', isReadonly);
+                //     $('#dateCaducidadCirculacion').prop('disabled', isdisabled);
                 //     //limpiaCamposArchivos();
                 // });
 
-                // if (isReadonly) {
+                // if (isdisabled) {
 
                 // }
                 // else {
@@ -238,7 +238,7 @@ function mdAltaEdicion(command) {
                 //     $('div.progress').show();
                 //     $('#divBody a').hide();
                 // }
-                // if (isReadonly || isEdit) {
+                // if (isdisabled || isEdit) {
                 //     $('#divBody a').show();
                 // }
 
@@ -252,7 +252,7 @@ function mdAltaEdicion(command) {
                 //Resets form error messages
                 $('.ui.form .field.error').removeClass("error");
                 $('.ui.form.error').removeClass("error");
-                $('.ui.form :input').attr('readonly', false);
+                $('.ui.form :input').attr('disabled', false);
                 $('.ui.dropdown.selection').removeClass('disabled');
                 $('.ui.calendar :input').attr('disabled', false);
             },
@@ -594,7 +594,7 @@ function loadData(data) {
     $('#idFinEspecificoMd').dropdown('set selected', data.idFinEspecifico);
     $('#idCondicionMd').dropdown('set selected', data.idEstatus);
     $('#idProgramaMd').dropdown('set selected', data.idPrograma);
-    $('#idContraparteMd').dropdown('set selected', 2);
+    $('#idContraparteMd').dropdown('set selected', data.idContraparte);
     $('#idAmbitoMd').dropdown('set selected', data.idAmbito);
     $('#idOrigenMd').dropdown('set selected', data.idOrigen);
     $('#idTipoConvenioMd').dropdown('set selected', data.idTipoConvenio);
