@@ -72,6 +72,10 @@ $(function() {
 
 
     } );
+    $('#tableContratos').on( 'search.dt', function () {
+        let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+        crearAcciones(idModulo_Rol);
+    } );
 
 });
 
