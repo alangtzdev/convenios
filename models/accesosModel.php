@@ -48,7 +48,7 @@ class AccesosModel extends Conexion
             if (!empty($arrayResult)) {
                 return $arrayResult;
             } else {
-                throw new Exception("No se pudieron obterner los datos");
+                return $arrayResult;
             }
         } catch (Throwable $th) {
             return $th->getMessage();

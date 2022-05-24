@@ -4,6 +4,7 @@ $(function() {
     getPaises();
     getResponsables();
     getContraparte();
+    let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
     
         // getResponsables();
         //   $('#example5').progress();
@@ -121,11 +122,9 @@ $(function() {
     //   }
     // });
     $('#tableConvenios').on('page.dt', function () {
-        let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
         crearAcciones(idModulo_Rol);
     } );
     $('#tableConvenios').on('search.dt', function () {
-        let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
         crearAcciones(idModulo_Rol);
     } );
 

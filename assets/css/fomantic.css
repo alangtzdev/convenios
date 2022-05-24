@@ -31787,7 +31787,7 @@
 
  .ui.disabled.input,
  .ui.input:not(.disabled) input[disabled] {
-     opacity: .45
+     opacity: .85
  }
 
  .ui.disabled.input>input,
@@ -39736,9 +39736,10 @@
  .ui.form .disabled.field,
  .ui.form .disabled.fields .field,
  .ui.form .field :disabled {
+     font-weight: bold;
      pointer-events: none;
-     opacity: .65;
-     color: #10a3a3;
+     opacity: .95;
+     color: #023c3c;
      background-color: #e1f7f7;
  }
 
@@ -52811,11 +52812,13 @@
 
  .ui.disabled.dropdown,
  .ui.dropdown .menu>.disabled.item {
+     font-weight: bold;
      cursor: default;
      pointer-events: none;
-     opacity: .65;
-     color: #10a3a3;
+     opacity: .95;
+     color: #023c3c;
      background-color: #e1f7f7;
+
  }
 
  .ui.dropdown .menu {
@@ -57626,7 +57629,7 @@
  .ui.disabled.search {
      cursor: default;
      pointer-events: none;
-     opacity: .45
+     opacity: .85
  }
 
  .ui.search.selection .prompt {
