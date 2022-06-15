@@ -242,6 +242,17 @@ function getModulos() {
           var ok = $(htmlDiv).appendTo($newDiv);
           $('#divModulosxRol2').html($('#divModulosxRol2').html() + htmlDiv);
         }
+        if (i > 11 && i <= 15) {
+          let htmlDiv = '';
+          htmlDiv = '<div class="four wide field">' +
+            '<div class="ui toggle checkbox">' +
+            '<input type="checkbox" value="' + value.idmodulo + '"  name="modulos">' +
+            '<label>' + value.nombre + '</label>' +
+            '</div>' +
+            '</div>';
+          var ok = $(htmlDiv).appendTo($newDiv);
+          $('#divModulosxRol3').html($('#divModulosxRol3').html() + htmlDiv);
+        }
       });
 
     }).catch(e => { });

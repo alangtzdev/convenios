@@ -176,6 +176,7 @@ function loadData(data) {
     $('#idRolMd').dropdown('set selected',data.idRol);
     $('#txtCorreo').val(data.correo);
     $('#txtUsuario').val(data.usuario);
+    $('#txtPw').val(data.pw)
     if(data.isResponsable) { $('#chkIsResp').prop('checked', true); }
 
 }
@@ -191,6 +192,7 @@ function saveUsuario() {
     idRol: $('#idRolMd').val(),
     correo: $('#txtCorreo').val(),
     usuario: $('#txtUsuario').val(),
+    pw: $('#txtPw').val(),
     isResponsable: $('#chkIsResp').is(':checked') == true ? 1 : 0 , 
   };
 fetch('./api/usuariosApi.php', {

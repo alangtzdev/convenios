@@ -183,11 +183,11 @@ function saveModulo() {
     HFCommandName: $('#HFCommandName').val(),
     idModulo: idModulo,
     nombre: $('#txtNombre').val(),
-    apellido: $('#txtApellido').val(),
-    idRol: $('#idRolMd').val(),
-    correo: $('#txtCorreo').val(),
-    usuario: $('#txtModulo').val(),
-    isResponsable: $('#chkIsResp').is(':checked') == true ? 1 : 0 , 
+    modulo: $('#txtIndice').val(),
+    // idRol: $('#idRolMd').val(),
+    // correo: $('#txtCorreo').val(),
+    // usuario: $('#txtModulo').val(),
+    // isResponsable: $('#chkIsResp').is(':checked') == true ? 1 : 0 , 
   };
 fetch('./api/modulosApi.php', {
   method: "POST",

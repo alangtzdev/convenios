@@ -6,8 +6,8 @@
         <div id="subMenuA" class="menu">
         </div>
     </div>
-    <a class="item<?php if(isset($_GET["ruta"]) &&  $_GET["ruta"] == "guia") { echo " active"; } else { " "; } ?>"
-        href="?ruta=guia">Guia Rapida</a>
+    <!-- <a class="item<?php if(isset($_GET["ruta"]) &&  $_GET["ruta"] == "guia") { echo " active"; } else { " "; } ?>"
+        href="?ruta=guia">Guia Rapida</a> -->
     <div class="right menu">
         <div class="header item">
             <i class="fas fa-graduation-cap fa-lg"></i> &nbsp; Contratos & Convenios

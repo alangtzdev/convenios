@@ -111,6 +111,7 @@ class UsuariosModel extends Conexion
                         'isResponsable' => $row['isResponsable'] == null ?  "" : $row['isResponsable'],
                         'usuario' => $row['usuario'] == null ?  "" : $row['usuario'],
                         'rol' => $row['rol'] == null ?  "" : $row['rol'],
+                        'idRol' => $row['idRol'] == null ?  "" : $row['idRol']
                     );
                 }
                 // $arrayResult = $stmt->fetchAll();
@@ -169,13 +170,14 @@ class UsuariosModel extends Conexion
                 //  if (pregmatch('/^[a-zA-ZáeíóúÁÉÍÓÚ ]+$/', $arrDatos['nombre'])) {
                 //      # code...
                 //  }
-                $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, apellido, correo, usuario, isResponsable, idRol) 
-             VALUES (:nombre, :apellido, :correo, :usuario, :isResponsable, :idRol)");
+                $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, apellido, correo, usuario, contrasenia, isResponsable, idRol) 
+             VALUES (:nombre, :apellido, :correo, :usuario, :contrasenia, :isResponsable, :idRol)");
                 $stmt->bindParam(":nombre", $arrDatos['nombre'], PDO::PARAM_STR);
                 $stmt->bindParam(":apellido", $arrDatos['apellido'], PDO::PARAM_STR);
                  $stmt->bindParam(":idRol", $arrDatos['idRol'], PDO::PARAM_INT);
                  $stmt->bindParam(":correo", $arrDatos['correo'], PDO::PARAM_STR);
                  $stmt->bindParam(":usuario", $arrDatos['usuario'], PDO::PARAM_STR);
+                 $stmt->bindParam(":contrasenia", $arrDatos['pw'], PDO::PARAM_STR);
                  $stmt->bindParam(":isResponsable", $arrDatos['isResponsable'], PDO::PARAM_BOOL);
                 if ($stmt->execute()) {
                     return "success";
@@ -187,7 +189,7 @@ class UsuariosModel extends Conexion
             } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idUsuario'] != "") {
 
                 $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, apellido = :apellido,
-                correo = :correo, usuario = :usuario, isResponsable = :isResponsable, idRol = :idRol 
+                correo = :correo, usuario = :usuario, contrasenia = :contrasenia, isResponsable = :isResponsable, idRol = :idRol 
             WHERE idUsuario = :idUsuario");
 
                 $stmt->bindParam(":idUsuario", $arrDatos['idUsuario'], PDO::PARAM_INT);
@@ -196,6 +198,7 @@ class UsuariosModel extends Conexion
                 $stmt->bindParam(":idRol", $arrDatos['idRol'], PDO::PARAM_INT);
                 $stmt->bindParam(":correo", $arrDatos['correo'], PDO::PARAM_STR);
                 $stmt->bindParam(":usuario", $arrDatos['usuario'], PDO::PARAM_STR);
+                $stmt->bindParam(":contrasenia", $arrDatos['pw'], PDO::PARAM_STR);
                 $stmt->bindParam(":isResponsable", $arrDatos['isResponsable'], PDO::PARAM_BOOL);
                 if ($stmt->execute()) {
                     return "success";

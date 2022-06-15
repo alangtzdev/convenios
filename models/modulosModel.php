@@ -26,10 +26,10 @@ class ModulosModel extends Conexion
          $today = date("Y-m-d H:i:s");
 
          if ($arrDatos['HFCommandName'] == 'ALTA' && $arrDatos['idModulo'] == "") {
-             $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, abreviacion) 
-             VALUES (:nombre, :abreviacion)");
+             $stmt = Conexion::conectar()->prepare("INSERT INTO $table (nombre, modulo) 
+             VALUES (:nombre, :modulo)");
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
-            $stmt->bindParam(":abreviacion",$arrDatos['abreviacion'], PDO::PARAM_STR);
+            $stmt->bindParam(":modulo",$arrDatos['modulo'], PDO::PARAM_STR);
             if ($stmt->execute()) {
                return "success";
            } else {
@@ -38,16 +38,16 @@ class ModulosModel extends Conexion
            $stmt->close();
          } else if ($arrDatos['HFCommandName'] == 'EDITAR' && $arrDatos['idModulo'] != ""){
 
-            $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, abreviacion = :abreviacion 
+            $stmt = Conexion::conectar()->prepare("UPDATE  $table SET nombre = :nombre, modulo = :modulo 
             WHERE idModulo = :idModulo");
 
             $stmt->bindParam(":idModulo", $arrDatos['idModulo'], PDO::PARAM_INT);
             $stmt->bindParam(":nombre",$arrDatos['nombre'], PDO::PARAM_STR);
-            $stmt->bindParam(":abreviacion",$arrDatos['abreviacion'], PDO::PARAM_STR);
+            $stmt->bindParam(":modulo",$arrDatos['modulo'], PDO::PARAM_STR);
             if ($stmt->execute()) {
                 return "success";
             } else {
-                return "Hubo un error al editar la institucion" .nombre;
+                return "Hubo un error al editar el Modulo" .$arrDatos['nombre'];
             }
             $stmt->close();
          } else {

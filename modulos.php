@@ -54,18 +54,18 @@
                                 </div>
                                 <div class="four wide field">
                                     <label>Indice</label>
-                                    <input type="text" id="txtApellido" name="apellido"
-                                        placeholder="Apellidos">
+                                    <input type="text" id="txtIndice" name="indice"
+                                        placeholder="Ejemplo: modulo +.php">
                                 </div>
                                 <div class="four wide field">
                                     <label>Ruta</label>
-                                    <input type="text" id="txtApellido" name="apellido"
-                                        placeholder="Apellidos">
+                                    <input type="text" id="txtApellido" name="ruta"
+                                        placeholder="ruta del modulo">
                                 </div>
                                 <div class="four wide field">
                                     <label>Icono</label>
-                                    <input type="text" id="txtApellido" name="apellido"
-                                        placeholder="Apellidos">
+                                    <input type="text" id="txtIcono" name="ruta"
+                                        placeholder="Ejemplo: fa-fa-plus">
                                 </div>
                             </div>
                         </div>

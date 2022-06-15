@@ -64,13 +64,17 @@
                                 </div>
                             </div>
                             <div class="fields">
-                                <div class="six wide field">
+                                <div class="four wide field">
                                     <label for="">Correo</label>
                                     <input type="text" id="txtCorreo" name="correo">
                                 </div>
-                                <div class="six wide field">
+                                <div class="four wide field">
                                     <label for="">Usuario</label>
                                     <input type="text" id="txtUsuario" name="usuario">
+                                </div>
+                                <div class="four wide field">
+                                    <label for="">contraseña provisional</label>
+                                    <input type="text" id="txtPw" name="password">
                                 </div>
                                 <div class="four wide field">
                                     <label for="">Es usario responsable</label>
