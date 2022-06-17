@@ -1,6 +1,6 @@
 <div id="divMenuA" class="ui red-colsan inverted top fixed menu">
     <a class="item pizzabars"><i class="fas fa-bars"></i>&nbsp;Menu</a>
-    <span class="item"><img src="/img/Logo.png"></span>
+    <span class="item"><img src="assets/img/logoicon.png"></span>
     <div id="perra" class="ui dropdown item">
         Administracion <i class="dropdown icon"></i>
         <div id="subMenuA" class="menu">

@@ -278,6 +278,7 @@ function subir(id) {
 function getConvenios() {
     waitMeShow('#idDivBody');
     var params = { idUsuario: 1 };
+    let idModulo_Rol = $('#divMenuA').find(".active").data("value");
     $.ajax({
         type: "POST",
         url: "./api/conveniosApi.php",
@@ -361,7 +362,7 @@ function getConvenios() {
             // swal("Cancelled", dataError + " !", "error");
         }
     });
-    let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+    
     crearAcciones(idModulo_Rol);
 }
 

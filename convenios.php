@@ -316,4 +316,4 @@
 <!-- <script src="assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script> -->
 <script src="assets/plugins/jquery.ui.widget.js"></script>
 <script src="assets/plugins/fileUpload/jquery.fileupload.js"></script>
-<script src="assets/js/p-convenios.js"></script>
+<script src="assets/js/p-convenios.js?v=1.0.1"></script>

@@ -16,7 +16,7 @@ class AccesosModel extends Conexion
             INNER JOIN modulos_rol as mr on mr.idModulo_Rol = a.idModulo_Rol
             INNER JOIN modulos as m on m.idModulo = mr.idModulo
             LEFT JOIN permisos_acceso as pa on pa.idAcceso = a.idAcceso
-            LEFT JOIN permisos as p on p.idPermiso = pa.idPermiso group by modulo");
+            LEFT JOIN permisos as p on p.idPermiso = pa.idPermiso group by idAcceso");
             if ($stmt->execute()) {
                 $arrayResult = $stmt->fetchAll();
                 if (is_array($arrayResult)) {

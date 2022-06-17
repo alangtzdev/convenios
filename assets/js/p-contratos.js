@@ -5,7 +5,7 @@ $(function() {
     getPaises();
     getResponsables();
     getContraparte();
-
+    let idModulo_Rol = $('#divMenuA').find(".active").data("value");
 
     $("#txtFinaciamiento").on({
         "keyup": function(event) {
@@ -67,14 +67,14 @@ $(function() {
     $('#divFechaFin :input').attr('disabled', false);
 
     $('#tableContratos').on('page.dt', function () {
-        let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+        
         crearAcciones(idModulo_Rol);
-
 
     } );
     $('#tableContratos').on( 'search.dt', function () {
-        let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
+
         crearAcciones(idModulo_Rol);
+
     } );
 
 });
@@ -155,6 +155,7 @@ function subir(id) {
 function getContratos() {
     waitMeShow('#idDivBody');
     var params = { idUsuario: 1 };
+    let idModulo_Rol = $('#divMenuA').find(".active").data("value");
     $.ajax({
         type: "POST",
         url: "./api/contratosApi.php",
@@ -255,7 +256,6 @@ function getContratos() {
         }
     });
 
-    let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
     crearAcciones(idModulo_Rol);
 }
 
