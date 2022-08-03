@@ -38,7 +38,7 @@ if(isset($request["getAccesos"])){
 } else if (isset($request["getAccesosModuloRol"])){
 
     $a = new AccesosApi ();
-    $a -> getAccesosModuloRol($request['getAccesosModuloRol']['idModulo_Rol']);
+    $a -> getAccesosModuloRol($request["getAccesosModuloRol"]["idModulo_Rol"]);
     // var_dump($request["getAccesos"]);
 
 }  else if (isset($request["saveAcceso"])) {

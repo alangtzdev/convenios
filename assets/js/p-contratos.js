@@ -68,12 +68,12 @@ $(function() {
 
     $('#tableContratos').on('page.dt', function () {
         
-        crearAcciones(idModulo_Rol);
+        crearAcciones($('#divMenuA').find(".active").data("value"));
 
     } );
     $('#tableContratos').on( 'search.dt', function () {
 
-        crearAcciones(idModulo_Rol);
+        crearAcciones($('#divMenuA').find(".active").data("value"));
 
     } );
 

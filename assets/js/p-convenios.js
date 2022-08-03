@@ -122,10 +122,10 @@ $(function() {
     //   }
     // });
     $('#tableConvenios').on('page.dt', function () {
-        crearAcciones(idModulo_Rol);
+        crearAcciones($('#divMenuA').find(".active").data("value"));
     } );
     $('#tableConvenios').on('search.dt', function () {
-        crearAcciones(idModulo_Rol);
+        crearAcciones($('#divMenuA').find(".active").data("value"));
     } );
 
 });

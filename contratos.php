@@ -390,4 +390,4 @@
 <?php include "include/footer.php"; ?>
 <script src="assets/plugins/jquery.ui.widget.js"></script>
 <script src="assets/plugins/fileUpload/jquery.fileupload.js"></script>
-<script src="assets/js/p-contratos.js?v=1.0.1"></script>
+<script src="assets/js/p-contratos.js?v=1.0.2"></script>
