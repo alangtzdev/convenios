@@ -341,7 +341,7 @@ function getConvenios() {
                     },
                     {
                         mRender: function(data, type, full) {
-                            return "<button id='btnEditar' type='button' class='ui violet icon button btnEditar' data-command='EDITAR' disabled/><i class='fa fa-pencil'></i></button>";
+                            return "<button id='btnEditar' type='button' class='ui violet icon button btnEditar' data-command='EDITAR' disabled/><i class='fa fa-pencil-alt'></i></button>";
                         },
                         width: "8%",
                     },

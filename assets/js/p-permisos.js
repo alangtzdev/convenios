@@ -124,7 +124,7 @@ function getPermisos() {
                     },
                     {
                         mRender: function (data, type, full) {
-                            return "<button id='editar' type='button' class='ui violet icon button' data-command='EDITAR'/><i class='fa fa-pencil'></i></button>";
+                            return "<button id='editar' type='button' class='ui violet icon button' data-command='EDITAR'/><i class='fa fa-pencil-alt'></i></button>";
                         },
                         width: "8%",
                     },
