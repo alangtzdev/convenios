@@ -5,30 +5,30 @@ $(function() {
     getResponsables();
     getContraparte();
     let idModulo_Rol = parseInt(Cookies.get('idModulo_Rol'));
-    
-        // getResponsables();
-        //   $('#example5').progress();
-        //   $('#aver')
-        //   .on('click', function() {
-        //     var
-        //       $progress       = $('indicating progress.ui.progress'),
-        //       $button         = $(this),
-        //       updateEvent
-        //     ;
-        //     // restart to zero
-        //     clearInterval(window.fakeProgress)
-        //     $progress.progress('reset');
-        //      // updates every 10ms until complete
-        //     window.fakeProgress = setInterval(function() {
-        //       $progress.progress('increment');
-        //       $button.text( $progress.progress('get value') );
-        //       // stop incrementing when complete
-        //       if($progress.progress('is complete')) {
-        //         clearInterval(window.fakeProgress)
-        //       }
-        //     }, 10);
-        //   })
-        // ;
+
+    // getResponsables();
+    //   $('#example5').progress();
+    //   $('#aver')
+    //   .on('click', function() {
+    //     var
+    //       $progress       = $('indicating progress.ui.progress'),
+    //       $button         = $(this),
+    //       updateEvent
+    //     ;
+    //     // restart to zero
+    //     clearInterval(window.fakeProgress)
+    //     $progress.progress('reset');
+    //      // updates every 10ms until complete
+    //     window.fakeProgress = setInterval(function() {
+    //       $progress.progress('increment');
+    //       $button.text( $progress.progress('get value') );
+    //       // stop incrementing when complete
+    //       if($progress.progress('is complete')) {
+    //         clearInterval(window.fakeProgress)
+    //       }
+    //     }, 10);
+    //   })
+    // ;
     $("#txtFinaciamiento").on({
         "keyup": function(event) {
             $(event.target).val(function(index, value) {
@@ -37,7 +37,7 @@ $(function() {
             });
         }
     });
-    // $('#txtFinaciamiento').on('change', function () {
+    // $('#txtFinaciamiento').on('change', function() {
     //   this.value = maskDinero(unmaskDinero(this.value));
     // });
 
@@ -95,25 +95,25 @@ $(function() {
     //   acceptFileTypes: /(\.|\/)(jpe?g|png)$/i,
     //   previewMaxWidth: 100,
     //   previewMaxHeight: 100,
-    //   success: function (response, status, e, data) {
+    //   success: function(response, status, e, data) {
     //     Toast.fire({
     //       type: 'success',
     //       title: "Imagen cargada correctamente."
     //     });
     //   },
-    //   error: function (e, data) {
+    //   error: function(e, data) {
     //     Toast.fire({
     //       type: 'warning',
     //       title: "Error al cargar la imagen."
     //     });
     //     limpiaImagen();
     //   },
-    //   done: function (e, data) {
+    //   done: function(e, data) {
     //     $('#imgEmpleado').prop('src', data.result);
     //     $('#imgEmpleado').data('image', 'profile');
     //     $('#imgEmpleado').height(127);
     //   },
-    //   progressall: function (e, data) {
+    //   progressall: function(e, data) {
     //     var progress = parseInt(data.loaded / data.total * 100, 10);
     //     // var progress = parseInt(data.loaded / data.total * 100, 10);
     //     $($(this).data('idprogress')).progress({
@@ -121,12 +121,12 @@ $(function() {
     //     });
     //   }
     // });
-    $('#tableConvenios').on('page.dt', function () {
+    $('#tableConvenios').on('page.dt', function() {
         crearAcciones($('#divMenuA').find(".active").data("value"));
-    } );
-    $('#tableConvenios').on('search.dt', function () {
+    });
+    $('#tableConvenios').on('search.dt', function() {
         crearAcciones($('#divMenuA').find(".active").data("value"));
-    } );
+    });
 
 });
 
@@ -147,7 +147,7 @@ function mdAltaEdicion(command) {
                     type: 'date',
                     startMode: 'year',
                     //   formatter: {
-                    //     date: function (date, settings) {
+                    //     date: function(date, settings) {
                     //         if (!date) return '';
                     //         var day = date.getDate() + '';
                     //         if (day.length < 2) {
@@ -183,7 +183,7 @@ function mdAltaEdicion(command) {
                     $('#txtTitle').text('CONSULTA');
                     $('#btnGuardar').hide();
                     $('#idArchivo').attr('disable', true);
-                    //   $("#mdAltaEdicion .dropdown").each(function (index) {
+                    //   $("#mdAltaEdicion .dropdown").each(function(index) {
                     //     $(this).attr('disabled', true); 
                     // });
                     $('.ui.dropdown.selection').addClass('disabled');
@@ -217,7 +217,7 @@ function mdAltaEdicion(command) {
                 //     $('#HFCommandName').val(button.data('command'));
 
                 // }
-                // $("#mdAltaEdicion :input").each(function (index) {
+                // $("#mdAltaEdicion :input").each(function(index) {
                 //     $(this).attr('disabled', isdisabled);
                 //     $(this).parent('div').removeClass('has-error');
                 //     $('span.help-block-error').remove();
@@ -291,68 +291,70 @@ function getConvenios() {
             $('#tableConvenios').DataTable({
                 language: { "url": "./assets/plugins/datatable/Spanish.json" },
                 data: response,
-                buttons: ['pdf'],
+                
+                buttons: ['excelHtml5'],
                 columnDefs: [
-                    { "bSortable": false, "aTargets": [5,6,7] },
+                    { "bSortable": false, "aTargets": [5, 6, 7] },
                     {
                         className: "dt-center",
                         "targets": "_all"
                     }
                 ],
                 columns: [{
-                        data: "nombre",
-                        mRender: function(data, type, full) {
-                            return '<a type="button" id="linkConvenio"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
-                        }
-
-
-                    },
-                    {
-                        data: "contraparte",
-                        mRender: function (data, type, full) {
-                            return '<div class="ui label"><i class="school icon"></i>' + data +'</div>'
-                          }
-                    },
-                    {
-                        data: "fechaFirma"
-                    },
-                    {
-                        mRender: function(data, type, full) {
-                            return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
-                        }
-                    },
-                    {
-                        data: "tipoConvenio",
-                        mRender: function(data, type, full) {
-                            return '<label class="ui ' + arrColor[full.tipoConvenio] + ' tag label"><strong>' + data + '</strong></label>';
-                        }
-                    },
-                    // {
-                    //   mRender: function (data, type, full) {
-                    //     return ((full.financiamiento).replace(/[^0-9.-]+/g, "").replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ","));
-                    //   }
-                    // },
-                    {
-                        mRender: function(data, type, full) {
-                            // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
-                            return (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'Sin archivo');
-                        },
-                        width: "8%",
-                    },
-                    {
-                        mRender: function(data, type, full) {
-                            return "<button id='btnEditar' type='button' class='ui violet icon button btnEditar' data-command='EDITAR' disabled/><i class='fa fa-pencil-alt'></i></button>";
-                        },
-                        width: "8%",
-                    },
-                    {
-                        mRender: function(data, type, full) {
-                            return '<button id="btnEliminar" data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button btnEliminar" onclick="deleteConvenio(' + full.idConvenio + ')" disabled/><i class="fa fa-trash"></i></button>';
-                        },
-                        width: "8%",
+                    data: "nombre",
+                    mRender: function(data, type, full) {
+                        return '<a type="button" id="linkConvenio"  href="#" data-command="CONSULTA" /><strong>' + data + '</strong></a>';
                     }
+
+
+                },
+                {
+                    data: "contraparte",
+                    mRender: function(data, type, full) {
+                        return '<div class="ui label"><i class="school icon"></i>' + data + '</div>'
+                    }
+                },
+                {
+                    data: "fechaFirma"
+                },
+                {
+                    mRender: function(data, type, full) {
+                        return full.isIndefinida == 0 ? full.fechaFin : "Indefinida";
+                    }
+                },
+                {
+                    data: "tipoConvenio",
+                    mRender: function(data, type, full) {
+                        return '<label class="ui ' + arrColor[full.tipoConvenio] + ' tag label"><strong>' + data + '</strong></label>';
+                    }
+                },
+                // {
+                //   mRender: function(data, type, full) {
+                //     return ((full.financiamiento).replace(/[^0-9.-]+/g, "").replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ","));
+                //   }
+                // },
+                {
+                    mRender: function(data, type, full) {
+                        // (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '"/><strong> ' + data + '</strong></a>' : '<label><strong> ' + data + '</strong></label>');
+                        return (full.rutaArchivo != "" ? '<a target="_blank"  href="' + full.rutaArchivo + '" type="button" class="ui teal icon button"/><i class="fa fa-file"></i></a>' : 'Sin archivo');
+                    },
+                    width: "8%",
+                },
+                {
+                    mRender: function(data, type, full) {
+                        return "<button id='btnEditar' type='button' class='ui violet icon button btnEditar' data-command='EDITAR' disabled/><i class='fa fa-pencil-alt'></i></button>";
+                    },
+                    width: "8%",
+                },
+                {
+                    mRender: function(data, type, full) {
+                        return '<button id="btnEliminar" data-toggle="tooltip" data-placement="left" title="Eliminar" type="button" class="ui red icon button btnEliminar" onclick="deleteConvenio(' + full.idConvenio + ')" disabled/><i class="fa fa-trash"></i></button>';
+                    },
+                    width: "8%",
+                }
                 ]
             });
+            table.buttons().container().appendTo($('div.eight.column:eq(0)', table.table().container()));
             waitMeHide('#idDivBody');
             //crearAcciones();
         },
@@ -362,16 +364,16 @@ function getConvenios() {
             // swal("Cancelled", dataError + " !", "error");
         }
     });
-    
+
     crearAcciones(idModulo_Rol);
 }
 
 function getCatalogos() {
     fetch('./api/catalogosApi.php', {
-            method: "POST",
-            body: JSON.stringify({ 'getCatalogos': { id: 1 } }),
-            dataType: "JSON"
-        })
+        method: "POST",
+        body: JSON.stringify({ 'getCatalogos': { id: 1 } }),
+        dataType: "JSON"
+    })
         .then(function(response) {
             return response.json();
         })
@@ -457,10 +459,10 @@ function getSubCatalogos(idArea, search, md) {
 
 function getPaises() {
     fetch('./api/paisesApi.php', {
-            method: "POST",
-            body: JSON.stringify({ 'getPaises': { id: 1 } }),
-            dataType: "JSON"
-        })
+        method: "POST",
+        body: JSON.stringify({ 'getPaises': { id: 1 } }),
+        dataType: "JSON"
+    })
         .then(function(response) {
             return response.json();
         })
@@ -481,10 +483,10 @@ function getPaises() {
 
 function getResponsables() {
     fetch('./api/usuariosApi.php', {
-            method: "POST",
-            body: JSON.stringify({ 'getUsuarios': { id: 1 } }),
-            dataType: "JSON"
-        })
+        method: "POST",
+        body: JSON.stringify({ 'getUsuarios': { id: 1 } }),
+        dataType: "JSON"
+    })
         .then(function(response) {
             return response.json();
         })
@@ -504,10 +506,10 @@ function getResponsables() {
 
 function getContraparte() {
     fetch('./api/institucionesApi.php', {
-            method: "POST",
-            body: JSON.stringify({ 'getInstituciones': {} }),
-            dataType: "JSON"
-        })
+        method: "POST",
+        body: JSON.stringify({ 'getInstituciones': {} }),
+        dataType: "JSON"
+    })
         .then(function(response) {
             return response.json();
         })
@@ -557,10 +559,10 @@ function saveConvenio() {
         rutaArchivo: $('#HFRutaArchivo').val()
     };
     fetch('./api/conveniosApi.php', {
-            method: "POST",
-            body: JSON.stringify({ 'saveConvenio': params }),
-            dataType: "JSON"
-        })
+        method: "POST",
+        body: JSON.stringify({ 'saveConvenio': params }),
+        dataType: "JSON"
+    })
         .then(response => {
             return response.json();
         })
@@ -633,7 +635,7 @@ function loadData(data) {
     }
     if ($('#HFCommandName').val() == "EDITAR" && data.encrypArchivo !== "") {
         $('#HFEncrypArchivo').val(data.encrypArchivo),
-        $('#HFRutaArchivo').val(data.rutaArchivo)
+            $('#HFRutaArchivo').val(data.rutaArchivo)
     }
     // $('#formConvenios :input")').addClass("edited");
 }
@@ -648,10 +650,10 @@ function deleteConvenio(idConvenio) {
             },
             onApprove: function() {
                 fetch('./api/conveniosApi.php', {
-                        method: "POST",
-                        body: JSON.stringify({ 'deleteConvenio': { idConvenio: idConvenio } }),
-                        dataType: "JSON"
-                    })
+                    method: "POST",
+                    body: JSON.stringify({ 'deleteConvenio': { idConvenio: idConvenio } }),
+                    dataType: "JSON"
+                })
                     .then(response => {
                         return response.json();
                     })
@@ -677,7 +679,7 @@ function deleteConvenio(idConvenio) {
 
 //               onFailure: function() {
 //               alert('Failure');
-//               return false; // false is required if you do don't want to let it submit                                            
+//               return false; // false is required if you do don't want to let it submit
 //               }
 //             });
 // });

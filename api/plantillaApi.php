@@ -7,4 +7,3 @@ class PlantillaApi
         include "./include/plantilla.php";
     }
 }
-

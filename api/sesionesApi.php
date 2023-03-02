@@ -1,6 +1,7 @@
 <?php
 
-class Sessiones {
+class Sessiones
+{
     public static function iniciarSesionLogin($username, $idUsuario, $idRol)
     {
         session_start();
