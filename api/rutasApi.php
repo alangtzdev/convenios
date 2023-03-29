@@ -18,6 +18,7 @@ class RutasAPi
                 $_GET["ruta"] == "permisos" ||
                 $_GET["ruta"] == "modulosxrol" ||
                 $_GET["ruta"] == "accesos" ||
+                $_GET["ruta"] == "coediciones" ||
                 $_GET["ruta"] == "guia"
             ) {
 
@@ -31,6 +32,6 @@ class RutasAPi
             $modulo = "inicio.php";
         }
 
-        include $modulo;
+        return $modulo;
     }
 }

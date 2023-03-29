@@ -1,5 +1,23 @@
 <?php
+include_once("switchScripts.php"); 
 require_once "api/rutasApi.php";
+include 'include/header.php';
+include 'include/top-menu.php';
+include 'include/left-menu.php';
+$index = new RutasAPi();
+$route = $index -> getRuta();
+// var_dump($route);
+?>
+
+
+<div id="app" class="ui basic segment">
+<?php include($route); ?>
+</div>
+
+<?php 
+include "include/footer.php";
+echo $jsTag;
+echo $jsTagCustom;
 // //index.php
 
 // //Include Configuration File
@@ -13,7 +31,7 @@ require_once "api/rutasApi.php";
 //  //It will Attempt to exchange a code for an valid authentication token.
 //  $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
 
-//  //This condition will check there is any error occur during geting authentication token. If there is no any error occur then it will execute if block of code/
+//  //This condition will check there is any error occur during geting authentication token 555. If there is no any error occur then it will execute if block of code/
 //  if(!isset($token['error']))
 //  {
 //   //Set the access token used for requests
@@ -62,8 +80,3 @@ require_once "api/rutasApi.php";
 //  //Create a URL to obtain user authorization
 //  $login_button = '<a href="'.$google_client->createAuthUrl().'"><img src="sign-in-with-google.png" /></a>';
 // }
-
-
-
-$index = new RutasAPi();
-$index -> getRuta();

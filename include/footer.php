@@ -16,6 +16,7 @@
 <script src="assets/plugins/datatable/jquery.dataTables.semanticui.min.js"></script>
 <script src="assets/plugins/waitme/waitMe.js"></script>
 <script src="assets/plugins/js-cookie-2.0.0/js.cookie.js"></script>
+<script src="assets/plugins/jquery.ui.widget.js"></script>
 <script src="assets/js/g-master.js"></script>
 <script src="assets/js/g-menu.js"></script>
 <script src="assets/js/g-acciones.js"></script>
